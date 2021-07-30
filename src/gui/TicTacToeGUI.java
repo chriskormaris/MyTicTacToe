@@ -3,7 +3,6 @@ package gui;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,6 +12,7 @@ import java.util.Stack;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -65,8 +65,8 @@ public class TicTacToeGUI {
 	public static JMenuItem aboutItem;
 	
 	// These Stack objects are used for the "Undo" and "Redo" functionalities.
-	static Stack<Board> undoBoards = new Stack<Board>();
-	static Stack<Board> redoBoards = new Stack<Board>();
+	static Stack<Board> undoBoards = new Stack<>();
+	static Stack<Board> redoBoards = new Stack<>();
 	
 	public TicTacToeGUI(String title) {
 		
@@ -106,68 +106,46 @@ public class TicTacToeGUI {
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
 
-		newGameItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		newGameItem.addActionListener(e -> {
 
-				if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI)
-					createHumanVsAiNewGame();
-				else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN)
-					createHumanVsHumanNewGame();
-				else if (GameParameters.gameMode == GameMode.MINIMAX_AI_VS_MINIMAX_AI)
-					createAiVsAiNewGame();
-				else if (GameParameters.gameMode == GameMode.CLIENT_SERVER)
-					createClientServerNewGame();
-				
-				undoBoards.clear();
-				redoBoards.clear();
-				
-				undoItem.setEnabled(false);
-				redoItem.setEnabled(false);
-				
-				Board.printBoard(board.getGameBoard());
-			}
+			if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI)
+				createHumanVsAiNewGame();
+			else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN)
+				createHumanVsHumanNewGame();
+			else if (GameParameters.gameMode == GameMode.MINIMAX_AI_VS_MINIMAX_AI)
+				createAiVsAiNewGame();
+			else if (GameParameters.gameMode == GameMode.CLIENT_SERVER)
+				createClientServerNewGame();
+
+			undoBoards.clear();
+			redoBoards.clear();
+
+			undoItem.setEnabled(false);
+			redoItem.setEnabled(false);
+
+			Board.printBoard(board.getGameBoard());
 		});
 		
-		undoItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				undo();
-			}
+		undoItem.addActionListener(e -> undo());
+		
+		redoItem.addActionListener(e -> redo());
+		
+		settingsItem.addActionListener(e -> {
+			SettingsWindow settings = new SettingsWindow();
+			settings.setVisible(true);
 		});
 		
-		redoItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				redo();
-			}
-		});
+		exitItem.addActionListener(e -> System.exit(0));
 		
-		settingsItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SettingsWindow settings = new SettingsWindow();
-				settings.setVisible(true);
-			}
-		});
+		howToPlayItem.addActionListener(e -> JOptionPane.showMessageDialog(null,
+				"Click on the buttons or press 1-9 on your keyboard to insert a new symbol."
+				+ "\nTo win you must place 3 symbols in an row, horizontally, vertically or diagonally.",
+				"How to Play", JOptionPane.INFORMATION_MESSAGE));
 		
-		exitItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		howToPlayItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,
-						"Click on the buttons or press 1-9 on your keyboard to insert a new symbol."
-						+ "\nTo win you must place 3 symbols in an row, horizontally, vertically or diagonally.",
-						"How to Play", JOptionPane.INFORMATION_MESSAGE);
-			}
-		});
-		
-		aboutItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,
-						"© Created by: Christos Kormaris\nVersion" + Constants.VERSION,
-						"About", JOptionPane.INFORMATION_MESSAGE);			
-				}
+		aboutItem.addActionListener(e -> {
+			JLabel label = new JLabel("<html>© Created by: Christos Kormaris<br>"
+					+ "Version " + Constants.VERSION + "</html>");
+			JOptionPane.showMessageDialog(null, label, "About", JOptionPane.INFORMATION_MESSAGE);
 		});
 
 		fileMenu.add(newGameItem);
@@ -185,7 +163,7 @@ public class TicTacToeGUI {
 			System.out.println("Undo is pressed!");
 			
 			// System.out.println("undo");
-			// This is the undo implementation for Human VS Human mode.
+			// This is the "undo" implementation for Human VS Human mode.
 			if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN) {
 				try {
 					redoBoards.push(new Board(board));
@@ -224,7 +202,7 @@ public class TicTacToeGUI {
 				}
 			}
 			
-			// This is the undo implementation for Human VS AI mode.
+			// This is the "undo" implementation for Human VS AI mode.
 			else if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
 				
 				try {
@@ -273,7 +251,7 @@ public class TicTacToeGUI {
 			System.out.println("Redo is pressed!");
 
 			// System.out.println("undo");
-			// This is the undo implementation for Human VS Human mode.
+			// This is the "redo" implementation for Human VS Human mode.
 			if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN) {
 				try {
 					
@@ -386,7 +364,7 @@ public class TicTacToeGUI {
 	 * f(2, 2) = 0 = 2*3 + 2
 	*/ 
 	public static List<Integer> getBoardCellById(int id) {
-		List<Integer> cell = new ArrayList<Integer>();
+		List<Integer> cell = new ArrayList<>();
 		int i = 0, j = 0;
 		if (id / 3 == 0) {  // we know that i=0
 			i = 0;

@@ -23,34 +23,21 @@ public class SettingsWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 4435307947189338751L;
+
+	private final JComboBox<String> gui_style_drop_down;
+	private final JComboBox<String> game_mode_drop_down;
+	private final JComboBox<String> max_depth1_drop_down;
+	private final JComboBox<String> max_depth2_drop_down;
+	private final JComboBox<String> player1_color_drop_down;
+	private final JComboBox<String> player2_color_drop_down;
+	private final JComboBox<String> client_server_symbol_drop_down;
+	private final JTextField server_port_text_field;
+	private final JTextField client_ip_text_field;
+	private final JTextField client_port_text_field;
 	
-	private JLabel guiStyleLabel;
-	private JLabel gameModeLabel;
-	private JLabel maxDepth1Label;
-	private JLabel maxDepth2Label;
-	private JLabel player1ColorLabel;
-	private JLabel player2ColorLabel;
-	private JLabel clientServerSymbolLabel;
-	private JLabel serverPortLabel;
-	private JLabel clientIpLabel;
-	private JLabel clientPortLabel;
-	
-	private JComboBox<String> gui_style_drop_down;
-	private JComboBox<String> game_mode_drop_down;
-	private JComboBox<String> max_depth1_drop_down;
-	private JComboBox<String> max_depth2_drop_down;
-	private JComboBox<String> player1_color_drop_down;
-	private JComboBox<String> player2_color_drop_down;
-	private JComboBox<String> client_server_symbol_drop_down;
-	private JTextField server_port_text_field;
-	private JTextField client_ip_text_field;
-	private JTextField client_port_text_field;
-	
-	private JButton apply;
-	private JButton cancel;
-	
-	private EventHandler handler;
-	
+	private final JButton apply;
+	private final JButton cancel;
+
 	public static int width = 460;
 	public static int height = 480;
 	
@@ -63,8 +50,8 @@ public class SettingsWindow extends JFrame {
 		setSize(width, height);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
-		handler = new EventHandler();
+
+		EventHandler handler = new EventHandler();
 
 		GuiStyle selectedGuiStyle = GameParameters.guiStyle;
 		GameMode selectedMode = GameParameters.gameMode;
@@ -77,16 +64,16 @@ public class SettingsWindow extends JFrame {
 		String clientIP = GameParameters.clientIP;
 		int clientPort = GameParameters.clientPort;
 
-		guiStyleLabel = new JLabel("GUI style");
-		gameModeLabel = new JLabel("Game mode");
-		maxDepth1Label = new JLabel("AI 1 depth");
-		maxDepth2Label = new JLabel("AI 2 depth (AiVsAi)");
-		player1ColorLabel = new JLabel("Player 1 \"X\" color");
-		player2ColorLabel = new JLabel("Player 2 \"O\" color");
-		clientServerSymbolLabel = new JLabel("Client-Server symbol");
-		serverPortLabel = new JLabel("Server port");
-		clientIpLabel = new JLabel("Client IP");
-		clientPortLabel = new JLabel("Client port");
+		JLabel guiStyleLabel = new JLabel("GUI style");
+		JLabel gameModeLabel = new JLabel("Game mode");
+		JLabel maxDepth1Label = new JLabel("AI 1 depth");
+		JLabel maxDepth2Label = new JLabel("AI 2 depth (AiVsAi)");
+		JLabel player1ColorLabel = new JLabel("Player 1 \"X\" color");
+		JLabel player2ColorLabel = new JLabel("Player 2 \"O\" color");
+		JLabel clientServerSymbolLabel = new JLabel("Client-Server symbol");
+		JLabel serverPortLabel = new JLabel("Server port");
+		JLabel clientIpLabel = new JLabel("Client IP");
+		JLabel clientPortLabel = new JLabel("Client port");
 		
 		add(guiStyleLabel);
 		add(gameModeLabel);
@@ -99,7 +86,7 @@ public class SettingsWindow extends JFrame {
 		add(clientIpLabel);
 		add(clientPortLabel);
 		
-		gui_style_drop_down = new JComboBox<String>();
+		gui_style_drop_down = new JComboBox<>();
 		gui_style_drop_down.addItem("System style");
 		gui_style_drop_down.addItem("Cross-Platform style");
 		gui_style_drop_down.addItem("Nimbus style");
@@ -111,7 +98,7 @@ public class SettingsWindow extends JFrame {
 		else if (selectedGuiStyle == GuiStyle.NIMBUS_STYLE)
 			gui_style_drop_down.setSelectedIndex(2);
 			
-		game_mode_drop_down = new JComboBox<String>();
+		game_mode_drop_down = new JComboBox<>();
 		game_mode_drop_down.addItem("Human Vs Minimax AI");
 		game_mode_drop_down.addItem("Human Vs Human");
 		game_mode_drop_down.addItem("Minimax AI Vs Minimax AI");
@@ -126,7 +113,7 @@ public class SettingsWindow extends JFrame {
 		else if (selectedMode == GameMode.CLIENT_SERVER)
 			game_mode_drop_down.setSelectedIndex(3);
 		
-		max_depth1_drop_down = new JComboBox<String>();
+		max_depth1_drop_down = new JComboBox<>();
 		max_depth1_drop_down.addItem("1");
 		max_depth1_drop_down.addItem("2");
 		max_depth1_drop_down.addItem("3");
@@ -136,7 +123,7 @@ public class SettingsWindow extends JFrame {
 		maxDepth1 = (maxDepth1 == Constants.BEST_RESPONSE) ? 4 : maxDepth1-1; 
 		max_depth1_drop_down.setSelectedIndex(maxDepth1);
 		
-		max_depth2_drop_down = new JComboBox<String>();
+		max_depth2_drop_down = new JComboBox<>();
 		max_depth2_drop_down.addItem("1");
 		max_depth2_drop_down.addItem("2");
 		max_depth2_drop_down.addItem("3");
@@ -146,7 +133,7 @@ public class SettingsWindow extends JFrame {
 		maxDepth2 = (maxDepth2 == Constants.BEST_RESPONSE) ? 4 : maxDepth2-1; 
 		max_depth2_drop_down.setSelectedIndex(maxDepth2);
 		
-		player1_color_drop_down = new JComboBox<String>();
+		player1_color_drop_down = new JComboBox<>();
 		player1_color_drop_down.addItem(String.valueOf(Color.BLUE));
 		player1_color_drop_down.addItem(String.valueOf(Color.RED));
 		player1_color_drop_down.addItem(String.valueOf(Color.BLACK));
@@ -165,12 +152,12 @@ public class SettingsWindow extends JFrame {
 			player1_color_drop_down.setSelectedIndex(3);
 		else if (selectedPlayer1Color == Color.ORANGE)
 			player1_color_drop_down.setSelectedIndex(4);
-		else if (selectedPlayer1Color == Color.ORANGE)
+		else if (selectedPlayer1Color == Color.PURPLE)
 			player1_color_drop_down.setSelectedIndex(5);
 		else if (selectedPlayer1Color == Color.YELLOW)
 			player1_color_drop_down.setSelectedIndex(6);
 		
-		player2_color_drop_down = new JComboBox<String>();
+		player2_color_drop_down = new JComboBox<>();
 		player2_color_drop_down.addItem(String.valueOf(Color.BLUE));
 		player2_color_drop_down.addItem(String.valueOf(Color.RED));
 		player2_color_drop_down.addItem(String.valueOf(Color.BLACK));
@@ -189,12 +176,12 @@ public class SettingsWindow extends JFrame {
 			player2_color_drop_down.setSelectedIndex(3);
 		else if (selectedPlayer2Color == Color.ORANGE)
 			player2_color_drop_down.setSelectedIndex(4);
-		else if (selectedPlayer2Color == Color.ORANGE)
+		else if (selectedPlayer2Color == Color.PURPLE)
 			player2_color_drop_down.setSelectedIndex(5);
 		else if (selectedPlayer2Color == Color.YELLOW)
 			player2_color_drop_down.setSelectedIndex(6);
 		
-		client_server_symbol_drop_down = new JComboBox<String>();
+		client_server_symbol_drop_down = new JComboBox<>();
 		client_server_symbol_drop_down.addItem("X");
 		client_server_symbol_drop_down.addItem("O");
 		
@@ -251,9 +238,9 @@ public class SettingsWindow extends JFrame {
 		add(cancel);
 		
 		int distance = 10;
-		apply.setBounds((int) (width / 2) - 110 - (int) (distance / 2), 380, 100, 30);
+		apply.setBounds((width / 2) - 110 - (distance / 2), 380, 100, 30);
 		apply.addActionListener(handler);
-		cancel.setBounds((int) (width / 2) - 10 + (int) (distance / 2), 380, 100, 30);
+		cancel.setBounds((width / 2) - 10 + (distance / 2), 380, 100, 30);
 		cancel.addActionListener(handler);
 	}
 

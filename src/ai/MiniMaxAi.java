@@ -41,11 +41,11 @@ public class MiniMaxAi {
 	
     // Initiates the MiniMax algorithm
 	public Move miniMax(Board board) {
-        // If the X plays then it wants to MAXimize the heuristics value
+        // If the X plays then it wants to maximize the heuristics value
         if (playerLetter == Constants.X) {
             return max(new Board(board), 0);
         }
-        // If the O plays then it wants to MINimize the heuristics value
+        // If the O plays then it wants to minimize the heuristics value
         else {
             return min(new Board(board), 0);
         }
@@ -61,8 +61,7 @@ public class MiniMaxAi {
 		if((board.isTerminal()) || (depth == maxDepth)) {
 			int value = board.evaluate();
 			// System.out.println("MAX function, Depth: " + depth + ", move value: " + value);
-			Move lastMove = new Move(board.getLastMove().getRow(), board.getLastMove().getColumn(), value);
-			return lastMove;
+			return new Move(board.getLastMove().getRow(), board.getLastMove().getColumn(), value);
 		}
         // The children-moves of the state are calculated
 		ArrayList<Board> children = new ArrayList<Board>(board.getChildren(Constants.X));
@@ -99,7 +98,7 @@ public class MiniMaxAi {
 			Move lastMove = new Move(board.getLastMove().getRow(), board.getLastMove().getColumn(), value);
 			return lastMove;
 		}
-		ArrayList<Board> children = new ArrayList<Board>(board.getChildren(Constants.O));
+		ArrayList<Board> children = new ArrayList<>(board.getChildren(Constants.O));
 		Move minMove = new Move(Integer.MAX_VALUE);
 		for (Board child : children) {
 			Move move = max(child, depth + 1);

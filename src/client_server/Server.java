@@ -43,9 +43,9 @@ public class Server extends Thread {
 				int id = TicTacToeGUI.getIdByBoardCell(lastMove.getRow(), lastMove.getColumn());
 				// System.out.println(id);
 				
-				int oppossingPlayerSymbol = in.readInt();
+				int opposingPlayerSymbol = in.readInt();
 				
-				TicTacToeGUI.board.setLastPlayer(oppossingPlayerSymbol);
+				TicTacToeGUI.board.setLastPlayer(opposingPlayerSymbol);
 				
 				for (ClientServerButton button: TicTacToeGUI.clientServerButtons) {
 					if (button.id == id) {
