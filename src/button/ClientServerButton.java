@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import ai.Board;
+import tic_tac_toe.Board;
 import client_server.Client;
 import gui.TicTacToeGUI;
 import utility.Constants;
@@ -99,6 +99,5 @@ public class ClientServerButton extends XOButton implements Serializable {
 		}
 		TicTacToeGUI.clientServerButtons[id] = this;
 	}
-	
 	
 }

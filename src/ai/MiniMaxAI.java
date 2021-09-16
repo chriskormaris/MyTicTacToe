@@ -1,26 +1,26 @@
 package ai;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import tic_tac_toe.Board;
+import tic_tac_toe.Move;
 import utility.Constants;
 
-public class MiniMaxAi {
+public class MiniMaxAI extends AI {
 	
-    // Variable that holds the maximum depth the MiniMax algorithm will reach for this player
+    // Variable that holds the maximum depth the MiniMax algorithm will reach for this player.
 	private int maxDepth;
-	
-	// Variable that holds which letter this player controls
-	private int playerLetter;
 
-	public MiniMaxAi() {
+	public MiniMaxAI() {
+		super(Constants.O);
 		maxDepth = 3;
-		playerLetter = Constants.O;
 	}
 	
-	public MiniMaxAi(int maxDepth, int playerLetter) {
+	public MiniMaxAI(int maxDepth, int playerLetter) {
+		super(playerLetter);
 		this.maxDepth = maxDepth;
-		this.playerLetter = playerLetter;
 	}
 	
     public int getMaxDepth() {
@@ -31,18 +31,11 @@ public class MiniMaxAi {
 		this.maxDepth = maxDepth;
 	}
 
-	public int getPlayerSymbol() {
-		return playerLetter;
-	}
-
-	public void setPlayerSymbol(int playerSymbol) {
-		this.playerLetter = playerSymbol;
-	}
-	
     // Initiates the MiniMax algorithm
-	public Move miniMax(Board board) {
+	@Override
+	public Move getNextMove(Board board) {
         // If the X plays then it wants to maximize the heuristics value
-        if (playerLetter == Constants.X) {
+        if (getAiPlayer() == Constants.X) {
             return max(new Board(board), 0);
         }
         // If the O plays then it wants to minimize the heuristics value
@@ -64,7 +57,7 @@ public class MiniMaxAi {
 			return new Move(board.getLastMove().getRow(), board.getLastMove().getColumn(), value);
 		}
         // The children-moves of the state are calculated
-		ArrayList<Board> children = new ArrayList<Board>(board.getChildren(Constants.X));
+		List<Board> children = new ArrayList<>(board.getChildren(Constants.X));
 		Move maxMove = new Move(Integer.MIN_VALUE);
 		for (Board child : children) {
             // And for each child min is called, on a lower depth
@@ -98,7 +91,7 @@ public class MiniMaxAi {
 			Move lastMove = new Move(board.getLastMove().getRow(), board.getLastMove().getColumn(), value);
 			return lastMove;
 		}
-		ArrayList<Board> children = new ArrayList<>(board.getChildren(Constants.O));
+		List<Board> children = new ArrayList<>(board.getChildren(Constants.O));
 		Move minMove = new Move(Integer.MAX_VALUE);
 		for (Board child : children) {
 			Move move = max(child, depth + 1);

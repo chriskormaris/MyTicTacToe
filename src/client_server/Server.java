@@ -6,7 +6,7 @@ import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import ai.Move;
+import tic_tac_toe.Move;
 import button.ClientServerButton;
 import gui.TicTacToeGUI;
 

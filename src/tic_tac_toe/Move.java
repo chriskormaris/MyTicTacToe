@@ -1,4 +1,4 @@
-package ai;
+package tic_tac_toe;
 
 import java.io.Serializable;
 

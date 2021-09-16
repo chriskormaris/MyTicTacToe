@@ -1,6 +1,7 @@
-package ai;
+package tic_tac_toe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import utility.Constants;
 
@@ -99,8 +100,8 @@ public class Board {
     /* Generates the children of the state
      * Any square in the board that is empty results to a child
      */
-	public ArrayList<Board> getChildren(int symbol) {
-		ArrayList<Board> children = new ArrayList<Board>();
+	public List<Board> getChildren(int symbol) {
+		List<Board> children = new ArrayList<>();
 		for(int row=0; row<3; row++) {
 			for(int column=0; column<3; column++) {
 				if(isValidMove(row, column)) {
@@ -111,6 +112,18 @@ public class Board {
 			}
 		}
 		return children;
+	}
+
+	public List<Move> getValidMoves(int symbol) {
+		List<Move> moves = new ArrayList<>();
+		for(int row=0; row<3; row++) {
+			for(int column=0; column<3; column++) {
+				if(isValidMove(row, column)) {
+					moves.add(new Move(row, column, symbol));
+				}
+			}
+		}
+		return moves;
 	}
 
 	/*

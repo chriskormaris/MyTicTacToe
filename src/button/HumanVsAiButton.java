@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
+import ai.AI;
 import ai.BestResponse;
-import ai.Board;
-import ai.MiniMaxAi;
-import ai.Move;
+import tic_tac_toe.Board;
+import ai.MiniMaxAI;
+import tic_tac_toe.Move;
 import gui.TicTacToeGUI;
 import utility.Constants;
 import utility.GameParameters;
@@ -26,10 +27,10 @@ public class HumanVsAiButton extends XOButton {
 	public int id;
 	ImageIcon X;
 	ImageIcon O;
-	MiniMaxAi aiPlayer;
+	AI aiPlayer;
+
 	
-	
-	public HumanVsAiButton(int id, MiniMaxAi aiPlayer) {
+	public HumanVsAiButton(int id, AI aiPlayer) {
 		setFocusable(false);
 		this.id = id;
 		String player1Color = String.valueOf(GameParameters.player1Color).charAt(0) 
@@ -67,16 +68,7 @@ public class HumanVsAiButton extends XOButton {
 						
 			if (!TicTacToeGUI.board.isTerminal()) {
 				
-				Move aiMove;
-				if (this.aiPlayer.getMaxDepth() == Constants.BEST_RESPONSE) {
-					// Best Response Move
-					BestResponse bestResponse = new BestResponse(TicTacToeGUI.board.getGameBoard());
-					aiMove = bestResponse.findBestResponse();
-				} else {
-					// MiniMax AI Move
-					// System.out.println(GUI.board.getLastMove());
-					aiMove = this.aiPlayer.miniMax(TicTacToeGUI.board);
-				}
+				Move aiMove = this.aiPlayer.getNextMove(TicTacToeGUI.board);
 				
 				TicTacToeGUI.makeMove(aiMove.getRow(), aiMove.getColumn(), Constants.O);
 				

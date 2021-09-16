@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
 
-import ai.Board;
+import tic_tac_toe.Board;
 import gui.TicTacToeGUI;
 import utility.Constants;
 import utility.GameParameters;
@@ -47,16 +47,15 @@ public class AiVsAiButton extends XOButton {
 		// List<Integer> cell = GUI.getBoardCellById(id);
 		// System.out.println("button cell: [" + cell.get(0) + "]" + "[" + cell.get(1) + "]");
 		
-		if (player == Constants.X)
+		if (player == Constants.X) {
 			setIcon(X);
-		else if (player == Constants.O)
+		} else if (player == Constants.O) {
 			setIcon(O);
+		}
 		
 		Board.printBoard(TicTacToeGUI.board.getGameBoard());
 		
 		removeActionListener(this);
-	
 	}
-	
 	
 }

@@ -5,7 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import ai.Move;
+import tic_tac_toe.Move;
 import gui.TicTacToeGUI;
 
 public class Client extends Thread {

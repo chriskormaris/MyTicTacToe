@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import ai.Board;
+import tic_tac_toe.Board;
 import gui.TicTacToeGUI;
 import utility.Constants;
 import utility.GameParameters;

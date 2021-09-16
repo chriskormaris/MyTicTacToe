@@ -21,10 +21,13 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import ai.AI;
 import ai.BestResponse;
-import ai.Board;
-import ai.MiniMaxAi;
-import ai.Move;
+import ai.RandomChoiceAI;
+import enumeration.AiType;
+import tic_tac_toe.Board;
+import ai.MiniMaxAI;
+import tic_tac_toe.Move;
 import button.AiVsAiButton;
 import button.ClientServerButton;
 import button.HumanVsAiButton;
@@ -108,14 +111,15 @@ public class TicTacToeGUI {
 
 		newGameItem.addActionListener(e -> {
 
-			if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI)
+			if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 				createHumanVsAiNewGame();
-			else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN)
+			} else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN) {
 				createHumanVsHumanNewGame();
-			else if (GameParameters.gameMode == GameMode.MINIMAX_AI_VS_MINIMAX_AI)
+			} else if (GameParameters.gameMode == GameMode.AI_VS_AI) {
 				createAiVsAiNewGame();
-			else if (GameParameters.gameMode == GameMode.CLIENT_SERVER)
+			} else if (GameParameters.gameMode == GameMode.CLIENT_SERVER) {
 				createClientServerNewGame();
+			}
 
 			undoBoards.clear();
 			redoBoards.clear();
@@ -203,7 +207,7 @@ public class TicTacToeGUI {
 			}
 			
 			// This is the "undo" implementation for Human VS AI mode.
-			else if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+			else if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 				
 				try {
 					
@@ -300,7 +304,7 @@ public class TicTacToeGUI {
 				}
 			}
 			
-			else if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+			else if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 				
 				try {
 					undoBoards.push(new Board(board));
@@ -390,11 +394,19 @@ public class TicTacToeGUI {
 
 		configureGuiStyle();
 	
-		if (menuBar == null)
+		if (menuBar == null) {
 			addMenus();
-		
-		MiniMaxAi aiPlayer = new MiniMaxAi(GameParameters.maxDepth1, Constants.O);
-		
+		}
+
+		AI aiPlayer = null;
+		if (GameParameters.aiType == AiType.BEST_RESPONSE_AI) {
+			aiPlayer = new BestResponse(Constants.O);
+		} else if (GameParameters.aiType == AiType.MINIMAX_AI) {
+			aiPlayer = new MiniMaxAI(GameParameters.ai1MaxDepth, Constants.O);
+		} else if (GameParameters.aiType == AiType.RANDOM_AI) {
+			aiPlayer = new RandomChoiceAI(Constants.O);
+		}
+
 		if (panel != null) {
 			frame.remove(panel);
 			frame.revalidate();
@@ -419,8 +431,9 @@ public class TicTacToeGUI {
 			panel.add(humanVsAiButtons[i]);
 		}
 	
-		if (frame.getKeyListeners().length == 0)
+		if (frame.getKeyListeners().length == 0) {
 			frame.addKeyListener(gameKeyListener);
+		}
 		frame.setFocusable(true);
 		
 		frame.setVisible(true);
@@ -432,8 +445,9 @@ public class TicTacToeGUI {
 
 		configureGuiStyle();
 	
-		if (menuBar == null)
+		if (menuBar == null) {
 			addMenus();
+		}
 		
 		if (panel != null) {
 			frame.remove(panel);
@@ -471,12 +485,23 @@ public class TicTacToeGUI {
 
 		configureGuiStyle();
 	
-		if (menuBar == null)
+		if (menuBar == null) {
 			addMenus();
+		}
 		
-		MiniMaxAi ai1Player = new MiniMaxAi(GameParameters.maxDepth1, Constants.X);
-		MiniMaxAi ai2Player = new MiniMaxAi(GameParameters.maxDepth2, Constants.O);
-	
+		AI ai1Player = null;
+		AI ai2Player = null;
+		if (GameParameters.aiType == AiType.BEST_RESPONSE_AI) {
+			ai1Player = new BestResponse(Constants.X);
+			ai2Player = new BestResponse(Constants.O);
+		} else if (GameParameters.aiType == AiType.MINIMAX_AI) {
+			ai1Player = new MiniMaxAI(GameParameters.ai1MaxDepth, Constants.X);
+			ai2Player = new MiniMaxAI(GameParameters.ai2MaxDepth, Constants.O);
+		} else if (GameParameters.aiType == AiType.RANDOM_AI) {
+			ai1Player = new RandomChoiceAI(Constants.X);
+			ai2Player = new RandomChoiceAI(Constants.O);
+		}
+
 		if (panel != null) {
 			frame.remove(panel);
 			frame.revalidate();
@@ -504,7 +529,6 @@ public class TicTacToeGUI {
 		frame.setVisible(true);
 		
 		playAiVsAi(ai1Player, ai2Player);
-		
 	}
 
 
@@ -543,38 +567,31 @@ public class TicTacToeGUI {
 			panel.add(clientServerButtons[i]);
 		}
 		
-		if (frame.getKeyListeners().length == 0)
+		if (frame.getKeyListeners().length == 0) {
 			frame.addKeyListener(gameKeyListener);
+		}
 		frame.setFocusable(true);
 		
 		frame.setVisible(true);
 		
 	}
 	
-	private static void aiMove(MiniMaxAi aiPlayer) {
-		Move aiMove;
-		if (aiPlayer.getMaxDepth() == Constants.BEST_RESPONSE) {
-			// Best Response Move
-			BestResponse bestResponse = new BestResponse(board.getGameBoard());
-			aiMove = bestResponse.findBestResponse();
-		} else {
-			// MiniMax AI Move
-			aiMove = aiPlayer.miniMax(board);
-		}
-		
-		makeMove(aiMove.getRow(), aiMove.getColumn(), aiPlayer.getPlayerSymbol());
+	private static void aiMove(AI ai) {
+		Move aiMove = ai.getNextMove(board);
+
+		makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
 		
 		int ai_button_id = getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 		for (AiVsAiButton button: aiVsAiButtons) {
 			if (button.id == ai_button_id) {
-				button.player = aiPlayer.getPlayerSymbol();
+				button.player = ai.getAiPlayer();
 				button.doClick();
 			}
 		}
 	}
 	
 	
-	private static void playAiVsAi(MiniMaxAi ai1Player, MiniMaxAi ai2Player) {
+	private static void playAiVsAi(AI ai1Player, AI ai2Player) {
 		
 		while (!TicTacToeGUI.board.isTerminal()) {
 
@@ -645,18 +662,18 @@ public class TicTacToeGUI {
 					"Player 1 \"X\" wins!\nPlay again?",
 					"Game Over", JOptionPane.YES_NO_OPTION);
 			if (input == JOptionPane.OK_OPTION) {
-				if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+				if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 					createHumanVsAiNewGame();
 				} else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN) {
 					createHumanVsHumanNewGame();
-				} else if (GameParameters.gameMode == GameMode.MINIMAX_AI_VS_MINIMAX_AI) {
+				} else if (GameParameters.gameMode == GameMode.AI_VS_AI) {
 					createAiVsAiNewGame();
 				} else if (GameParameters.gameMode == GameMode.CLIENT_SERVER) {
 					createClientServerNewGame();
 				}
 			} else if (input == JOptionPane.NO_OPTION 
 					|| input == JOptionPane.CLOSED_OPTION) {
-				if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+				if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 					for (HumanVsAiButton button: humanVsAiButtons) {
 						button.removeActionListener(button);
 					}
@@ -676,18 +693,18 @@ public class TicTacToeGUI {
 					"Player 2 \"O\" wins!\nPlay again?",
 					"Game Over", JOptionPane.YES_NO_OPTION);
 			if (input == JOptionPane.OK_OPTION) {
-				if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+				if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 					createHumanVsAiNewGame();
 				} else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN) {
 					createHumanVsHumanNewGame();
-				} else if (GameParameters.gameMode == GameMode.MINIMAX_AI_VS_MINIMAX_AI) {
+				} else if (GameParameters.gameMode == GameMode.AI_VS_AI) {
 					createAiVsAiNewGame();
 				} else if (GameParameters.gameMode == GameMode.CLIENT_SERVER) {
 					createClientServerNewGame();
 				}
 			} else if (input == JOptionPane.NO_OPTION 
 					|| input == JOptionPane.CLOSED_OPTION) {
-				if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+				if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 					for (HumanVsAiButton button: humanVsAiButtons) {
 						button.removeActionListener(button);
 					}
@@ -707,18 +724,18 @@ public class TicTacToeGUI {
 					"It is a draw!\nPlay again?",
 					"Game Over", JOptionPane.YES_NO_OPTION);
 			if (input == JOptionPane.OK_OPTION) {
-				if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+				if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 					createHumanVsAiNewGame();
 				} else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN) {
 					createHumanVsHumanNewGame();
-				} else if (GameParameters.gameMode == GameMode.MINIMAX_AI_VS_MINIMAX_AI) {
+				} else if (GameParameters.gameMode == GameMode.AI_VS_AI) {
 					createAiVsAiNewGame();
 				} else if (GameParameters.gameMode == GameMode.CLIENT_SERVER) {
 					createClientServerNewGame();
 				}
 			} else if (input == JOptionPane.NO_OPTION 
 					|| input == JOptionPane.CLOSED_OPTION) {
-				if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI) {
+				if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 					for (HumanVsAiButton button: humanVsAiButtons) {
 						button.removeActionListener(button);
 					}
@@ -738,7 +755,6 @@ public class TicTacToeGUI {
 	public static KeyListener gameKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
-			
 		}
 
 		@Override
@@ -748,7 +764,7 @@ public class TicTacToeGUI {
 			
 			for (int i=0; i<9; i++) {
 				if (button.equals(i+1+"")) {
-					if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI)
+					if (GameParameters.gameMode == GameMode.HUMAN_VS_AI)
 						humanVsAiButtons[i].doClick();
 					if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN)
 						humanVsHumanButtons[i].doClick();
@@ -777,7 +793,7 @@ public class TicTacToeGUI {
 	
     // Make a move; it places a symbol on the board
 	public static void makeMove(int row, int col, int player) {
-		if ((player == Constants.X && GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI)
+		if ((player == Constants.X && GameParameters.gameMode == GameMode.HUMAN_VS_AI)
 			|| (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN)) {
 			undoBoards.push(new Board(board));
 		}
@@ -817,14 +833,15 @@ public class TicTacToeGUI {
 		@SuppressWarnings("unused")
 		TicTacToeGUI gui = new TicTacToeGUI("My TicTacToe");
 		
-		if (GameParameters.gameMode == GameMode.HUMAN_VS_MINIMAX_AI)
+		if (GameParameters.gameMode == GameMode.HUMAN_VS_AI) {
 			TicTacToeGUI.createHumanVsAiNewGame();
-		else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN)
+		} else if (GameParameters.gameMode == GameMode.HUMAN_VS_HUMAN) {
 			TicTacToeGUI.createHumanVsHumanNewGame();
-		else if (GameParameters.gameMode == GameMode.MINIMAX_AI_VS_MINIMAX_AI)
+		} else if (GameParameters.gameMode == GameMode.AI_VS_AI) {
 			TicTacToeGUI.createAiVsAiNewGame();
-		else if (GameParameters.gameMode == GameMode.CLIENT_SERVER)
+		} else if (GameParameters.gameMode == GameMode.CLIENT_SERVER) {
 			TicTacToeGUI.createClientServerNewGame();
+		}
 	}
 	
 }
