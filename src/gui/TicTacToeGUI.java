@@ -861,6 +861,4 @@ public class TicTacToeGUI {
         }
     };
 
-
-
 }
