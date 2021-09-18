@@ -1,15 +1,12 @@
 package button;
 
-import java.awt.event.ActionEvent;
-import java.util.List;
-
-import javax.swing.ImageIcon;
-
-import tic_tac_toe.Board;
 import gui.TicTacToeGUI;
+import tic_tac_toe.Board;
 import utility.Constants;
 import utility.GameParameters;
-import utility.ResourceLoader;
+
+import java.awt.event.ActionEvent;
+import java.util.List;
 
 
 public class HumanVsHumanButton extends XOButton {

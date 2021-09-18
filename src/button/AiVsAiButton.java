@@ -1,11 +1,11 @@
 package button;
 
-import java.awt.event.ActionEvent;
-
-import tic_tac_toe.Board;
 import gui.TicTacToeGUI;
+import tic_tac_toe.Board;
 import utility.Constants;
 import utility.GameParameters;
+
+import java.awt.event.ActionEvent;
 
 
 public class AiVsAiButton extends XOButton {

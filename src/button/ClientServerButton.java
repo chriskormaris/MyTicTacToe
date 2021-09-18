@@ -1,14 +1,14 @@
 package button;
 
+import client_server.Client;
+import gui.TicTacToeGUI;
+import tic_tac_toe.Board;
+import utility.Constants;
+import utility.GameParameters;
+
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.List;
-
-import tic_tac_toe.Board;
-import client_server.Client;
-import gui.TicTacToeGUI;
-import utility.Constants;
-import utility.GameParameters;
 
 
 public class ClientServerButton extends XOButton implements Serializable {
