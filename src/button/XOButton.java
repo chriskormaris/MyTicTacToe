@@ -7,9 +7,9 @@ import javax.swing.JButton;
 
 public abstract class XOButton extends JButton implements ActionListener {
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-	}
+    }
 
 }

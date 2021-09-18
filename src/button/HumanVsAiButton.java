@@ -16,84 +16,84 @@ import utility.ResourceLoader;
 
 public class HumanVsAiButton extends XOButton {
 
-	// Empty: 0, X: 1, O: 0
-	public int id;
-	int playerSymbol;
-	AI ai;
+    // Empty: 0, X: 1, O: 0
+    public int id;
+    int playerSymbol;
+    AI ai;
 
-	
-	public HumanVsAiButton(int id, int playerSymbol, AI ai) {
-		setFocusable(false);
-		this.id = id;
-		this.playerSymbol = playerSymbol;
-		this.addActionListener(this);
-		setIcon(null);
-		this.ai = ai;
-	}
 
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		TicTacToeGUI.undoItem.setEnabled(true);
+    public HumanVsAiButton(int id, int playerSymbol, AI ai) {
+        setFocusable(false);
+        this.id = id;
+        this.playerSymbol = playerSymbol;
+        this.addActionListener(this);
+        setIcon(null);
+        this.ai = ai;
+    }
 
-		if (GameParameters.playerSymbol == Constants.X) {
-			setIcon(GameParameters.X_ICON);
-		} else if (GameParameters.playerSymbol == Constants.O) {
-			setIcon(GameParameters.O_ICON);
-		}
 
-		// get cell coordinates by id
-		List<Integer> cell = TicTacToeGUI.getBoardCellById(id);
-		
-		TicTacToeGUI.makeMove(cell.get(0), cell.get(1), playerSymbol);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        TicTacToeGUI.undoItem.setEnabled(true);
 
-		// Check if the game is over.
-		if (TicTacToeGUI.board.isTerminal()) {
-			TicTacToeGUI.gameOver();
-			return;
-		} else {
-			try {
-				this.removeActionListener(this);
-			} catch (NullPointerException ex) {
-				// Do nothing
-			}
-		}
+        if (GameParameters.playerSymbol == Constants.X) {
+            setIcon(GameParameters.X_ICON);
+        } else if (GameParameters.playerSymbol == Constants.O) {
+            setIcon(GameParameters.O_ICON);
+        }
 
-		// System.out.println(GUI.board.getLastMove());
-		// Board.printBoard(GUI.board.getGameBoard());
+        // get cell coordinates by id
+        List<Integer> cell = TicTacToeGUI.getBoardCellById(id);
 
-		Move aiMove = this.ai.getNextMove(TicTacToeGUI.board);
+        TicTacToeGUI.makeMove(cell.get(0), cell.get(1), playerSymbol);
 
-		TicTacToeGUI.makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
+        // Check if the game is over.
+        if (TicTacToeGUI.board.isTerminal()) {
+            TicTacToeGUI.gameOver();
+            return;
+        } else {
+            try {
+                this.removeActionListener(this);
+            } catch (NullPointerException ex) {
+                // Do nothing
+            }
+        }
 
-		int aiMoveButtonId = TicTacToeGUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
-		// System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");
+        // System.out.println(GUI.board.getLastMove());
+        // Board.printBoard(GUI.board.getGameBoard());
 
-		for (HumanVsAiButton button: TicTacToeGUI.humanVsAiButtons) {
-			button.ai = this.ai;
-			if (button.id == aiMoveButtonId) {
-				if (GameParameters.playerSymbol == Constants.X) {
-					button.setIcon(GameParameters.O_ICON);
-				} else if (GameParameters.playerSymbol == Constants.O) {
-					button.setIcon(GameParameters.X_ICON);
-				}
-				button.removeActionListener(button);
-			}
-		}
+        Move aiMove = this.ai.getNextMove(TicTacToeGUI.board);
 
-		Board.printBoard(TicTacToeGUI.board.getGameBoard());
+        TicTacToeGUI.makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
 
-		// Check if the game is over.
-		if (TicTacToeGUI.board.isTerminal()) {
-			TicTacToeGUI.gameOver();
-		} else {
-			try {
-				this.removeActionListener(this);
-			} catch (NullPointerException ex) {
-				// Do nothing
-			}
-		}
+        int aiMoveButtonId = TicTacToeGUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
+        // System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");
 
-	}
+        for (HumanVsAiButton button : TicTacToeGUI.humanVsAiButtons) {
+            button.ai = this.ai;
+            if (button.id == aiMoveButtonId) {
+                if (GameParameters.playerSymbol == Constants.X) {
+                    button.setIcon(GameParameters.O_ICON);
+                } else if (GameParameters.playerSymbol == Constants.O) {
+                    button.setIcon(GameParameters.X_ICON);
+                }
+                button.removeActionListener(button);
+            }
+        }
+
+        Board.printBoard(TicTacToeGUI.board.getGameBoard());
+
+        // Check if the game is over.
+        if (TicTacToeGUI.board.isTerminal()) {
+            TicTacToeGUI.gameOver();
+        } else {
+            try {
+                this.removeActionListener(this);
+            } catch (NullPointerException ex) {
+                // Do nothing
+            }
+        }
+
+    }
 
 }

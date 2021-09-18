@@ -23,7 +23,7 @@ public abstract class AI {
     }
 
     public void setAiPlayer(int aiPlayer) {
-     this.aiPlayer = aiPlayer;
+        this.aiPlayer = aiPlayer;
     }
 
     public abstract Move getNextMove(Board board);
