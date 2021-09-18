@@ -5,7 +5,6 @@ import gui.TicTacToeGUI;
 import tic_tac_toe.Board;
 import tic_tac_toe.Move;
 import utility.Constants;
-import utility.GameParameters;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -33,10 +32,10 @@ public class HumanVsAiButton extends XOButton {
     public void actionPerformed(ActionEvent e) {
         TicTacToeGUI.undoItem.setEnabled(true);
 
-        if (GameParameters.playerSymbol == Constants.X) {
-            setIcon(GameParameters.X_ICON);
-        } else if (GameParameters.playerSymbol == Constants.O) {
-            setIcon(GameParameters.O_ICON);
+        if (TicTacToeGUI.gameParameters.getPlayerSymbol() == Constants.X) {
+            setIcon(TicTacToeGUI.gameParameters.getXIcon());
+        } else if (TicTacToeGUI.gameParameters.getPlayerSymbol() == Constants.O) {
+            setIcon(TicTacToeGUI.gameParameters.getOIcon());
         }
 
         // get cell coordinates by id
@@ -68,10 +67,10 @@ public class HumanVsAiButton extends XOButton {
 
         for (HumanVsAiButton button : TicTacToeGUI.humanVsAiButtons) {
             if (button.id == aiMoveButtonId) {
-                if (GameParameters.playerSymbol == Constants.X) {
-                    button.setIcon(GameParameters.O_ICON);
-                } else if (GameParameters.playerSymbol == Constants.O) {
-                    button.setIcon(GameParameters.X_ICON);
+                if (TicTacToeGUI.gameParameters.getPlayerSymbol() == Constants.X) {
+                    button.setIcon(TicTacToeGUI.gameParameters.getOIcon());
+                } else if (TicTacToeGUI.gameParameters.getPlayerSymbol() == Constants.O) {
+                    button.setIcon(TicTacToeGUI.gameParameters.getXIcon());
                 }
                 button.removeActionListener(button);
             }

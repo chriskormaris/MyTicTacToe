@@ -32,9 +32,9 @@ public class AiVsAiButton extends XOButton {
         // System.out.println("button cell: [" + cell.get(0) + "]" + "[" + cell.get(1) + "]");
 
         if (aiPlayer == Constants.X) {
-            setIcon(GameParameters.X_ICON);
+            setIcon(TicTacToeGUI.gameParameters.getXIcon());
         } else if (aiPlayer == Constants.O) {
-            setIcon(GameParameters.O_ICON);
+            setIcon(TicTacToeGUI.gameParameters.getOIcon());
         }
 
         Board.printBoard(TicTacToeGUI.board.getGameBoard());

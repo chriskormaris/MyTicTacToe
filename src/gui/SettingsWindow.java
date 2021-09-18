@@ -49,17 +49,17 @@ public class SettingsWindow extends JFrame {
 
         EventHandler handler = new EventHandler();
 
-        GuiStyle selectedGuiStyle = GameParameters.guiStyle;
-        GameMode selectedMode = GameParameters.gameMode;
-        AiType aiType = GameParameters.aiType;
-        int maxDepth1 = GameParameters.ai1MaxDepth;
-        int maxDepth2 = GameParameters.ai2MaxDepth;
-        Color selectedPlayer1Color = GameParameters.player1Color;
-        Color selectedPlayer2Color = GameParameters.player2Color;
-        int playerSymbol = GameParameters.playerSymbol;
-        int serverPort = GameParameters.serverPort;
-        String clientIP = GameParameters.clientIP;
-        int clientPort = GameParameters.clientPort;
+        GuiStyle selectedGuiStyle = TicTacToeGUI.gameParameters.getGuiStyle();
+        GameMode selectedMode = TicTacToeGUI.gameParameters.getGameMode();
+        AiType aiType = TicTacToeGUI.gameParameters.getAiType();
+        int maxDepth1 = TicTacToeGUI.gameParameters.getAi1MaxDepth();
+        int maxDepth2 = TicTacToeGUI.gameParameters.getAi2MaxDepth();
+        Color selectedPlayer1Color = TicTacToeGUI.gameParameters.getPlayer1Color();
+        Color selectedPlayer2Color = TicTacToeGUI.gameParameters.getPlayer2Color();
+        int playerSymbol = TicTacToeGUI.gameParameters.getPlayerSymbol();
+        int serverPort = TicTacToeGUI.gameParameters.getServerPort();
+        String clientIP = TicTacToeGUI.gameParameters.getClientIP();
+        int clientPort = TicTacToeGUI.gameParameters.getClientPort();
 
         JLabel guiStyleLabel = new JLabel("GUI style");
         JLabel gameModeLabel = new JLabel("Game mode");
@@ -208,10 +208,10 @@ public class SettingsWindow extends JFrame {
         server_port_text_field = new JTextField();
         server_port_text_field.setText(serverPort + "");
 
-        client_ip_text_field = new JTextField(GameParameters.clientIP);
+        client_ip_text_field = new JTextField(clientIP);
         client_ip_text_field.setText(clientIP);
 
-        client_port_text_field = new JTextField(GameParameters.clientPort);
+        client_port_text_field = new JTextField(clientPort);
         client_port_text_field.setText(clientPort + "");
 
         add(gui_style_drop_down);
@@ -295,25 +295,16 @@ public class SettingsWindow extends JFrame {
                         return;
                     }
 
-                    // Change game parameters based on settings.
-                    GameParameters.guiStyle = guiStyle;
-                    GameParameters.gameMode = gameMode;
-                    GameParameters.aiType = aiType;
-                    GameParameters.ai1MaxDepth = ai1MaxDepth;
-                    GameParameters.ai2MaxDepth = ai2MaxDepth;
-                    GameParameters.player1Color = player1Color;
-                    GameParameters.player2Color = player2Color;
-                    GameParameters.playerSymbol = playerSymbol;
-                    GameParameters.serverPort = serverPort;
-                    GameParameters.clientIP = clientIP;
-                    GameParameters.clientPort = clientPort;
+                    String player1ColorString = String.valueOf(player1Color).charAt(0)
+                            + String.valueOf(player1Color).toLowerCase().substring(1);
+                    String player2ColorString = String.valueOf(player2Color).charAt(0)
+                            + String.valueOf(player2Color).toLowerCase().substring(1);
+                    ImageIcon XIcon = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, player1ColorString)));
+                    ImageIcon OIcon = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, player2ColorString)));
 
-                    String player1ColorString = String.valueOf(GameParameters.player1Color).charAt(0)
-                            + String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
-                    String player2ColorString = String.valueOf(GameParameters.player2Color).charAt(0)
-                            + String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-                    GameParameters.X_ICON = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, player1ColorString)));
-                    GameParameters.O_ICON = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, player2ColorString)));
+                    // Change game parameters based on the settings.
+                    TicTacToeGUI.newGameParameters = new GameParameters(guiStyle, gameMode, aiType, ai1MaxDepth, ai2MaxDepth,
+                            player1Color, player2Color, playerSymbol, serverPort, clientIP, clientPort, XIcon, OIcon);
 
                     JOptionPane.showMessageDialog(null,
                             "Game settings have been changed.\nThe changes will be applied in the next new game.",

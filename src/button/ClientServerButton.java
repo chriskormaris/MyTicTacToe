@@ -58,9 +58,9 @@ public class ClientServerButton extends XOButton implements Serializable {
         if (turn == Constants.EMPTY) {
             setIcon(null);
         } else if (turn == Constants.X) {
-            setIcon(GameParameters.X_ICON);
+            setIcon(TicTacToeGUI.gameParameters.getXIcon());
         } else if (turn == Constants.O) {
-            setIcon(GameParameters.O_ICON);
+            setIcon(TicTacToeGUI.gameParameters.getOIcon());
         }
 
         // get cell coordinates by id
