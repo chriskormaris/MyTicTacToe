@@ -3,12 +3,7 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import enumeration.AiType;
 import enumeration.Color;
@@ -16,6 +11,7 @@ import enumeration.GameMode;
 import enumeration.GuiStyle;
 import utility.Constants;
 import utility.GameParameters;
+import utility.ResourceLoader;
 
 
 public class SettingsWindow extends JFrame {
@@ -32,7 +28,7 @@ public class SettingsWindow extends JFrame {
 	private final JComboBox<String> ai2_max_depth_drop_down;
 	private final JComboBox<String> player1_color_drop_down;
 	private final JComboBox<String> player2_color_drop_down;
-	private final JComboBox<String> client_server_symbol_drop_down;
+	private final JComboBox<String> player_symbol_drop_down;
 	private final JTextField server_port_text_field;
 	private final JTextField client_ip_text_field;
 	private final JTextField client_port_text_field;
@@ -62,7 +58,7 @@ public class SettingsWindow extends JFrame {
 		int maxDepth2 = GameParameters.ai2MaxDepth;
 		Color selectedPlayer1Color = GameParameters.player1Color;
 		Color selectedPlayer2Color = GameParameters.player2Color;
-		int selectedClientServerSymbol = GameParameters.clientServerSymbol;
+		int playerSymbol = GameParameters.playerSymbol;
 		int serverPort = GameParameters.serverPort;
 		String clientIP = GameParameters.clientIP;
 		int clientPort = GameParameters.clientPort;
@@ -74,7 +70,7 @@ public class SettingsWindow extends JFrame {
 		JLabel ai2MaxDepthLabel = new JLabel("AI 2 depth (AiVsAi)");
 		JLabel player1ColorLabel = new JLabel("Player 1 \"X\" color");
 		JLabel player2ColorLabel = new JLabel("Player 2 \"O\" color");
-		JLabel clientServerSymbolLabel = new JLabel("Client-Server symbol");
+		JLabel playerSymbolLabel = new JLabel("Player symbol");
 		JLabel serverPortLabel = new JLabel("Server port");
 		JLabel clientIpLabel = new JLabel("Client IP");
 		JLabel clientPortLabel = new JLabel("Client port");
@@ -86,7 +82,7 @@ public class SettingsWindow extends JFrame {
 		add(ai2MaxDepthLabel);
 		add(player1ColorLabel);
 		add(player2ColorLabel);
-		add(clientServerSymbolLabel);
+		add(playerSymbolLabel);
 		add(serverPortLabel);
 		add(clientIpLabel);
 		add(clientPortLabel);
@@ -132,7 +128,7 @@ public class SettingsWindow extends JFrame {
 		} else if (aiType == AiType.RANDOM_AI) {
 			ai_type_drop_down.setSelectedIndex(2);
 		}
-		
+
 		ai1_max_depth_drop_down = new JComboBox<>();
 		ai1_max_depth_drop_down.addItem("1");
 		ai1_max_depth_drop_down.addItem("2");
@@ -141,7 +137,7 @@ public class SettingsWindow extends JFrame {
 		ai1_max_depth_drop_down.addItem("5");
 
 		ai1_max_depth_drop_down.setSelectedIndex(maxDepth1 - 1);
-		
+
 		ai2_max_depth_drop_down = new JComboBox<>();
 		ai2_max_depth_drop_down.addItem("1");
 		ai2_max_depth_drop_down.addItem("2");
@@ -150,7 +146,7 @@ public class SettingsWindow extends JFrame {
 		ai2_max_depth_drop_down.addItem("5");
 
 		ai2_max_depth_drop_down.setSelectedIndex(maxDepth2 - 1);
-		
+
 		player1_color_drop_down = new JComboBox<>();
 		player1_color_drop_down.addItem(String.valueOf(Color.BLUE));
 		player1_color_drop_down.addItem(String.valueOf(Color.RED));
@@ -159,7 +155,7 @@ public class SettingsWindow extends JFrame {
 		player1_color_drop_down.addItem(String.valueOf(Color.ORANGE));
 		player1_color_drop_down.addItem(String.valueOf(Color.PURPLE));
 		player1_color_drop_down.addItem(String.valueOf(Color.YELLOW));
-		
+
 		if (selectedPlayer1Color == Color.BLUE) {
 			player1_color_drop_down.setSelectedIndex(0);
 		} else if (selectedPlayer1Color == Color.RED) {
@@ -175,7 +171,7 @@ public class SettingsWindow extends JFrame {
 		} else if (selectedPlayer1Color == Color.YELLOW) {
 			player1_color_drop_down.setSelectedIndex(6);
 		}
-		
+
 		player2_color_drop_down = new JComboBox<>();
 		player2_color_drop_down.addItem(String.valueOf(Color.BLUE));
 		player2_color_drop_down.addItem(String.valueOf(Color.RED));
@@ -184,7 +180,7 @@ public class SettingsWindow extends JFrame {
 		player2_color_drop_down.addItem(String.valueOf(Color.ORANGE));
 		player2_color_drop_down.addItem(String.valueOf(Color.PURPLE));
 		player2_color_drop_down.addItem(String.valueOf(Color.YELLOW));
-		
+
 		if (selectedPlayer2Color == Color.BLUE) {
 			player2_color_drop_down.setSelectedIndex(0);
 		} else if (selectedPlayer2Color == Color.RED) {
@@ -200,26 +196,26 @@ public class SettingsWindow extends JFrame {
 		} else if (selectedPlayer2Color == Color.YELLOW) {
 			player2_color_drop_down.setSelectedIndex(6);
 		}
-		
-		client_server_symbol_drop_down = new JComboBox<>();
-		client_server_symbol_drop_down.addItem("X");
-		client_server_symbol_drop_down.addItem("O");
-		
-		if (selectedClientServerSymbol == Constants.X) {
-			client_server_symbol_drop_down.setSelectedIndex(Constants.X - 1);
-		} else if (selectedClientServerSymbol == Constants.O) {
-			client_server_symbol_drop_down.setSelectedIndex(Constants.O - 1);
+
+		player_symbol_drop_down = new JComboBox<>();
+		player_symbol_drop_down.addItem("X");
+		player_symbol_drop_down.addItem("O");
+
+		if (playerSymbol == Constants.X) {
+			player_symbol_drop_down.setSelectedIndex(0);
+		} else if (playerSymbol == Constants.O) {
+			player_symbol_drop_down.setSelectedIndex(1);
 		}
-		
+
 		server_port_text_field = new JTextField();
 		server_port_text_field.setText(serverPort + "");
-		
+
 		client_ip_text_field = new JTextField(GameParameters.clientIP);
 		client_ip_text_field.setText(clientIP);
-		
+
 		client_port_text_field = new JTextField(GameParameters.clientPort);
 		client_port_text_field.setText(clientPort + "");
-		
+
 		add(gui_style_drop_down);
 		add(game_mode_drop_down);
 		add(ai_type_drop_down);
@@ -227,7 +223,7 @@ public class SettingsWindow extends JFrame {
 		add(ai2_max_depth_drop_down);
 		add(player1_color_drop_down);
 		add(player2_color_drop_down);
-		add(client_server_symbol_drop_down);
+		add(player_symbol_drop_down);
 		add(server_port_text_field);
 		add(client_ip_text_field);
 		add(client_port_text_field);
@@ -239,11 +235,11 @@ public class SettingsWindow extends JFrame {
 		ai2MaxDepthLabel.setBounds(20, 165, 250, 25);
 		player1ColorLabel.setBounds(20, 200, 250, 25);
 		player2ColorLabel.setBounds(20, 235, 250, 25);
-		clientServerSymbolLabel.setBounds(20, 270, 250, 25);
+		playerSymbolLabel.setBounds(20, 270, 250, 25);
 		serverPortLabel.setBounds(20, 305, 250, 25);
 		clientIpLabel.setBounds(20, 340, 250, 25);
 		clientPortLabel.setBounds(20, 375, 250, 25);
-		
+
 		gui_style_drop_down.setBounds(260, 25, 160, 25);
 		game_mode_drop_down.setBounds(260, 60, 160, 25);
 		ai_type_drop_down.setBounds(260, 95, 160, 25);
@@ -251,16 +247,16 @@ public class SettingsWindow extends JFrame {
 		ai2_max_depth_drop_down.setBounds(260, 165, 160, 25);
 		player1_color_drop_down.setBounds(260, 200, 160, 25);
 		player2_color_drop_down.setBounds(260, 235, 160, 25);
-		client_server_symbol_drop_down.setBounds(260, 270, 160, 25);
+		player_symbol_drop_down.setBounds(260, 270, 160, 25);
 		server_port_text_field.setBounds(260, 305, 160, 25);
 		client_ip_text_field.setBounds(260, 340, 160, 25);
 		client_port_text_field.setBounds(260, 375, 160, 25);
-				
+
 		apply = new JButton("Apply");
 		cancel = new JButton("Cancel");
 		add(apply);
 		add(cancel);
-		
+
 		int distance = 10;
 		apply.setBounds((width / 2) - 110 - (distance / 2), 415, 100, 30);
 		apply.addActionListener(handler);
@@ -270,34 +266,30 @@ public class SettingsWindow extends JFrame {
 
 
 	private class EventHandler implements ActionListener {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent ev) {
-			
+
 			if (ev.getSource() == cancel) {
 				dispose();
-			}
-			
-			else if (ev.getSource() == apply) {
+			} else if (ev.getSource() == apply) {
 				try {
-					
-					GuiStyle guiStyle = 
+
+					GuiStyle guiStyle =
 						GuiStyle.valueOf(gui_style_drop_down.getSelectedItem().toString().toUpperCase().replace("-", "_").replace(" ", "_"));
-					GameMode gameMode = 
+					GameMode gameMode =
 						GameMode.valueOf(game_mode_drop_down.getSelectedItem().toString().toUpperCase().replace("-", "_").replace(" ", "_"));
 					AiType aiType =
 						AiType.valueOf(ai_type_drop_down.getSelectedItem().toString().toUpperCase().replace("-", "_").replace(" ", "_"));
 					int ai1MaxDepth = ai1_max_depth_drop_down.getSelectedIndex() + 1;
 					int ai2MaxDepth = ai2_max_depth_drop_down.getSelectedIndex() + 1;
-					Color player1Color = 
-						Color.valueOf(player1_color_drop_down.getSelectedItem().toString());
-					Color player2Color =
-							Color.valueOf(player2_color_drop_down.getSelectedItem().toString());
-					int clientServerSymbol = client_server_symbol_drop_down.getSelectedIndex() + 1;
+					Color player1Color = Color.valueOf(player1_color_drop_down.getSelectedItem().toString());
+					Color player2Color = Color.valueOf(player2_color_drop_down.getSelectedItem().toString());
+					int playerSymbol = (player_symbol_drop_down.getSelectedIndex()) == 0 ? Constants.X : Constants.O;
 					int serverPort = Integer.parseInt(server_port_text_field.getText());
 					String clientIP = client_ip_text_field.getText();
 					int clientPort = Integer.parseInt(client_port_text_field.getText());
-					
+
 					if (player1Color == player2Color) {
 						JOptionPane.showMessageDialog(null,
 								"Player 1 and Player 2 cannot have the same color of symbols!",
@@ -313,26 +305,33 @@ public class SettingsWindow extends JFrame {
 					GameParameters.ai2MaxDepth = ai2MaxDepth;
 					GameParameters.player1Color = player1Color;
 					GameParameters.player2Color = player2Color;
-					GameParameters.clientServerSymbol = clientServerSymbol;
+					GameParameters.playerSymbol = playerSymbol;
 					GameParameters.serverPort = serverPort;
 					GameParameters.clientIP = clientIP;
 					GameParameters.clientPort = clientPort;
-					
+
+					String player1ColorString = String.valueOf(GameParameters.player1Color).charAt(0)
+							+ String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
+					String player2ColorString = String.valueOf(GameParameters.player2Color).charAt(0)
+							+ String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
+					GameParameters.X_ICON = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1ColorString)));
+					GameParameters.O_ICON = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2ColorString)));
+
 					JOptionPane.showMessageDialog(null,
 							"Game settings have been changed.\nThe changes will be applied in the next new game.",
 							"", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 				}
-				
+
 				catch(Exception e) {
 					System.err.println("ERROR : " + e.getMessage());
 				}
-				
+
 			}  // else if.
-			
+
 		}  // action performed.
-		
+
 	}  // inner class.
-	
-	
+
+
 }  // class end.

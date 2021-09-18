@@ -4,27 +4,17 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-
 import tic_tac_toe.Board;
 import client_server.Client;
 import gui.TicTacToeGUI;
 import utility.Constants;
 import utility.GameParameters;
-import utility.ResourceLoader;
 
 
 public class ClientServerButton extends XOButton implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7433169613318480660L;
-	
 	// Empty: 0, X: 1, O: 0
 	public int id;
-	ImageIcon X;
-	ImageIcon O;
 	String serverIP;
 	int serverPort;
 	Client client;
@@ -35,12 +25,6 @@ public class ClientServerButton extends XOButton implements Serializable {
 	public ClientServerButton(int id, String serverIP, int serverPort, int playerSymbol) {
 		setFocusable(false);
 		this.id = id;
-		String player1Color = String.valueOf(GameParameters.player1Color).charAt(0) 
-				+ String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
-		String player2Color = String.valueOf(GameParameters.player2Color).charAt(0) 
-				+ String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-		this.X = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1Color)));
-		this.O = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2Color)));
 		this.addActionListener(this);
 		setIcon(null);
 		this.serverIP = serverIP;
@@ -55,13 +39,15 @@ public class ClientServerButton extends XOButton implements Serializable {
 		// GUI.undoItem.setEnabled(false);  // uncomment only if needed
 		
 		int turn = Constants.EMPTY;
-		if (TicTacToeGUI.board.getLastPlayer() == Constants.X)
+		if (TicTacToeGUI.board.getLastPlayer() == Constants.X) {
 			turn = Constants.O;
-		else if (TicTacToeGUI.board.getLastPlayer() == Constants.O)
+		} else if (TicTacToeGUI.board.getLastPlayer() == Constants.O) {
 			turn = Constants.X;
+		}
 		
-		if (turn != playerLetter)
+		if (turn != playerLetter) {
 			return;
+		}
 		
 		if (programmaticallyPressed) {
 			turn = TicTacToeGUI.board.getLastPlayer(); 
@@ -72,20 +58,19 @@ public class ClientServerButton extends XOButton implements Serializable {
 		if (turn == Constants.EMPTY) {
 			setIcon(null);
 		} else if (turn == Constants.X) {
-			setIcon(X);
+			setIcon(GameParameters.X_ICON);
 		} else if (turn == Constants.O) {
-			setIcon(O);
+			setIcon(GameParameters.O_ICON);
 		}
 			
 		// get cell coordinates by id
 		List<Integer> cell = TicTacToeGUI.getBoardCellById(id);
-		if (cell != null)
-			TicTacToeGUI.makeMove(cell.get(0), cell.get(1), turn);
+		TicTacToeGUI.makeMove(cell.get(0), cell.get(1), turn);
 		Board.printBoard(TicTacToeGUI.board.getGameBoard());
 		
 		if (!programmaticallyPressed) {
 			this.client = new Client(serverIP, serverPort, playerLetter);
-			this.client.run();
+			this.client.start();
 			
 			// check if the game is over
 			if (TicTacToeGUI.board.isTerminal()) {

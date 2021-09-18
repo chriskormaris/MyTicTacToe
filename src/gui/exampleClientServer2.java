@@ -9,7 +9,7 @@ import utility.GameParameters;
 
 public class exampleClientServer2 {
 
-	static int clientServerSymbol = Constants.O;
+	static int playerSymbol = Constants.O;
 	static int serverPort = 4001;
 	static String clientIP = "127.0.0.1";
 	static int clientPort = 4000;
@@ -26,7 +26,7 @@ public class exampleClientServer2 {
 		GameParameters.ai2MaxDepth = 5;
 		GameParameters.player1Color = Color.BLUE;
 		GameParameters.player2Color = Color.RED;
-		GameParameters.clientServerSymbol = clientServerSymbol;
+		GameParameters.playerSymbol = playerSymbol;
 		GameParameters.serverPort = serverPort;
 		GameParameters.clientIP = clientIP;
 		GameParameters.clientPort = clientPort;

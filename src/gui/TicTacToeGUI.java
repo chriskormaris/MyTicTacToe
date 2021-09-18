@@ -39,6 +39,8 @@ import utility.Constants;
 import utility.GameParameters;
 import utility.ResourceLoader;
 
+import static utility.GameParameters.playerSymbol;
+
 
 public class TicTacToeGUI {
 	
@@ -398,13 +400,14 @@ public class TicTacToeGUI {
 			addMenus();
 		}
 
-		AI aiPlayer = null;
+		int aiPlayerSymbol = (GameParameters.playerSymbol == Constants.X) ? Constants.O : Constants.X;
+		AI ai = null;
 		if (GameParameters.aiType == AiType.BEST_RESPONSE_AI) {
-			aiPlayer = new BestResponse(Constants.O);
+			ai = new BestResponse(aiPlayerSymbol);
 		} else if (GameParameters.aiType == AiType.MINIMAX_AI) {
-			aiPlayer = new MiniMaxAI(GameParameters.ai1MaxDepth, Constants.O);
+			ai = new MiniMaxAI(GameParameters.ai1MaxDepth, aiPlayerSymbol);
 		} else if (GameParameters.aiType == AiType.RANDOM_AI) {
-			aiPlayer = new RandomChoiceAI(Constants.O);
+			ai = new RandomChoiceAI(aiPlayerSymbol);
 		}
 
 		if (panel != null) {
@@ -427,7 +430,7 @@ public class TicTacToeGUI {
 		panel.revalidate();
 		panel.repaint();
 		for (int i=0; i<9; i++) {
-			humanVsAiButtons[i] = new HumanVsAiButton(i, aiPlayer);
+			humanVsAiButtons[i] = new HumanVsAiButton(i, GameParameters.playerSymbol, ai);
 			panel.add(humanVsAiButtons[i]);
 		}
 	
@@ -437,7 +440,22 @@ public class TicTacToeGUI {
 		frame.setFocusable(true);
 		
 		frame.setVisible(true);
-		
+
+		if (GameParameters.playerSymbol == Constants.O) {
+			Move aiMove = ai.getNextMove(board);
+			makeMove(aiMove.getRow(), aiMove.getColumn(), Constants.X);
+
+			int aiMoveButtonId = TicTacToeGUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
+			// System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");
+
+			for (HumanVsAiButton button: TicTacToeGUI.humanVsAiButtons) {
+				if (button.id == aiMoveButtonId) {
+					button.setIcon(GameParameters.X_ICON);
+					button.removeActionListener(button);
+				}
+			}
+
+		}
 	}
 
 
@@ -489,17 +507,17 @@ public class TicTacToeGUI {
 			addMenus();
 		}
 		
-		AI ai1Player = null;
-		AI ai2Player = null;
+		AI ai1 = null;
+		AI ai2 = null;
 		if (GameParameters.aiType == AiType.BEST_RESPONSE_AI) {
-			ai1Player = new BestResponse(Constants.X);
-			ai2Player = new BestResponse(Constants.O);
+			ai1 = new BestResponse(Constants.X);
+			ai2 = new BestResponse(Constants.O);
 		} else if (GameParameters.aiType == AiType.MINIMAX_AI) {
-			ai1Player = new MiniMaxAI(GameParameters.ai1MaxDepth, Constants.X);
-			ai2Player = new MiniMaxAI(GameParameters.ai2MaxDepth, Constants.O);
+			ai1 = new MiniMaxAI(GameParameters.ai1MaxDepth, Constants.X);
+			ai2 = new MiniMaxAI(GameParameters.ai2MaxDepth, Constants.O);
 		} else if (GameParameters.aiType == AiType.RANDOM_AI) {
-			ai1Player = new RandomChoiceAI(Constants.X);
-			ai2Player = new RandomChoiceAI(Constants.O);
+			ai1 = new RandomChoiceAI(Constants.X);
+			ai2 = new RandomChoiceAI(Constants.O);
 		}
 
 		if (panel != null) {
@@ -528,7 +546,7 @@ public class TicTacToeGUI {
 		
 		frame.setVisible(true);
 		
-		playAiVsAi(ai1Player, ai2Player);
+		playAiVsAi(ai1, ai2);
 	}
 
 
@@ -563,7 +581,7 @@ public class TicTacToeGUI {
 		panel.repaint();
 		for (int i=0; i<9; i++) {
 			clientServerButtons[i] = new ClientServerButton(i, GameParameters.clientIP, 
-					GameParameters.clientPort, GameParameters.clientServerSymbol);
+					GameParameters.clientPort, playerSymbol);
 			panel.add(clientServerButtons[i]);
 		}
 		
@@ -584,7 +602,7 @@ public class TicTacToeGUI {
 		int ai_button_id = getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 		for (AiVsAiButton button: aiVsAiButtons) {
 			if (button.id == ai_button_id) {
-				button.player = ai.getAiPlayer();
+				button.aiPlayer = ai.getAiPlayer();
 				button.doClick();
 			}
 		}

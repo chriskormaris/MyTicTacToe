@@ -19,7 +19,7 @@ public abstract class AI {
     }
 
     public int getAiPlayer() {
-     return aiPlayer;
+        return aiPlayer;
     }
 
     public void setAiPlayer(int aiPlayer) {

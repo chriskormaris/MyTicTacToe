@@ -14,11 +14,6 @@ import utility.ResourceLoader;
 
 public class HumanVsHumanButton extends XOButton {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7433169613318480660L;
-	
 	// Empty: 0, X: 1, O: 0
 	public int id;
 	ImageIcon X;
@@ -60,8 +55,7 @@ public class HumanVsHumanButton extends XOButton {
 			
 		// get cell coordinates by id
 		List<Integer> cell = TicTacToeGUI.getBoardCellById(id);
-		if (cell != null)
-			TicTacToeGUI.makeMove(cell.get(0), cell.get(1), turn);
+		TicTacToeGUI.makeMove(cell.get(0), cell.get(1), turn);
 		Board.printBoard(TicTacToeGUI.board.getGameBoard());
 		
 		// check if the game is over
