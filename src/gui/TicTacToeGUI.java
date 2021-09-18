@@ -38,6 +38,7 @@ import enumeration.GuiStyle;
 import utility.Constants;
 import utility.GameParameters;
 import utility.ResourceLoader;
+import utility.Utilities;
 
 import static utility.GameParameters.playerSymbol;
 
@@ -180,12 +181,12 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(GameParameters.player1Color).charAt(0)
                                     + String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, player1Color))));
                             button.doClick();
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(GameParameters.player2Color).charAt(0)
                                     + String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, player2Color))));
                             button.doClick();
                         } else {
                             button.setIcon(null);
@@ -194,8 +195,9 @@ public class TicTacToeGUI {
                         }
                     }
 
-                    if (undoBoards.isEmpty())
+                    if (undoBoards.isEmpty()) {
                         undoItem.setEnabled(false);
+                    }
 
                     redoItem.setEnabled(true);
 
@@ -220,12 +222,12 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(GameParameters.player1Color).charAt(0)
                                     + String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, player1Color))));
                             button.doClick();
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(GameParameters.player2Color).charAt(0)
                                     + String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, player2Color))));
                             button.doClick();
                         } else {
                             button.setIcon(null);
@@ -267,14 +269,14 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(GameParameters.player1Color).charAt(0)
                                     + String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, player1Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(GameParameters.player2Color).charAt(0)
                                     + String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, player2Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }
@@ -312,14 +314,14 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(GameParameters.player1Color).charAt(0)
                                     + String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, player1Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(GameParameters.player2Color).charAt(0)
                                     + String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, player2Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }

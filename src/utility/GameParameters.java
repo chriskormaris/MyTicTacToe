@@ -21,8 +21,9 @@ public class GameParameters {
     public static int serverPort = 4000;
     public static String clientIP = "127.0.0.1";
     public static int clientPort = 4001;
-    public static ImageIcon X_ICON = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, "Blue")));
-    public static ImageIcon O_ICON = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, "Red")));
+    public static ImageIcon X_ICON = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, "Blue")));
+    public static ImageIcon O_ICON = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, "Red")));
+
     private GameParameters() {
     }  // Prevents instantiation.
 

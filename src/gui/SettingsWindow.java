@@ -12,6 +12,7 @@ import enumeration.GuiStyle;
 import utility.Constants;
 import utility.GameParameters;
 import utility.ResourceLoader;
+import utility.Utilities;
 
 
 public class SettingsWindow extends JFrame {
@@ -311,8 +312,8 @@ public class SettingsWindow extends JFrame {
                             + String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
                     String player2ColorString = String.valueOf(GameParameters.player2Color).charAt(0)
                             + String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-                    GameParameters.X_ICON = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1ColorString)));
-                    GameParameters.O_ICON = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2ColorString)));
+                    GameParameters.X_ICON = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.X, player1ColorString)));
+                    GameParameters.O_ICON = new ImageIcon(ResourceLoader.load(Utilities.getIconPath(Constants.O, player2ColorString)));
 
                     JOptionPane.showMessageDialog(null,
                             "Game settings have been changed.\nThe changes will be applied in the next new game.",

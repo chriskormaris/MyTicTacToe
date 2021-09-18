@@ -16,19 +16,11 @@ public class HumanVsHumanButton extends XOButton {
 
     // Empty: 0, X: 1, O: 0
     public int id;
-    ImageIcon X;
-    ImageIcon O;
 
 
     public HumanVsHumanButton(int id) {
         setFocusable(false);
         this.id = id;
-        String player1Color = String.valueOf(GameParameters.player1Color).charAt(0)
-                + String.valueOf(GameParameters.player1Color).toLowerCase().substring(1);
-        String player2Color = String.valueOf(GameParameters.player2Color).charAt(0)
-                + String.valueOf(GameParameters.player2Color).toLowerCase().substring(1);
-        this.X = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.X, player1Color)));
-        this.O = new ImageIcon(ResourceLoader.load(Constants.getIconPath(Constants.O, player2Color)));
         this.addActionListener(this);
         setIcon(null);
     }
@@ -48,9 +40,9 @@ public class HumanVsHumanButton extends XOButton {
         if (turn == Constants.EMPTY) {
             setIcon(null);
         } else if (turn == Constants.X) {
-            setIcon(X);
+            setIcon(GameParameters.X_ICON);
         } else if (turn == Constants.O) {
-            setIcon(O);
+            setIcon(GameParameters.O_ICON);
         }
 
         // get cell coordinates by id

@@ -12,12 +12,4 @@ public class Constants {
     private Constants() {
     }  // Prevents instantiation.
 
-    public static String getIconPath(int player, String color) {
-        if (player == X) {
-            return "img/X/" + color + ".png";
-        } else {
-            return "img/O/" + color + ".png";
-        }
-    }
-
 }
