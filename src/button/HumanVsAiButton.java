@@ -70,7 +70,6 @@ public class HumanVsAiButton extends XOButton {
         // System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");
 
         for (HumanVsAiButton button : TicTacToeGUI.humanVsAiButtons) {
-            button.ai = this.ai;
             if (button.id == aiMoveButtonId) {
                 if (GameParameters.playerSymbol == Constants.X) {
                     button.setIcon(GameParameters.O_ICON);
