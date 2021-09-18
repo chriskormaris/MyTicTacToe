@@ -332,8 +332,9 @@ public class TicTacToeGUI {
                         }
                     }
 
-                    if (redoBoards.isEmpty())
+                    if (redoBoards.isEmpty()) {
                         redoItem.setEnabled(false);
+                    }
 
                     undoItem.setEnabled(true);
 
