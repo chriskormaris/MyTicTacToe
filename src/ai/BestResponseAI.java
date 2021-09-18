@@ -9,15 +9,15 @@ import tic_tac_toe.Move;
 import utility.Constants;
 
 
-public class BestResponse extends AI {
+public class BestResponseAI extends AI {
 
     // Default values
-    public BestResponse() {
+    public BestResponseAI() {
         super(Constants.O);
         // this.bestResponse = new Move();
     }
 
-    public BestResponse(int aiPlayer) {
+    public BestResponseAI(int aiPlayer) {
         super(aiPlayer);
         // this.bestResponse = new Move();
     }
@@ -46,7 +46,8 @@ public class BestResponse extends AI {
          * |- - -|
          * |- - -|
          * |- - -| */
-        if (Board.isGameBoardEmpty(gameBoard)) {
+        if (getAiPlayer() == Constants.X
+                && Board.isGameBoardEmpty(gameBoard)) {
             /* |- - -|
              * |- X -|
              * |- - -| */
@@ -66,7 +67,8 @@ public class BestResponse extends AI {
 		 * |- - -| |- - -| |- - -| |- - -|
 		 * |- - X| |- - -| |- - -| |- - -|
 		 * |- - -| |X - -| |- X -| |- - X| */
-        if (((gameBoard[0][0] == Constants.X || gameBoard[0][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && ((gameBoard[0][0] == Constants.X || gameBoard[0][1] == Constants.X
                 || gameBoard[0][2] == Constants.X || gameBoard[1][0] == Constants.X
                 || gameBoard[1][2] == Constants.X || gameBoard[2][0] == Constants.X
                 || gameBoard[2][1] == Constants.X || gameBoard[2][2] == Constants.X))
@@ -87,7 +89,8 @@ public class BestResponse extends AI {
 		/* |- - -|
 		 * |- X -|
 		 * |- - -| */
-        if (gameBoard[1][1] == Constants.X && number_of_empty_cells == 8) {
+        if (getAiPlayer() == Constants.O
+                && gameBoard[1][1] == Constants.X && number_of_empty_cells == 8) {
             /* |O - -| |- - O| |- - -| |- - -|
              * |- X -| |- X -| |- X -| |- X -|
              * |- - -| |- - -| |O - -| |- - O| */
@@ -115,7 +118,8 @@ public class BestResponse extends AI {
 		/* |- O -| |- - -| |- - -| |- - -|
 		 * |- X -| |O X -| |- X O| |- X -|
 		 * |- - -| |- - -| |- - -| |- O -| */
-        if (((gameBoard[0][1] == Constants.O && gameBoard[1][1] == Constants.X)
+        if (getAiPlayer() == Constants.X
+                && ((gameBoard[0][1] == Constants.O && gameBoard[1][1] == Constants.X)
                 || (gameBoard[1][0] == Constants.O && gameBoard[1][1] == Constants.X)
                 || (gameBoard[1][2] == Constants.O && gameBoard[1][1] == Constants.X)
                 || (gameBoard[2][1] == Constants.O && gameBoard[1][1] == Constants.X))
@@ -145,7 +149,8 @@ public class BestResponse extends AI {
 		 * |- X -|
 		 * |- - -|
 		 * */
-        if ((gameBoard[0][0] == Constants.O && gameBoard[1][1] == Constants.X)
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[0][0] == Constants.O && gameBoard[1][1] == Constants.X)
                 && number_of_empty_cells == 7) {
             /* |O - X| |O - -| |O - -|
              * |- X -| |X X -| |- X -|
@@ -168,7 +173,8 @@ public class BestResponse extends AI {
 		/* |- - O|
 		 * |- X -|
 		 * |- - -| */
-        if ((gameBoard[0][2] == Constants.O && gameBoard[1][1] == Constants.X)
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[0][2] == Constants.O && gameBoard[1][1] == Constants.X)
                 && number_of_empty_cells == 7) {
             /* |X - O| |- - O| |- - O|
              * |- X -| |- X -| |- X -|
@@ -191,7 +197,8 @@ public class BestResponse extends AI {
 		/* |- - -|
 		 * |- X -|
 		 * |O - -| */
-        if ((gameBoard[2][0] == Constants.O && gameBoard[1][1] == Constants.X)
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[2][0] == Constants.O && gameBoard[1][1] == Constants.X)
                 && number_of_empty_cells == 7) {
             /* |X - -| |- - X| |- - -|
              * |- X -| |- X -| |- X -|
@@ -214,7 +221,8 @@ public class BestResponse extends AI {
 		/* |- - -|
 		 * |- X -|
 		 * |- - O| */
-        if ((gameBoard[2][2] == Constants.O && gameBoard[1][1] == Constants.X)
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[2][2] == Constants.O && gameBoard[1][1] == Constants.X)
                 && number_of_empty_cells == 7) {
             /* |X - -| |- - X| |- - -|
              * |- X -| |- X -| |- X -|
@@ -235,14 +243,15 @@ public class BestResponse extends AI {
 
         /* Number of Empty Cells: 6 */
 
-        Move br = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 6);
-        if (br != null) return br;
+        Move bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 6);
+        if (bestResponseMove != null) return bestResponseMove;
 
 		/* Given boards:
 		/* |X - -|   |O - -|
 		 * |- X -| - |- X -|
 		 * |- - O|   |- - X| */
-        if (((gameBoard[0][0] == Constants.X && gameBoard[1][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && ((gameBoard[0][0] == Constants.X && gameBoard[1][1] == Constants.X
                 && gameBoard[2][2] == Constants.O)
                 ||
                 (gameBoard[2][2] == Constants.X && gameBoard[1][1] == Constants.X
@@ -265,7 +274,8 @@ public class BestResponse extends AI {
 		/* |- X -|
 		 * |- X -|
 		 * |- O -| */
-        if ((gameBoard[0][1] == Constants.X && gameBoard[1][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[0][1] == Constants.X && gameBoard[1][1] == Constants.X
                 && gameBoard[2][0] == Constants.O)
                 && number_of_empty_cells == 6) {
             /* |- X -| |- X -|
@@ -285,7 +295,8 @@ public class BestResponse extends AI {
 		/* |- - -|
 		 * |X X O|
 		 * |- - -| */
-        if ((gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
                 && gameBoard[1][2] == Constants.O)
                 && number_of_empty_cells == 6) {
             /* |- - O| |- - -|
@@ -306,7 +317,8 @@ public class BestResponse extends AI {
 		/* |- - -|
 		 * |O X X|
 		 * |- - -| */
-        if ((gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
                 && gameBoard[1][2] == Constants.O)
                 && number_of_empty_cells == 6) {
             /* |O - -| |- - -|
@@ -326,7 +338,8 @@ public class BestResponse extends AI {
 		/* |- - X|   |- - O|
 		 * |- X -| - |- X -|
 		 * |O - -|   |X - -| */
-        if ((gameBoard[0][2] == Constants.X && gameBoard[1][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[0][2] == Constants.X && gameBoard[1][1] == Constants.X
                 && gameBoard[2][0] == Constants.O
                 ||
                 (gameBoard[2][0] == Constants.X && gameBoard[1][1] == Constants.X
@@ -349,7 +362,8 @@ public class BestResponse extends AI {
 		/* |- O -|
 		 * |- X -|
 		 * |- X -| */
-        if ((gameBoard[0][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[0][1] == Constants.X
                 && gameBoard[1][1] == Constants.X
                 && gameBoard[2][0] == Constants.O)
                 && number_of_empty_cells == 6) {
@@ -369,14 +383,15 @@ public class BestResponse extends AI {
 
         /* Number of Empty Cells: 5 */
 
-        br = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 5);
-        if (br != null) return br;
+        bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 5);
+        if (bestResponseMove != null) return bestResponseMove;
 
         /* Non-winning and non-losing case, that suggests the move [0][0] (for 5 empty cells). */
         /* |- X -|
          * |X - O|
          * |- O -| */
-        if ((gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X
                 && gameBoard[1][2] == Constants.O && gameBoard[2][1] == Constants.O)
                 && number_of_empty_cells == 5) {
             /* |X X -|
@@ -390,7 +405,8 @@ public class BestResponse extends AI {
         /* |- X -|
          * |O - X|
          * |- O -| */
-        if ((gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
                 && gameBoard[1][0] == Constants.O && gameBoard[2][1] == Constants.O)
                 && number_of_empty_cells == 5) {
             /* |- X X|
@@ -404,8 +420,9 @@ public class BestResponse extends AI {
         /* |- O -|
          * |X - O|
          * |- X -| */
-        if ((gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
-                && gameBoard[1][0] == Constants.O && gameBoard[2][1] == Constants.O)
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
+                && gameBoard[1][0] == Constants.X && gameBoard[2][1] == Constants.O)
                 && number_of_empty_cells == 5) {
             /* |- O -|
              * |X - O|
@@ -418,7 +435,8 @@ public class BestResponse extends AI {
         /* |- O -|
          * |O - X|
          * |- X -| */
-        if ((gameBoard[0][2] == Constants.X && gameBoard[2][1] == Constants.X
+        if (getAiPlayer() == Constants.X
+                && (gameBoard[0][2] == Constants.X && gameBoard[2][1] == Constants.X
                 && gameBoard[0][1] == Constants.O && gameBoard[1][0] == Constants.O)
                 && number_of_empty_cells == 5) {
             /* |- O -|
@@ -430,87 +448,175 @@ public class BestResponse extends AI {
 
 
         /* Number of Empty Cells: 4 */
-        br = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 4);
-        if (br != null) return br;
+        bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 4);
+        if (bestResponseMove != null) return bestResponseMove;
 
         /* Non-winning and non-losing case, that suggests the move [2][2] (for 4 empty cells). */
         /* |- X -|
          * |X X O|
          * |- O -| */
-        if ((gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
                 && gameBoard[1][2] == Constants.O && gameBoard[2][1] == Constants.O)
                 && number_of_empty_cells == 4) {
             /* |- X -|
              * |X X O|
              * |- O O| */
             // System.out.println("INSIDE CASE B1");
-            return new Move(2, 2, Constants.X);
+            return new Move(2, 2, Constants.O);
         }
 
-        /* Non-winning and non-losing case, that suggests the move [2][0] (for 5 empty cells). */
+        /* Non-winning and non-losing case, that suggests the move [2][0] (for 4 empty cells). */
         /* |- X -|
          * |O X X|
          * |- O -| */
-        if ((gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X && gameBoard[1][1] == Constants.X
                 && gameBoard[1][0] == Constants.O && gameBoard[2][1] == Constants.O)
                 && number_of_empty_cells == 4) {
             /* |- X -|
              * |O X X|
              * |O O -| */
             // System.out.println("INSIDE CASE B2");
-            return new Move(2, 0, Constants.X);
+            return new Move(2, 0, Constants.O);
         }
 
-        /* Non-winning and non-losing case, that suggests the move [0][2] (for 5 empty cells). */
+        /* Non-winning and non-losing case, that suggests the move [0][2] (for 4 empty cells). */
         /* |- O -|
          * |X X O|
          * |- X -| */
-        if ((gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
-                && gameBoard[1][0] == Constants.O && gameBoard[2][1] == Constants.O)
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[0][1] == Constants.O && gameBoard[1][2] == Constants.O && gameBoard[1][1] == Constants.X
+                && gameBoard[1][0] == Constants.X && gameBoard[2][1] == Constants.X)
                 && number_of_empty_cells == 4) {
             /* |- O O|
              * |X X O|
              * |- X -| */
             // System.out.println("INSIDE CASE B3");
-            return new Move(0, 2, Constants.X);
+            return new Move(0, 2, Constants.O);
         }
 
-        /* Non-winning and non-losing case, that suggests the move [0][0] (for 5 empty cells). */
+        /* Non-winning and non-losing case, that suggests the move [0][0] (for 4 empty cells). */
         /* |- O -|
          * |O X X|
          * |- X -| */
-        if ((gameBoard[0][2] == Constants.X && gameBoard[2][1] == Constants.X
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.X && gameBoard[1][2] == Constants.X
                 && gameBoard[0][1] == Constants.O && gameBoard[1][0] == Constants.O)
                 && number_of_empty_cells == 4) {
             /* |O O -|
              * |O X X|
              * |- X -| */
             // System.out.println("INSIDE CASE B4");
-            return new Move(0, 0, Constants.X);
+            return new Move(0, 0, Constants.O);
+        }
+
+        /* Non-winning and near-losing case, that suggests the move [0][2] or [2][2] (for 4 empty cells). */
+        /* |- X -|
+         * |O O X|
+         * |- X -| */
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.X
+                && gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.O)
+                && number_of_empty_cells == 4) {
+            /* |- X O| |- X -|
+             * |O O X| |O O X|
+             * |- X -| |- X O| */
+            // System.out.println("INSIDE CASE B5");
+            int random_number = r.nextInt(2) + 1;
+            if (random_number == 1) {
+                return new Move(0, 2, Constants.O);
+            }
+            if (random_number == 2) {
+                return new Move(2, 2, Constants.O);
+            }
+        }
+
+        /* Non-winning and near-losing case, that suggests the move [0][0] or [2][0] (for 4 empty cells). */
+        /* |- X -|
+         * |X O O|
+         * |- X -| */
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.O
+                && gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X)
+                && number_of_empty_cells == 4) {
+            /* |O X -| |- X -|
+             * |X O O| |X O O|
+             * |- X -| |O X -| */
+            // System.out.println("INSIDE CASE B6");
+            int random_number = r.nextInt(2) + 1;
+            if (random_number == 1) {
+                return new Move(0, 0, Constants.O);
+            }
+            if (random_number == 2) {
+                return new Move(2, 0, Constants.O);
+            }
+        }
+
+        /* Non-winning and near-losing case, that suggests the move [0][0] or [0][2] (for 4 empty cells). */
+        /* |- X -|
+         * |X O X|
+         * |- O -| */
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[2][1] == Constants.O && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.X
+                && gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X)
+                && number_of_empty_cells == 4) {
+            /* |O X -| |- X O|
+             * |X O X| |X O X|
+             * |- O -| |- O -| */
+            // System.out.println("INSIDE CASE B5");
+            int random_number = r.nextInt(2) + 1;
+            if (random_number == 1) {
+                return new Move(0, 0, Constants.O);
+            }
+            if (random_number == 2) {
+                return new Move(0, 2, Constants.O);
+            }
+        }
+
+        /* Non-winning and near-losing case, that suggests the move [2][0] or [2][2] (for 4 empty cells). */
+        /* |- O -|
+         * |X O X|
+         * |- X -| */
+        if (getAiPlayer() == Constants.O
+                && (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.X
+                && gameBoard[0][1] == Constants.O && gameBoard[1][0] == Constants.X)
+                && number_of_empty_cells == 4) {
+            /* |- O -| |- O -|
+             * |X O X| |X O X|
+             * |O X -| |- X O| */
+            // System.out.println("INSIDE CASE B6");
+            int random_number = r.nextInt(2) + 1;
+            if (random_number == 1) {
+                return new Move(2, 0, Constants.O);
+            }
+            if (random_number == 2) {
+                return new Move(2, 2, Constants.O);
+            }
         }
 
 
         /* Number of Empty Cells: 3 */
-        br = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 3);
-        if (br != null) return br;
+        bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 3);
+        if (bestResponseMove != null) return bestResponseMove;
 
 
         /* Number of Empty Cells: 2 */
-        br = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 2);
-        if (br != null) return br;
+        bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 2);
+        if (bestResponseMove != null) return bestResponseMove;
 
 
         /* Number of Empty Cells: 1 */
-        br = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 1);
-        if (br != null) return br;
+        bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 1);
+        if (bestResponseMove != null) return bestResponseMove;
 
 
         /* For the rest of the cases, we simply make a random move, among the empty cells. */
-        List<List<Integer>> emptyCells = new ArrayList<List<Integer>>();
+        List<List<Integer>> emptyCells = new ArrayList<>();
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 if (gameBoard[row][col] == Constants.EMPTY) {
-                    List<Integer> emptyCell = new ArrayList<Integer>();
+                    List<Integer> emptyCell = new ArrayList<>();
                     emptyCell.add(row);
                     emptyCell.add(col);
                     // System.out.println("empty cell: [" + row + "]" + "[" + col + "]");
@@ -522,11 +628,13 @@ public class BestResponse extends AI {
 
         if (emptyCells.size() > 0) {
             int random_number = r.nextInt(emptyCells.size()) + 1;
-            if (number_of_empty_cells % 2 == 1) {
+            if (getAiPlayer() == Constants.X
+                    && number_of_empty_cells % 2 == 1) {
                 return new Move(emptyCells.get(random_number - 1).get(0),
                         emptyCells.get(random_number - 1).get(1),
                         Constants.X);
-            } else if (number_of_empty_cells % 2 == 0) {
+            } else if (getAiPlayer() == Constants.O
+                    && number_of_empty_cells % 2 == 0) {
                 return new Move(emptyCells.get(random_number - 1).get(0),
                         emptyCells.get(random_number - 1).get(1),
                         Constants.O);
@@ -534,7 +642,6 @@ public class BestResponse extends AI {
         }
 
         return null;
-
     }
 
 
@@ -549,6 +656,8 @@ public class BestResponse extends AI {
             currentPlayer = Constants.O;
             otherPlayer = Constants.X;
         }
+
+        if (currentPlayer != getAiPlayer()) return null;
 
 
         /* Cases that suggest a win condition! */

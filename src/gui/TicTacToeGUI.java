@@ -22,7 +22,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import ai.AI;
-import ai.BestResponse;
+import ai.BestResponseAI;
 import ai.RandomChoiceAI;
 import enumeration.AiType;
 import tic_tac_toe.Board;
@@ -400,7 +400,7 @@ public class TicTacToeGUI {
         int aiPlayerSymbol = (GameParameters.playerSymbol == Constants.X) ? Constants.O : Constants.X;
         AI ai = null;
         if (GameParameters.aiType == AiType.BEST_RESPONSE_AI) {
-            ai = new BestResponse(aiPlayerSymbol);
+            ai = new BestResponseAI(aiPlayerSymbol);
         } else if (GameParameters.aiType == AiType.MINIMAX_AI) {
             ai = new MiniMaxAI(GameParameters.ai1MaxDepth, aiPlayerSymbol);
         } else if (GameParameters.aiType == AiType.RANDOM_AI) {
@@ -507,8 +507,8 @@ public class TicTacToeGUI {
         AI ai1 = null;
         AI ai2 = null;
         if (GameParameters.aiType == AiType.BEST_RESPONSE_AI) {
-            ai1 = new BestResponse(Constants.X);
-            ai2 = new BestResponse(Constants.O);
+            ai1 = new BestResponseAI(Constants.X);
+            ai2 = new BestResponseAI(Constants.O);
         } else if (GameParameters.aiType == AiType.MINIMAX_AI) {
             ai1 = new MiniMaxAI(GameParameters.ai1MaxDepth, Constants.X);
             ai2 = new MiniMaxAI(GameParameters.ai2MaxDepth, Constants.O);
