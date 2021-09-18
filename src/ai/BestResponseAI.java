@@ -95,17 +95,17 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -| |- X -| |- X -|
              * |- - -| |- - -| |O - -| |- - O| */
             // System.out.println("INSIDE CASE 10");
-            int random_number = r.nextInt(4) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(4);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(0, 2, Constants.O);
             }
-            if (random_number == 3) {
+            if (random_number == 2) {
                 return new Move(2, 0, Constants.O);
             }
-            if (random_number == 4) {
+            if (random_number == 3) {
                 return new Move(2, 2, Constants.O);
             }
         }
@@ -128,17 +128,17 @@ public class BestResponseAI extends AI {
              * |- X -| |O X -| |- X O| |- X -|
              * |- - -| |- - -| |X - -| |- O X| */
             // System.out.println("INSIDE CASE 11-14");
-            int random_number = r.nextInt(4) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(4);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.X);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(0, 2, Constants.X);
             }
-            if (random_number == 3) {
+            if (random_number == 2) {
                 return new Move(2, 0, Constants.X);
             }
-            if (random_number == 4) {
+            if (random_number == 3) {
                 return new Move(2, 2, Constants.X);
             }
         }
@@ -156,14 +156,14 @@ public class BestResponseAI extends AI {
              * |- X -| |X X -| |- X -|
              * |- - -| |- - -| |- - X| */
             // System.out.println("INSIDE CASE 15");
-            int random_number = r.nextInt(3) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(3);
+            if (random_number == 0) {
                 return new Move(0, 2, Constants.X);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 0, Constants.X);
             }
-            if (random_number == 3) {
+            if (random_number == 2) {
                 return new Move(2, 2, Constants.X);
             }
         }
@@ -180,14 +180,14 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -| |- X -|
              * |- - -| |X - -| |- - X| */
             // System.out.println("INSIDE CASE 16");
-            int random_number = r.nextInt(3) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(3);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.X);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 0, Constants.X);
             }
-            if (random_number == 3) {
+            if (random_number == 2) {
                 return new Move(2, 2, Constants.X);
             }
         }
@@ -204,14 +204,14 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -| |- X -|
              * |O - -| |O - -| |O - X| */
             // System.out.println("INSIDE CASE 17");
-            int random_number = r.nextInt(3) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(3);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.X);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(0, 2, Constants.X);
             }
-            if (random_number == 3) {
+            if (random_number == 2) {
                 return new Move(2, 2, Constants.X);
             }
         }
@@ -228,14 +228,14 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -| |- X -|
              * |- - O| |- - O| |X - O| */
             // System.out.println("INSIDE CASE 18");
-            int random_number = r.nextInt(3) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(3);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.X);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(0, 2, Constants.X);
             }
-            if (random_number == 3) {
+            if (random_number == 2) {
                 return new Move(2, 0, Constants.X);
             }
         }
@@ -261,11 +261,11 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -| - |- X -| |- X -|
              * |- - O| |O - O|   |- - X| |O - X| */
             // System.out.println("INSIDE CASE C1-C2");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 2, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 0, Constants.O);
             }
         }
@@ -282,11 +282,11 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -|
              * |O O -| |- O O| */
             // System.out.println("INSIDE CASE C3");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(2, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 2, Constants.O);
             }
         }
@@ -303,11 +303,11 @@ public class BestResponseAI extends AI {
              * |X X O| |X X O|
              * |- - -| |- - O| */
             // System.out.println("INSIDE CASE C4");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 2, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 2, Constants.O);
             }
         }
@@ -325,11 +325,11 @@ public class BestResponseAI extends AI {
              * |O X X| |O X X|
              * |- - -| |O - -| */
             // System.out.println("INSIDE CASE C5");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 0, Constants.O);
             }
         }
@@ -349,11 +349,11 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -| - |- X -| |- X -|
              * |O - -| |O - O|   |X - -| |X - O| */
             // System.out.println("INSIDE CASE C6-C7");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 2, Constants.O);
             }
         }
@@ -371,11 +371,11 @@ public class BestResponseAI extends AI {
              * |- X -| |- X -|
              * |- X -| |- X -| */
             // System.out.println("INSIDE CASE C8");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(0, 2, Constants.O);
             }
         }
@@ -523,11 +523,11 @@ public class BestResponseAI extends AI {
              * |O O X| |O O X|
              * |- X -| |- X O| */
             // System.out.println("INSIDE CASE B5");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 2, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 2, Constants.O);
             }
         }
@@ -544,11 +544,11 @@ public class BestResponseAI extends AI {
              * |X O O| |X O O|
              * |- X -| |O X -| */
             // System.out.println("INSIDE CASE B6");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 0, Constants.O);
             }
         }
@@ -565,11 +565,11 @@ public class BestResponseAI extends AI {
              * |X O X| |X O X|
              * |- O -| |- O -| */
             // System.out.println("INSIDE CASE B5");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(0, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(0, 2, Constants.O);
             }
         }
@@ -586,11 +586,11 @@ public class BestResponseAI extends AI {
              * |X O X| |X O X|
              * |O X -| |- X O| */
             // System.out.println("INSIDE CASE B6");
-            int random_number = r.nextInt(2) + 1;
-            if (random_number == 1) {
+            int random_number = r.nextInt(2);
+            if (random_number == 0) {
                 return new Move(2, 0, Constants.O);
             }
-            if (random_number == 2) {
+            if (random_number == 1) {
                 return new Move(2, 2, Constants.O);
             }
         }
