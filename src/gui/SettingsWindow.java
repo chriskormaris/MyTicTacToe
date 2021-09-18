@@ -17,10 +17,6 @@ import utility.Utilities;
 
 public class SettingsWindow extends JFrame {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 4435307947189338751L;
     public static int width = 460;
     public static int height = 515;
     private final JComboBox<String> gui_style_drop_down;

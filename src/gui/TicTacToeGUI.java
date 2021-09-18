@@ -786,6 +786,41 @@ public class TicTacToeGUI {
 
         redoBoards.clear();
         redoItem.setEnabled(false);
+    }
+
+    public static void main(String[] args) {
+
+        // These are the default values.
+        // Feel free to change them, before running.
+        // You can also change them later, from the GUI window.
+		/*
+		gameParameters.guiStyle = Constants.SystemStyle;
+		gameParameters.gameMode = Constants.HumanVsAi;
+		// gameParameters.gameMode = Constants.AiVsAi;
+		// gameParameters.maxDepth1 = Constants.BestResponse;
+		gameParameters.maxDepth1 = 4;
+		// gameParameters.maxDepth2 = Constants.BestResponse;
+		gameParameters.maxDepth2 = 1;
+		gameParameters.player1Color = Constants.BLUE;
+		gameParameters.player2Color = Constants.RED;
+		gameParameters.clientServerSymbol = Constants.X;
+		gameParameters.serverPort = 4000;
+		gameParameters.clientIP = "127.0.0.1";
+		gameParameters.clientPort = 4001;
+		*/
+
+        @SuppressWarnings("unused")
+        TicTacToeGUI gui = new TicTacToeGUI("My TicTacToe");
+
+        if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+            TicTacToeGUI.createHumanVsAiNewGame();
+        } else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+            TicTacToeGUI.createHumanVsHumanNewGame();
+        } else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
+            TicTacToeGUI.createAiVsAiNewGame();
+        } else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
+            TicTacToeGUI.createClientServerNewGame();
+        }
     }    public static KeyListener gameKeyListener = new KeyListener() {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -826,39 +861,6 @@ public class TicTacToeGUI {
         }
     };
 
-    public static void main(String[] args) {
 
-        // These are the default values.
-        // Feel free to change them, before running.
-        // You can also change them later, from the GUI window.
-		/*
-		gameParameters.guiStyle = Constants.SystemStyle;
-		gameParameters.gameMode = Constants.HumanVsAi;
-		// gameParameters.gameMode = Constants.AiVsAi;
-		// gameParameters.maxDepth1 = Constants.BestResponse;
-		gameParameters.maxDepth1 = 4;
-		// gameParameters.maxDepth2 = Constants.BestResponse;
-		gameParameters.maxDepth2 = 1;
-		gameParameters.player1Color = Constants.BLUE;
-		gameParameters.player2Color = Constants.RED;
-		gameParameters.clientServerSymbol = Constants.X;
-		gameParameters.serverPort = 4000;
-		gameParameters.clientIP = "127.0.0.1";
-		gameParameters.clientPort = 4001;
-		*/
-
-        @SuppressWarnings("unused")
-        TicTacToeGUI gui = new TicTacToeGUI("My TicTacToe");
-
-        if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-            TicTacToeGUI.createHumanVsAiNewGame();
-        } else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-            TicTacToeGUI.createHumanVsHumanNewGame();
-        } else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-            TicTacToeGUI.createAiVsAiNewGame();
-        } else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-            TicTacToeGUI.createClientServerNewGame();
-        }
-    }
 
 }

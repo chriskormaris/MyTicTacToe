@@ -8,15 +8,13 @@ import utility.Constants;
 public class Board {
 
 
+    private final int[][] gameBoard;
     // Immediate move that led to this board.
     private Move lastMove;
-
     /* Variable containing who played last; whose turn resulted in this board.
      * Even a new Board has lastLetterPlayed value; it denotes which player will play first.
      */
     private int lastPlayer;
-
-    private final int[][] gameBoard;
     private int winner;
 
     public Board() {
