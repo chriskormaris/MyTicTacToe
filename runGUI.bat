@@ -1,2 +1,2 @@
-java -cp bin gui.GUI
+java -cp bin com.chriskormaris.gui.gui.GUI
 pause
