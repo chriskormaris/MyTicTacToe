@@ -723,8 +723,7 @@ public class TicTacToeGUI {
             }
         } else if (Board.isGameBoardFull(board.getGameBoard()) && board.getWinner() == Constants.EMPTY) {
             System.out.println("It is a draw!");
-            int input = JOptionPane.showConfirmDialog(frame,
-                    "It is a draw!\nPlay again?",
+            int input = JOptionPane.showConfirmDialog(frame, "It is a draw!\nPlay again?",
                     "Game Over", JOptionPane.YES_NO_OPTION);
             if (input == JOptionPane.OK_OPTION) {
                 if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
@@ -736,8 +735,7 @@ public class TicTacToeGUI {
                 } else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
                     createClientServerNewGame();
                 }
-            } else if (input == JOptionPane.NO_OPTION
-                    || input == JOptionPane.CLOSED_OPTION) {
+            } else if (input == JOptionPane.NO_OPTION || input == JOptionPane.CLOSED_OPTION) {
                 if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
                     for (HumanVsAiButton button : humanVsAiButtons) {
                         button.removeActionListener(button);
@@ -813,7 +811,6 @@ public class TicTacToeGUI {
     };
 
     public static void main(String[] args) {
-
         // These are the default values.
         // Feel free to change them, before running.
         // You can also change them later, from the GUI window.
