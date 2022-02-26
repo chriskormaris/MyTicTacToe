@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.api.ai;
 
-import com.chriskormaris.mytictactoe.api.tic_tac_toe.Board;
-import com.chriskormaris.mytictactoe.api.tic_tac_toe.Move;
+import com.chriskormaris.mytictactoe.api.board.Board;
+import com.chriskormaris.mytictactoe.api.board.Move;
 import com.chriskormaris.mytictactoe.api.utility.Constants;
 
 import java.util.ArrayList;

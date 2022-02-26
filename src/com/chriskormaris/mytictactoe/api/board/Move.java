@@ -1,4 +1,4 @@
-package com.chriskormaris.mytictactoe.api.tic_tac_toe;
+package com.chriskormaris.mytictactoe.api.board;
 
 import java.io.Serializable;
 

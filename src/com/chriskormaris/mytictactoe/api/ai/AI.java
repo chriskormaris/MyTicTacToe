@@ -6,8 +6,8 @@ package com.chriskormaris.mytictactoe.api.ai;
  * Author     : Christos Kormaris
  */
 
-import com.chriskormaris.mytictactoe.api.tic_tac_toe.Board;
-import com.chriskormaris.mytictactoe.api.tic_tac_toe.Move;
+import com.chriskormaris.mytictactoe.api.board.Board;
+import com.chriskormaris.mytictactoe.api.board.Move;
 
 public abstract class AI {
 

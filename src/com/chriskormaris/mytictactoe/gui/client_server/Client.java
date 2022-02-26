@@ -1,6 +1,6 @@
 package com.chriskormaris.mytictactoe.gui.client_server;
 
-import com.chriskormaris.mytictactoe.api.tic_tac_toe.Move;
+import com.chriskormaris.mytictactoe.api.board.Move;
 import com.chriskormaris.mytictactoe.gui.TicTacToeGUI;
 
 import java.io.IOException;
