@@ -9,12 +9,14 @@ public class Board {
 
 
     private final int[][] gameBoard;
+
     // Immediate move that led to this board.
     private Move lastMove;
+
     /* Variable containing who played last; whose turn resulted in this board.
-     * Even a new Board has lastLetterPlayed value; it denotes which player will play first.
-     */
+     * Even a new Board has a lastPlayer value; it the opponent of the player who will play first. */
     private int lastPlayer;
+
     private int winner;
 
     public Board() {
