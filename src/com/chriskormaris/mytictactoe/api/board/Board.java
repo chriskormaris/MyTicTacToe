@@ -148,7 +148,7 @@ public class Board {
     // Make a move; it places a symbol on the board
     public void makeMove(int row, int column, int player) {
         this.gameBoard[row][column] = player;
-        this.lastMove = new Move(row, column);
+        this.lastMove = new Move(row, column, evaluate());
         this.lastPlayer = player;
     }
 
@@ -160,9 +160,8 @@ public class Board {
         return this.gameBoard[row][column] == Constants.EMPTY;
     }
 
-    /* Generates the children of the state
-     * Any square in the board that is empty results to a child
-     */
+    /* Generates the children of the state.
+     * Any square in the board that is empty results to a child. */
     public List<Board> getChildren(int symbol) {
         List<Board> children = new ArrayList<>();
         for (int row = 0; row < 3; row++) {
@@ -177,7 +176,7 @@ public class Board {
         return children;
     }
 
-    //Prints the board
+    // Prints the board.
     /*
 	public void print() {
 		System.out.println("*********");

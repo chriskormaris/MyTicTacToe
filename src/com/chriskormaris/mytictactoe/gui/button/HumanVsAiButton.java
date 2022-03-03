@@ -59,8 +59,10 @@ public class HumanVsAiButton extends XOButton {
         // Board.printBoard(GUI.board.getGameBoard());
 
         Move aiMove = this.ai.getNextMove(TicTacToeGUI.board);
+        // System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: " + aiMove.getValue());
 
         TicTacToeGUI.makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
+        // System.out.println("board value: " + TicTacToeGUI.board.evaluate());
 
         int aiMoveButtonId = TicTacToeGUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
         // System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");

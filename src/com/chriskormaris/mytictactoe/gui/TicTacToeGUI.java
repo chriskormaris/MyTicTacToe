@@ -383,7 +383,6 @@ public class TicTacToeGUI {
     }
 
     public static void createHumanVsAiNewGame() {
-
         configureGuiStyle();
 
         if (menuBar == null) {
@@ -436,7 +435,7 @@ public class TicTacToeGUI {
             makeMove(aiMove.getRow(), aiMove.getColumn(), Constants.X);
 
             int aiMoveButtonId = TicTacToeGUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
-            // System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");
+            // System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: " + aiMove.getValue());
 
             for (HumanVsAiButton button : TicTacToeGUI.humanVsAiButtons) {
                 if (button.id == aiMoveButtonId) {
@@ -581,7 +580,7 @@ public class TicTacToeGUI {
         frame.setVisible(true);
     }
 
-    private static void aiMove(AI ai) {
+    private static void aiVsAiMove(AI ai) {
         Move aiMove = ai.getNextMove(board);
 
         makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
@@ -600,7 +599,7 @@ public class TicTacToeGUI {
         while (!TicTacToeGUI.board.isTerminal()) {
 
             // AI 1 Move
-            aiMove(ai1Player);
+            aiVsAiMove(ai1Player);
 
             // Sleep for 200 ms
             try {
@@ -612,7 +611,7 @@ public class TicTacToeGUI {
 
             if (!TicTacToeGUI.board.isTerminal()) {
                 // AI 2 Move
-                aiMove(ai2Player);
+                aiVsAiMove(ai2Player);
             }
 
             // Sleep for 200 ms
