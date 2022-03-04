@@ -1,8 +1,8 @@
-package com.chriskormaris.mytictactoe.gui.utility;
+package com.chriskormaris.mytictactoe.gui.util;
 
-import com.chriskormaris.mytictactoe.api.utility.Constants;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 
-public class GuiUtilities {
+public class GuiUtils {
 
     public static String getIconPath(int player, String color) {
         if (player == Constants.X) {

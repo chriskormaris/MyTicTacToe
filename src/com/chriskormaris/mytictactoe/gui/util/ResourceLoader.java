@@ -1,4 +1,4 @@
-package com.chriskormaris.mytictactoe.gui.utility;
+package com.chriskormaris.mytictactoe.gui.util;
 
 import java.net.URL;
 

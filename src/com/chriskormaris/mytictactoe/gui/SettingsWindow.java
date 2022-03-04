@@ -2,12 +2,12 @@ package com.chriskormaris.mytictactoe.gui;
 
 import com.chriskormaris.mytictactoe.api.enumeration.AiType;
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
-import com.chriskormaris.mytictactoe.api.utility.Constants;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
-import com.chriskormaris.mytictactoe.gui.utility.GameParameters;
-import com.chriskormaris.mytictactoe.gui.utility.GuiUtilities;
-import com.chriskormaris.mytictactoe.gui.utility.ResourceLoader;
+import com.chriskormaris.mytictactoe.gui.util.GameParameters;
+import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
+import com.chriskormaris.mytictactoe.gui.util.ResourceLoader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -294,8 +294,8 @@ public class SettingsWindow extends JFrame {
                             + String.valueOf(player1Color).toLowerCase().substring(1);
                     String player2ColorString = String.valueOf(player2Color).charAt(0)
                             + String.valueOf(player2Color).toLowerCase().substring(1);
-                    ImageIcon XIcon = new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.X, player1ColorString)));
-                    ImageIcon OIcon = new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.O, player2ColorString)));
+                    ImageIcon XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1ColorString)));
+                    ImageIcon OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2ColorString)));
 
                     // Change game parameters based on the settings.
                     TicTacToeGUI.newGameParameters = new GameParameters(guiStyle, gameMode, aiType, ai1MaxDepth, ai2MaxDepth,

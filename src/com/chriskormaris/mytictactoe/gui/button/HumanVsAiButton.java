@@ -3,7 +3,7 @@ package com.chriskormaris.mytictactoe.gui.button;
 import com.chriskormaris.mytictactoe.api.ai.AI;
 import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.board.Move;
-import com.chriskormaris.mytictactoe.api.utility.Constants;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.TicTacToeGUI;
 
 import java.awt.event.ActionEvent;

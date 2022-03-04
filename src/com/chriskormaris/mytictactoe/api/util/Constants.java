@@ -1,4 +1,4 @@
-package com.chriskormaris.mytictactoe.api.utility;
+package com.chriskormaris.mytictactoe.api.util;
 
 public class Constants {
 

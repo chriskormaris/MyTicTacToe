@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.gui.button;
 
 import com.chriskormaris.mytictactoe.api.board.Board;
-import com.chriskormaris.mytictactoe.api.utility.Constants;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.TicTacToeGUI;
 import com.chriskormaris.mytictactoe.gui.client_server.Client;
 

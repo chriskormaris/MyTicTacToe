@@ -8,17 +8,17 @@ import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.board.Move;
 import com.chriskormaris.mytictactoe.api.enumeration.AiType;
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
-import com.chriskormaris.mytictactoe.api.utility.Constants;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.button.AiVsAiButton;
 import com.chriskormaris.mytictactoe.gui.button.ClientServerButton;
 import com.chriskormaris.mytictactoe.gui.button.HumanVsAiButton;
 import com.chriskormaris.mytictactoe.gui.button.HumanVsHumanButton;
 import com.chriskormaris.mytictactoe.gui.client_server.Server;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
-import com.chriskormaris.mytictactoe.gui.utility.GameParameters;
-import com.chriskormaris.mytictactoe.gui.utility.GuiConstants;
-import com.chriskormaris.mytictactoe.gui.utility.GuiUtilities;
-import com.chriskormaris.mytictactoe.gui.utility.ResourceLoader;
+import com.chriskormaris.mytictactoe.gui.util.GameParameters;
+import com.chriskormaris.mytictactoe.gui.util.GuiConstants;
+import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
+import com.chriskormaris.mytictactoe.gui.util.ResourceLoader;
 
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -173,12 +173,12 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
                             button.doClick();
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
                             button.doClick();
                         } else {
                             button.setIcon(null);
@@ -214,12 +214,12 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
                             button.doClick();
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
                             button.doClick();
                         } else {
                             button.setIcon(null);
@@ -261,14 +261,14 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }
@@ -307,14 +307,14 @@ public class TicTacToeGUI {
                         if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
                             String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.X, player1Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }
                         } else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
                             String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
                                     + String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.O, player2Color))));
+                            button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
                             for (ActionListener actionListener : button.getActionListeners()) {
                                 button.removeActionListener(actionListener);
                             }

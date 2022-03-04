@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.gui;
 
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
-import com.chriskormaris.mytictactoe.api.utility.Constants;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 
 public class exampleClientServer {
 

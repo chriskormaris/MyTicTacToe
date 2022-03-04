@@ -1,8 +1,8 @@
-package com.chriskormaris.mytictactoe.gui.utility;
+package com.chriskormaris.mytictactoe.gui.util;
 
 import com.chriskormaris.mytictactoe.api.enumeration.AiType;
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
-import com.chriskormaris.mytictactoe.api.utility.Constants;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 
@@ -37,8 +37,8 @@ public class GameParameters {
         serverPort = 4000;
         clientIP = "127.0.0.1";
         clientPort = 4001;
-        XIcon = new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.X, "Blue")));
-        OIcon = new ImageIcon(ResourceLoader.load(GuiUtilities.getIconPath(Constants.O, "Red")));
+        XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, "Blue")));
+        OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, "Red")));
     }
 
     public GameParameters(GameParameters otherGameParameters) {
