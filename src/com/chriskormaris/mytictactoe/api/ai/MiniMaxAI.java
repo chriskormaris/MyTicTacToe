@@ -45,7 +45,7 @@ public class MiniMaxAI extends AI {
     }
 
     // The max and min functions are called interchangeably, one after another until a max depth is reached
-    public Move max(Board board, int depth) {
+    private Move max(Board board, int depth) {
         Random r = new Random();
 
         /* If MAX is called on a state that is terminal or after a maximum depth is reached,
@@ -82,14 +82,13 @@ public class MiniMaxAI extends AI {
     }
 
     // Min works similarly to max
-    public Move min(Board board, int depth) {
+    private Move min(Board board, int depth) {
         Random r = new Random();
 
         if ((board.isTerminal()) || (depth == maxDepth)) {
             int value = board.evaluate();
             // System.out.println("MIN function, Depth: " + depth + ", move value: " + value);
-            Move lastMove = new Move(board.getLastMove().getRow(), board.getLastMove().getColumn(), value);
-            return lastMove;
+            return new Move(board.getLastMove().getRow(), board.getLastMove().getColumn(), value);
         }
         List<Board> children = new ArrayList<>(board.getChildren(Constants.O));
         Move minMove = new Move(Integer.MAX_VALUE);
