@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MiniMaxAI extends AI {
+public class MinimaxAI extends AI {
 
-    // Variable that holds the maximum depth the MiniMax algorithm will reach for this player.
+    // Variable that holds the maximum depth the Minimax algorithm will reach for this player.
     private int maxDepth;
 
-    public MiniMaxAI() {
+    public MinimaxAI() {
         super(Constants.O);
         maxDepth = 3;
     }
 
-    public MiniMaxAI(int maxDepth, int playerLetter) {
+    public MinimaxAI(int maxDepth, int playerLetter) {
         super(playerLetter);
         this.maxDepth = maxDepth;
     }
@@ -31,7 +31,7 @@ public class MiniMaxAI extends AI {
         this.maxDepth = maxDepth;
     }
 
-    // Initiates the MiniMax algorithm
+    // Initiates the Minimax algorithm
     @Override
     public Move getNextMove(Board board) {
         // If the X plays then it wants to maximize the heuristics value

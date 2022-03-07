@@ -2,7 +2,7 @@ package com.chriskormaris.mytictactoe.gui;
 
 import com.chriskormaris.mytictactoe.api.ai.AI;
 import com.chriskormaris.mytictactoe.api.ai.BestResponseAI;
-import com.chriskormaris.mytictactoe.api.ai.MiniMaxAI;
+import com.chriskormaris.mytictactoe.api.ai.MinimaxAI;
 import com.chriskormaris.mytictactoe.api.ai.RandomChoiceAI;
 import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.board.Move;
@@ -394,7 +394,7 @@ public class TicTacToeGUI {
         if (gameParameters.getAiType() == AiType.BEST_RESPONSE_AI) {
             ai = new BestResponseAI(aiPlayerSymbol);
         } else if (gameParameters.getAiType() == AiType.MINIMAX_AI) {
-            ai = new MiniMaxAI(gameParameters.getAi1MaxDepth(), aiPlayerSymbol);
+            ai = new MinimaxAI(gameParameters.getAi1MaxDepth(), aiPlayerSymbol);
         } else if (gameParameters.getAiType() == AiType.RANDOM_AI) {
             ai = new RandomChoiceAI(aiPlayerSymbol);
         }
@@ -500,8 +500,8 @@ public class TicTacToeGUI {
             ai1 = new BestResponseAI(Constants.X);
             ai2 = new BestResponseAI(Constants.O);
         } else if (gameParameters.getAiType() == AiType.MINIMAX_AI) {
-            ai1 = new MiniMaxAI(gameParameters.getAi1MaxDepth(), Constants.X);
-            ai2 = new MiniMaxAI(gameParameters.getAi2MaxDepth(), Constants.O);
+            ai1 = new MinimaxAI(gameParameters.getAi1MaxDepth(), Constants.X);
+            ai2 = new MinimaxAI(gameParameters.getAi2MaxDepth(), Constants.O);
         } else if (gameParameters.getAiType() == AiType.RANDOM_AI) {
             ai1 = new RandomChoiceAI(Constants.X);
             ai2 = new RandomChoiceAI(Constants.O);
