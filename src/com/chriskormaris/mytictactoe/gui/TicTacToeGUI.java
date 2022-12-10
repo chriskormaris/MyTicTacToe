@@ -130,16 +130,21 @@ public class TicTacToeGUI {
         redoItem.addActionListener(e -> redo());
 
         settingsItem.addActionListener(e -> {
-            SettingsWindow settings = new SettingsWindow();
+            SettingsWindow settings = new SettingsWindow(frame);
             settings.setVisible(true);
         });
 
         exitItem.addActionListener(e -> System.exit(0));
 
-        howToPlayItem.addActionListener(e -> JOptionPane.showMessageDialog(frame,
-                "Click on the buttons or press 1-9 on your keyboard to insert a new symbol."
-                        + "\nTo win you must place 3 symbols in an row, horizontally, vertically or diagonally.",
-                "How to Play", JOptionPane.INFORMATION_MESSAGE));
+        howToPlayItem.addActionListener(
+                e -> JOptionPane.showMessageDialog(
+                        frame,
+                        "Click on the buttons or press 1-9 on your keyboard to insert a new symbol.\n"
+                        + "To win you must place 3 symbols in an row, horizontally, vertically or diagonally.",
+                        "How to Play",
+                        JOptionPane.INFORMATION_MESSAGE
+                )
+        );
 
         aboutItem.addActionListener(e -> {
             JLabel label = new JLabel("<html>© Created by: Christos Kormaris<br>"

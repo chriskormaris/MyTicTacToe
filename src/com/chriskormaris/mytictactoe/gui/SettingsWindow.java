@@ -10,6 +10,7 @@ import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
 import com.chriskormaris.mytictactoe.gui.util.ResourceLoader;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,13 +34,13 @@ public class SettingsWindow extends JFrame {
     private final JButton cancel;
 
 
-    public SettingsWindow() {
+    public SettingsWindow(Component parentComponent) {
         super("Settings");
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
         setSize(width, height);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parentComponent);
         setResizable(false);
 
         EventHandler handler = new EventHandler();
