@@ -8,19 +8,19 @@ import java.util.Random;
 
 public class RandomChoiceAI extends AI {
 
-    public RandomChoiceAI(int aiPlayer) {
-        super(aiPlayer);
-    }
+	public RandomChoiceAI(int aiPlayer) {
+		super(aiPlayer);
+	}
 
-    // Initiates the random move.
-    @Override
-    public Move getNextMove(Board board) {
-        Random r = new Random();
+	// Initiates the random move.
+	@Override
+	public Move getNextMove(Board board) {
+		Random r = new Random();
 
-        List<Move> validMoves = board.getValidMoves(getAiPlayer());
-        int randomMoveIndex = r.nextInt(validMoves.size());
+		List<Move> validMoves = board.getValidMoves(getAiPlayer());
+		int randomMoveIndex = r.nextInt(validMoves.size());
 
-        return validMoves.get(randomMoveIndex);
-    }
+		return validMoves.get(randomMoveIndex);
+	}
 
 }

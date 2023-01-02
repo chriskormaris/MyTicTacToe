@@ -8,71 +8,71 @@ import java.io.Serializable;
  */
 public class Move implements Serializable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 3166547244121566931L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 3166547244121566931L;
 
-    private int row;
-    private int column;
-    private int value;
+	private int row;
+	private int column;
+	private int value;
 
-    public Move() {
-        this.row = 0;
-        this.column = 0;
-    }
+	public Move() {
+		this.row = 0;
+		this.column = 0;
+	}
 
-    public Move(int row, int col) {
-        this.row = row;
-        this.column = col;
-        this.value = 0;
-    }
+	public Move(int row, int col) {
+		this.row = row;
+		this.column = col;
+		this.value = 0;
+	}
 
-    public Move(int value) {
-        this.row = 0;
-        this.column = 0;
-        this.value = value;
-    }
+	public Move(int value) {
+		this.row = 0;
+		this.column = 0;
+		this.value = value;
+	}
 
-    public Move(int row, int col, int value) {
-        this.row = row;
-        this.column = col;
-        this.value = value;
-    }
+	public Move(int row, int col, int value) {
+		this.row = row;
+		this.column = col;
+		this.value = value;
+	}
 
-    public Move(Move otherMove) {
-        this.row = otherMove.getRow();
-        this.column = otherMove.getColumn();
-        this.value = otherMove.getValue();
-    }
+	public Move(Move otherMove) {
+		this.row = otherMove.getRow();
+		this.column = otherMove.getColumn();
+		this.value = otherMove.getValue();
+	}
 
-    public int getRow() {
-        return row;
-    }
+	public int getRow() {
+		return row;
+	}
 
-    public void setRow(int row) {
-        this.row = row;
-    }
+	public void setRow(int row) {
+		this.row = row;
+	}
 
-    public int getColumn() {
-        return column;
-    }
+	public int getColumn() {
+		return column;
+	}
 
-    public void setColumn(int column) {
-        this.column = column;
-    }
+	public void setColumn(int column) {
+		this.column = column;
+	}
 
-    public int getValue() {
-        return value;
-    }
+	public int getValue() {
+		return value;
+	}
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+	public void setValue(int value) {
+		this.value = value;
+	}
 
-    @Override
-    public String toString() {
-        return "move [" + row + "][" + column + "]: " + value;
-    }
+	@Override
+	public String toString() {
+		return "move [" + row + "][" + column + "]: " + value;
+	}
 
 }

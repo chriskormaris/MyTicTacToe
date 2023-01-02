@@ -11,75 +11,75 @@ import java.net.Socket;
 
 public class Server extends Thread {
 
-    int serverPort;
+	int serverPort;
 
-    public Server() {
+	public Server() {
 
-    }
+	}
 
-    public Server(int port) {
-        this.serverPort = port;
-    }
+	public Server(int port) {
+		this.serverPort = port;
+	}
 
-    @Override
-    public void run() {
+	@Override
+	public void run() {
 
-        ServerSocket serverSocket = null;
-        Socket connection = null;
-        ObjectInputStream in = null;
-        try {
-            System.out.println("Server thread with id " + this.getId() +
-                    ": Server listening at port: " + serverPort + "...");
-            serverSocket = new ServerSocket(serverPort);
+		ServerSocket serverSocket = null;
+		Socket connection = null;
+		ObjectInputStream in = null;
+		try {
+			System.out.println("Server thread with id " + this.getId() +
+					": Server listening at port: " + serverPort + "...");
+			serverSocket = new ServerSocket(serverPort);
 
-            while (true) {
+			while (true) {
 
-                connection = serverSocket.accept();
-                System.out.println("Server accepted connection!");
-                in = new ObjectInputStream(connection.getInputStream());
+				connection = serverSocket.accept();
+				System.out.println("Server accepted connection!");
+				in = new ObjectInputStream(connection.getInputStream());
 
-                Move lastMove = (Move) in.readObject();
-                int id = TicTacToeGUI.getIdByBoardCell(lastMove.getRow(), lastMove.getColumn());
-                // System.out.println(id);
+				Move lastMove = (Move) in.readObject();
+				int id = TicTacToeGUI.getIdByBoardCell(lastMove.getRow(), lastMove.getColumn());
+				// System.out.println(id);
 
-                int opposingPlayerSymbol = in.readInt();
+				int opposingPlayerSymbol = in.readInt();
 
-                TicTacToeGUI.board.setLastPlayer(opposingPlayerSymbol);
+				TicTacToeGUI.board.setLastPlayer(opposingPlayerSymbol);
 
-                for (ClientServerButton button : TicTacToeGUI.clientServerButtons) {
-                    if (button.id == id) {
-                        // Programmatically press the com.chriskormaris.gui.button.
-                        button.programmaticallyPressed = true;
-                        button.doClick();
-                        button.programmaticallyPressed = false;
-                    }
-                }
-                // GUI.board.printBoard();
+				for (ClientServerButton button : TicTacToeGUI.clientServerButtons) {
+					if (button.id == id) {
+						// Programmatically press the com.chriskormaris.gui.button.
+						button.programmaticallyPressed = true;
+						button.doClick();
+						button.programmaticallyPressed = false;
+					}
+				}
+				// GUI.board.printBoard();
 
-                if (TicTacToeGUI.board.isTerminal()) {
-                    break;
-                }
-            }
+				if (TicTacToeGUI.board.isTerminal()) {
+					break;
+				}
+			}
 
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-                if (serverSocket != null) {
-                    serverSocket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        TicTacToeGUI.gameOver();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+				if (serverSocket != null) {
+					serverSocket.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		TicTacToeGUI.gameOver();
 
-    }
+	}
 
 }

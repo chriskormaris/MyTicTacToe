@@ -11,21 +11,21 @@ import com.chriskormaris.mytictactoe.api.board.Move;
 
 public abstract class AI {
 
-    // Variable that holds which letter this player controls.
-    private int aiPlayer;
+	// Variable that holds which letter this player controls.
+	private int aiPlayer;
 
-    public AI(int aiPlayer) {
-        this.aiPlayer = aiPlayer;
-    }
+	public AI(int aiPlayer) {
+		this.aiPlayer = aiPlayer;
+	}
 
-    public int getAiPlayer() {
-        return aiPlayer;
-    }
+	public int getAiPlayer() {
+		return aiPlayer;
+	}
 
-    public void setAiPlayer(int aiPlayer) {
-        this.aiPlayer = aiPlayer;
-    }
+	public void setAiPlayer(int aiPlayer) {
+		this.aiPlayer = aiPlayer;
+	}
 
-    public abstract Move getNextMove(Board board);
+	public abstract Move getNextMove(Board board);
 
 }
