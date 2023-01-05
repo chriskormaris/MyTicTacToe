@@ -26,19 +26,19 @@ public class GameParameters {
 
 	// Default constructor
 	public GameParameters() {
-		guiStyle = GuiStyle.SYSTEM_STYLE;
-		gameMode = GameMode.HUMAN_VS_AI;
-		aiType = AiType.BEST_RESPONSE_AI;
-		ai1MaxDepth = 3;
-		ai2MaxDepth = 3;
-		player1Color = Color.BLUE;
-		player2Color = Color.RED;
-		playerSymbol = Constants.X;
-		serverPort = 4000;
-		clientIP = "127.0.0.1";
-		clientPort = 4001;
-		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, "Blue")));
-		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, "Red")));
+		this.guiStyle = GuiStyle.SYSTEM_STYLE;
+		this.gameMode = GameMode.HUMAN_VS_AI;
+		this.aiType = AiType.BEST_RESPONSE_AI;
+		this.ai1MaxDepth = 3;
+		this.ai2MaxDepth = 3;
+		this.player1Color = Color.BLUE;
+		this.player2Color = Color.RED;
+		this.playerSymbol = Constants.X;
+		this.serverPort = Constants.SERVER_PORT;
+		this.clientIP = Constants.LOCALHOST;
+		this.clientPort = Constants.CLIENT_PORT;
+		this.XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, Color.BLUE)));
+		this.OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, Color.RED)));
 	}
 
 	public GameParameters(GameParameters otherGameParameters) {
@@ -57,9 +57,21 @@ public class GameParameters {
 		this.OIcon = otherGameParameters.OIcon;
 	}
 
-	public GameParameters(GuiStyle guiStyle, GameMode gameMode, AiType aiType, int ai1MaxDepth, int ai2MaxDepth,
-	                      Color player1Color, Color player2Color, int playerSymbol, int serverPort,
-	                      String clientIP, int clientPort, ImageIcon XIcon, ImageIcon OIcon) {
+	public GameParameters(
+			GuiStyle guiStyle,
+			GameMode gameMode,
+			AiType aiType,
+			int ai1MaxDepth,
+			int ai2MaxDepth,
+			Color player1Color,
+			Color player2Color,
+			int playerSymbol,
+			int serverPort,
+			String clientIP,
+			int clientPort,
+			ImageIcon XIcon,
+			ImageIcon OIcon
+	) {
 		this.guiStyle = guiStyle;
 		this.gameMode = gameMode;
 		this.aiType = aiType;

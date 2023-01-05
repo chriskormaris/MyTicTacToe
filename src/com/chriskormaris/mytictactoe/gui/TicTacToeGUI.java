@@ -176,14 +176,16 @@ public class TicTacToeGUI {
 					for (HumanVsHumanButton button : humanVsHumanButtons) {
 						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.X,
+									gameParameters.getPlayer1Color()
+							))));
 							button.doClick();
 						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.O,
+									gameParameters.getPlayer2Color()
+							))));
 							button.doClick();
 						} else {
 							button.setIcon(null);
@@ -217,14 +219,16 @@ public class TicTacToeGUI {
 					for (HumanVsAiButton button : humanVsAiButtons) {
 						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.X,
+									gameParameters.getPlayer1Color()
+							))));
 							button.doClick();
 						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.O,
+									gameParameters.getPlayer2Color()
+							))));
 							button.doClick();
 						} else {
 							button.setIcon(null);
@@ -233,8 +237,9 @@ public class TicTacToeGUI {
 						}
 					}
 
-					if (undoBoards.isEmpty())
+					if (undoBoards.isEmpty()) {
 						undoItem.setEnabled(false);
+					}
 
 					redoItem.setEnabled(true);
 
@@ -264,16 +269,18 @@ public class TicTacToeGUI {
 					for (HumanVsHumanButton button : humanVsHumanButtons) {
 						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.X,
+									gameParameters.getPlayer1Color()
+							))));
 							for (ActionListener actionListener : button.getActionListeners()) {
 								button.removeActionListener(actionListener);
 							}
 						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.O,
+									gameParameters.getPlayer2Color()
+							))));
 							for (ActionListener actionListener : button.getActionListeners()) {
 								button.removeActionListener(actionListener);
 							}
@@ -310,16 +317,18 @@ public class TicTacToeGUI {
 					for (HumanVsAiButton button : humanVsAiButtons) {
 						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							String player1Color = String.valueOf(gameParameters.getPlayer1Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer1Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.X,
+									gameParameters.getPlayer1Color()
+							))));
 							for (ActionListener actionListener : button.getActionListeners()) {
 								button.removeActionListener(actionListener);
 							}
 						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							String player2Color = String.valueOf(gameParameters.getPlayer2Color()).charAt(0)
-									+ String.valueOf(gameParameters.getPlayer2Color()).toLowerCase().substring(1);
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2Color))));
+							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+									Constants.O,
+									gameParameters.getPlayer2Color()
+							))));
 							for (ActionListener actionListener : button.getActionListeners()) {
 								button.removeActionListener(actionListener);
 							}
@@ -440,7 +449,8 @@ public class TicTacToeGUI {
 			makeMove(aiMove.getRow(), aiMove.getColumn(), Constants.X);
 
 			int aiMoveButtonId = TicTacToeGUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
-			// System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: " + aiMove.getValue());
+			// System.out.print("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: ");
+			// System.out.println(aiMove.getValue());
 
 			for (HumanVsAiButton button : TicTacToeGUI.humanVsAiButtons) {
 				if (button.id == aiMoveButtonId) {

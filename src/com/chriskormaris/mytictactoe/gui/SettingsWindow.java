@@ -263,18 +263,16 @@ public class SettingsWindow extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent ev) {
-
 			if (ev.getSource() == cancel) {
 				dispose();
 			} else if (ev.getSource() == apply) {
 				try {
-
-					GuiStyle guiStyle =
-							GuiStyle.valueOf(gui_style_drop_down.getSelectedItem().toString().toUpperCase().replace("-", "_").replace(" ", "_"));
-					GameMode gameMode =
-							GameMode.valueOf(game_mode_drop_down.getSelectedItem().toString().toUpperCase().replace("-", "_").replace(" ", "_"));
-					AiType aiType =
-							AiType.valueOf(ai_type_drop_down.getSelectedItem().toString().toUpperCase().replace("-", "_").replace(" ", "_"));
+					GuiStyle guiStyle = GuiStyle.valueOf(gui_style_drop_down.getSelectedItem().toString()
+							.toUpperCase().replace("-", "_").replace(" ", "_"));
+					GameMode gameMode = GameMode.valueOf(game_mode_drop_down.getSelectedItem().toString()
+							.toUpperCase().replace("-", "_").replace(" ", "_"));
+					AiType aiType = AiType.valueOf(ai_type_drop_down.getSelectedItem().toString()
+							.toUpperCase().replace("-", "_").replace(" ", "_"));
 					int ai1MaxDepth = ai1_max_depth_drop_down.getSelectedIndex() + 1;
 					int ai2MaxDepth = ai2_max_depth_drop_down.getSelectedIndex() + 1;
 					Color player1Color = Color.valueOf(player1_color_drop_down.getSelectedItem().toString());
@@ -291,20 +289,39 @@ public class SettingsWindow extends JFrame {
 						return;
 					}
 
-					String player1ColorString = String.valueOf(player1Color).charAt(0)
-							+ String.valueOf(player1Color).toLowerCase().substring(1);
-					String player2ColorString = String.valueOf(player2Color).charAt(0)
-							+ String.valueOf(player2Color).toLowerCase().substring(1);
-					ImageIcon XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, player1ColorString)));
-					ImageIcon OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, player2ColorString)));
+					ImageIcon XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+							Constants.X,
+							player1Color
+					)));
+					ImageIcon OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+							Constants.O,
+							player2Color
+					)));
 
 					// Change game parameters based on the settings.
-					TicTacToeGUI.newGameParameters = new GameParameters(guiStyle, gameMode, aiType, ai1MaxDepth, ai2MaxDepth,
-							player1Color, player2Color, playerSymbol, serverPort, clientIP, clientPort, XIcon, OIcon);
+					TicTacToeGUI.newGameParameters = new GameParameters(
+							guiStyle,
+							gameMode,
+							aiType,
+							ai1MaxDepth,
+							ai2MaxDepth,
+							player1Color,
+							player2Color,
+							playerSymbol,
+							serverPort,
+							clientIP,
+							clientPort,
+							XIcon,
+							OIcon
+					);
 
-					JOptionPane.showMessageDialog(null,
-							"Game settings have been changed.\nThe changes will be applied in the next new game.",
-							"", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(
+							null,
+							"Game settings have been changed.\n" +
+									"The changes will be applied in the next new game.",
+							"",
+							JOptionPane.INFORMATION_MESSAGE
+					);
 					dispose();
 				} catch (Exception e) {
 					System.err.println("ERROR : " + e.getMessage());
