@@ -8,7 +8,7 @@ Game modes:
 4) Client-Server (like Human Vs Human for different PCs, using static IPs)
 
 Video for this project:
-- https://www.youtube.com/watch?v=yc8WF4b1LR0&feature=youtu.be
+- https://www.youtube.com/watch?v=yc8WF4b1LR0
 
 
 ### Screenshots
