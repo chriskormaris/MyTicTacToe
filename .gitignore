@@ -28,7 +28,6 @@ jar/
 .settings/
 .classpath
 .project
-source_url.txt
 
 ######################
 # Intellij

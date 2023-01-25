@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.gui.util;
 
-import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
+import com.chriskormaris.mytictactoe.api.util.Constants;
 
 public class GuiUtils {
 

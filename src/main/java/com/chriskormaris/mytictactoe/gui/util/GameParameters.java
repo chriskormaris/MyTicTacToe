@@ -1,10 +1,10 @@
 package com.chriskormaris.mytictactoe.gui.util;
 
+import com.chriskormaris.mytictactoe.gui.enumeration.Color;
+import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 import com.chriskormaris.mytictactoe.api.enumeration.AiType;
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
 import com.chriskormaris.mytictactoe.api.util.Constants;
-import com.chriskormaris.mytictactoe.gui.enumeration.Color;
-import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 
 import javax.swing.*;
 

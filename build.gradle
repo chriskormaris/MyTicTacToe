@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+    id 'io.freefair.lombok' version '6.6.1'
+}
+
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+}
