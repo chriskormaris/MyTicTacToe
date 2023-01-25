@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.gui.client_server;
 
 import com.chriskormaris.mytictactoe.api.board.Move;
-import com.chriskormaris.mytictactoe.gui.TicTacToeGUI;
+import com.chriskormaris.mytictactoe.gui.GUI;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -35,7 +35,7 @@ public class Client extends Thread {
 			System.out.println("Client has started! Established connection with server at port: " + serverPort + "...");
 			out = new ObjectOutputStream(requestSocket.getOutputStream());
 
-			Move lastMove = TicTacToeGUI.board.getLastMove();
+			Move lastMove = GUI.board.getLastMove();
 			out.writeObject(lastMove);
 			out.flush();
 

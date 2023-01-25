@@ -6,16 +6,16 @@ import com.chriskormaris.mytictactoe.api.util.Constants;
 public class exampleClientServer {
 
 	public static void main(String[] args) {
-		TicTacToeGUI.gameParameters.setGameMode(GameMode.CLIENT_SERVER);
-		TicTacToeGUI.gameParameters.setPlayerSymbol(Constants.X);
-		TicTacToeGUI.gameParameters.setServerPort(4000);
-		TicTacToeGUI.gameParameters.setClientIP("127.0.0.1");
-		TicTacToeGUI.gameParameters.setClientPort(4001);
+		GUI.gameParameters.setGameMode(GameMode.CLIENT_SERVER);
+		GUI.gameParameters.setPlayerSymbol(Constants.X);
+		GUI.gameParameters.setServerPort(4000);
+		GUI.gameParameters.setClientIP("127.0.0.1");
+		GUI.gameParameters.setClientPort(4001);
 
 		@SuppressWarnings("unused")
-		TicTacToeGUI gui = new TicTacToeGUI("My TicTacToe ClientServer 1");
+		GUI gui = new GUI("My TicTacToe ClientServer 1");
 
-		TicTacToeGUI.createClientServerNewGame();
+		GUI.createClientServerNewGame();
 	}
 
 }

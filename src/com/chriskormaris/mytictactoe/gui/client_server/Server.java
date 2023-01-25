@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.gui.client_server;
 
 import com.chriskormaris.mytictactoe.api.board.Move;
-import com.chriskormaris.mytictactoe.gui.TicTacToeGUI;
+import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.gui.button.ClientServerButton;
 
 import java.io.IOException;
@@ -39,14 +39,14 @@ public class Server extends Thread {
 				in = new ObjectInputStream(connection.getInputStream());
 
 				Move lastMove = (Move) in.readObject();
-				int id = TicTacToeGUI.getIdByBoardCell(lastMove.getRow(), lastMove.getColumn());
+				int id = GUI.getIdByBoardCell(lastMove.getRow(), lastMove.getColumn());
 				// System.out.println(id);
 
 				int opposingPlayerSymbol = in.readInt();
 
-				TicTacToeGUI.board.setLastPlayer(opposingPlayerSymbol);
+				GUI.board.setLastPlayer(opposingPlayerSymbol);
 
-				for (ClientServerButton button : TicTacToeGUI.clientServerButtons) {
+				for (ClientServerButton button : GUI.clientServerButtons) {
 					if (button.id == id) {
 						// Programmatically press the com.chriskormaris.gui.button.
 						button.programmaticallyPressed = true;
@@ -56,7 +56,7 @@ public class Server extends Thread {
 				}
 				// GUI.board.printBoard();
 
-				if (TicTacToeGUI.board.isTerminal()) {
+				if (GUI.board.isTerminal()) {
 					break;
 				}
 			}
@@ -78,7 +78,7 @@ public class Server extends Thread {
 				e.printStackTrace();
 			}
 		}
-		TicTacToeGUI.gameOver();
+		GUI.gameOver();
 
 	}
 

@@ -45,17 +45,17 @@ public class SettingsWindow extends JFrame {
 
 		EventHandler handler = new EventHandler();
 
-		GuiStyle selectedGuiStyle = TicTacToeGUI.gameParameters.getGuiStyle();
-		GameMode selectedMode = TicTacToeGUI.gameParameters.getGameMode();
-		AiType aiType = TicTacToeGUI.gameParameters.getAiType();
-		int maxDepth1 = TicTacToeGUI.gameParameters.getAi1MaxDepth();
-		int maxDepth2 = TicTacToeGUI.gameParameters.getAi2MaxDepth();
-		Color selectedPlayer1Color = TicTacToeGUI.gameParameters.getPlayer1Color();
-		Color selectedPlayer2Color = TicTacToeGUI.gameParameters.getPlayer2Color();
-		int playerSymbol = TicTacToeGUI.gameParameters.getPlayerSymbol();
-		int serverPort = TicTacToeGUI.gameParameters.getServerPort();
-		String clientIP = TicTacToeGUI.gameParameters.getClientIP();
-		int clientPort = TicTacToeGUI.gameParameters.getClientPort();
+		GuiStyle selectedGuiStyle = GUI.gameParameters.getGuiStyle();
+		GameMode selectedMode = GUI.gameParameters.getGameMode();
+		AiType aiType = GUI.gameParameters.getAiType();
+		int maxDepth1 = GUI.gameParameters.getAi1MaxDepth();
+		int maxDepth2 = GUI.gameParameters.getAi2MaxDepth();
+		Color selectedPlayer1Color = GUI.gameParameters.getPlayer1Color();
+		Color selectedPlayer2Color = GUI.gameParameters.getPlayer2Color();
+		int playerSymbol = GUI.gameParameters.getPlayerSymbol();
+		int serverPort = GUI.gameParameters.getServerPort();
+		String clientIP = GUI.gameParameters.getClientIP();
+		int clientPort = GUI.gameParameters.getClientPort();
 
 		JLabel guiStyleLabel = new JLabel("GUI style");
 		JLabel gameModeLabel = new JLabel("Game mode");
@@ -299,7 +299,7 @@ public class SettingsWindow extends JFrame {
 					)));
 
 					// Change game parameters based on the settings.
-					TicTacToeGUI.newGameParameters = new GameParameters(
+					GUI.newGameParameters = new GameParameters(
 							guiStyle,
 							gameMode,
 							aiType,

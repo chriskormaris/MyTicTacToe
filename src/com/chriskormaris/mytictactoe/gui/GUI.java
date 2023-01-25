@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Stack;
 
 
-public class TicTacToeGUI {
+public class GUI {
 
 	public static GameParameters gameParameters = new GameParameters();
 	public static GameParameters newGameParameters = new GameParameters(gameParameters);
@@ -65,7 +65,7 @@ public class TicTacToeGUI {
 	static Stack<Board> undoBoards = new Stack<>();
 	static Stack<Board> redoBoards = new Stack<>();
 
-	public TicTacToeGUI(String title) {
+	public GUI(String title) {
 		configureGuiStyle();
 
 		frame = new JFrame();
@@ -174,7 +174,7 @@ public class TicTacToeGUI {
 					board = undoBoards.pop();
 
 					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
+						List<Integer> cell = GUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -217,7 +217,7 @@ public class TicTacToeGUI {
 					board = undoBoards.pop();
 
 					for (HumanVsAiButton button : humanVsAiButtons) {
-						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
+						List<Integer> cell = GUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -267,7 +267,7 @@ public class TicTacToeGUI {
 					board = new Board(redoBoards.pop());
 
 					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
+						List<Integer> cell = GUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -315,7 +315,7 @@ public class TicTacToeGUI {
 					board = new Board(redoBoards.pop());
 
 					for (HumanVsAiButton button : humanVsAiButtons) {
-						List<Integer> cell = TicTacToeGUI.getBoardCellById(button.id);
+						List<Integer> cell = GUI.getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -448,11 +448,11 @@ public class TicTacToeGUI {
 			Move aiMove = ai.getNextMove(board);
 			makeMove(aiMove.getRow(), aiMove.getColumn(), Constants.X);
 
-			int aiMoveButtonId = TicTacToeGUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
+			int aiMoveButtonId = GUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 			// System.out.print("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: ");
 			// System.out.println(aiMove.getValue());
 
-			for (HumanVsAiButton button : TicTacToeGUI.humanVsAiButtons) {
+			for (HumanVsAiButton button : GUI.humanVsAiButtons) {
 				if (button.id == aiMoveButtonId) {
 					button.setIcon(gameParameters.getXIcon());
 					button.removeActionListener(button);
@@ -611,7 +611,7 @@ public class TicTacToeGUI {
 
 
 	private static void playAiVsAi(AI ai1Player, AI ai2Player) {
-		while (!TicTacToeGUI.board.isTerminal()) {
+		while (!GUI.board.isTerminal()) {
 
 			// AI 1 Move
 			aiVsAiMove(ai1Player);
@@ -624,7 +624,7 @@ public class TicTacToeGUI {
 				e.printStackTrace();
 			}
 
-			if (!TicTacToeGUI.board.isTerminal()) {
+			if (!GUI.board.isTerminal()) {
 				// AI 2 Move
 				aiVsAiMove(ai2Player);
 			}
@@ -845,16 +845,16 @@ public class TicTacToeGUI {
 		*/
 
 		@SuppressWarnings("unused")
-		TicTacToeGUI gui = new TicTacToeGUI("My TicTacToe");
+		GUI gui = new GUI("My TicTacToe");
 
 		if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-			TicTacToeGUI.createHumanVsAiNewGame();
+			GUI.createHumanVsAiNewGame();
 		} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-			TicTacToeGUI.createHumanVsHumanNewGame();
+			GUI.createHumanVsHumanNewGame();
 		} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-			TicTacToeGUI.createAiVsAiNewGame();
+			GUI.createAiVsAiNewGame();
 		} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-			TicTacToeGUI.createClientServerNewGame();
+			GUI.createClientServerNewGame();
 		}
 	}
 
