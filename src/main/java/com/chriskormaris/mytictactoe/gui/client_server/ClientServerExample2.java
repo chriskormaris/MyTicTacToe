@@ -1,9 +1,10 @@
-package com.chriskormaris.mytictactoe.gui;
+package com.chriskormaris.mytictactoe.gui.client_server;
 
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
 import com.chriskormaris.mytictactoe.api.util.Constants;
+import com.chriskormaris.mytictactoe.gui.GUI;
 
-public class exampleClientServer2 {
+public class ClientServerExample2 {
 
 	public static void main(String[] args) {
 		GUI.gameParameters.setGameMode(GameMode.CLIENT_SERVER);
