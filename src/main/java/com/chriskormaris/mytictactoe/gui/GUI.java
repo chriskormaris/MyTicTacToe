@@ -75,7 +75,9 @@ public class GUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle(title);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation((int) (screenSize.getWidth() - frame.getWidth()) / 2, (int) (screenSize.getHeight() - frame.getHeight()) / 2);
+		int x = (int) (screenSize.getWidth() - frame.getWidth()) / 2;
+		int y = (int) (screenSize.getHeight() - frame.getHeight()) / 2;
+		frame.setLocation(x, y);
 	}
 
 
