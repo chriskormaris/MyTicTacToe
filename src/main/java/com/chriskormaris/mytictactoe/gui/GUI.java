@@ -81,6 +81,33 @@ public class GUI {
 	}
 
 
+	private static void configureGuiStyle() {
+		try {
+			if (gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
+				// Option 1
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} else if (gameParameters.getGuiStyle() == GuiStyle.CROSS_PLATFORM_STYLE) {
+				// Option 2
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} else if (gameParameters.getGuiStyle() == GuiStyle.NIMBUS_STYLE) {
+				// Option 3
+				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+					if ("Nimbus".equals(info.getName())) {
+						UIManager.setLookAndFeel(info.getClassName());
+						break;
+					}
+				}
+			}
+		} catch (Exception e1) {
+			try {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+
+
 	private static void addMenus() {
 		// Adding the menu bar
 		menuBar = new JMenuBar();
@@ -642,33 +669,6 @@ public class GUI {
 		}
 
 		gameOver();
-	}
-
-
-	private static void configureGuiStyle() {
-		try {
-			if (gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
-				// Option 1
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} else if (gameParameters.getGuiStyle() == GuiStyle.CROSS_PLATFORM_STYLE) {
-				// Option 2
-				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-			} else if (gameParameters.getGuiStyle() == GuiStyle.NIMBUS_STYLE) {
-				// Option 3
-				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-					if ("Nimbus".equals(info.getName())) {
-						UIManager.setLookAndFeel(info.getClassName());
-						break;
-					}
-				}
-			}
-		} catch (Exception e1) {
-			try {
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
 	}
 
 
