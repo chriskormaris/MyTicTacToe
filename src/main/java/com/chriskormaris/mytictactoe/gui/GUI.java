@@ -30,16 +30,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static com.chriskormaris.mytictactoe.gui.util.GuiConstants.TITLE;
+
 
 public class GUI {
 
-	public static GameParameters gameParameters = new GameParameters();
-	public static GameParameters newGameParameters = new GameParameters(gameParameters);
+	public static GameParameters gameParameters;
+	public static GameParameters newGameParameters;
 
-	public static JFrame frame;
+	private static JFrame frame;
 
-	public static JPanel panel;
-	public static GridLayout layout;
+	private static JPanel panel;
+	private static GridLayout layout;
 
 	public static HumanVsHumanButton[] humanVsHumanButtons;
 	public static HumanVsAiButton[] humanVsAiButtons;
@@ -49,23 +51,20 @@ public class GUI {
 	public static Board board;
 
 	// Menu bars and items
-	public static JMenuBar menuBar;
-	public static JMenu fileMenu;
-	public static JMenuItem newGameItem;
+	private static JMenuBar menuBar;
 	public static JMenuItem undoItem;
 	public static JMenuItem redoItem;
-	public static JMenuItem settingsItem;
-	public static JMenuItem exitItem;
-
-	public static JMenu helpMenu;
-	public static JMenuItem howToPlayItem;
-	public static JMenuItem aboutItem;
 
 	// These Stack objects are used for the "Undo" and "Redo" functionalities.
-	static Stack<Board> undoBoards = new Stack<>();
-	static Stack<Board> redoBoards = new Stack<>();
+	private static Stack<Board> undoBoards;
+	private static Stack<Board> redoBoards;
 
-	public GUI(String title) {
+	public static void create(String title) {
+		gameParameters = new GameParameters();
+		newGameParameters = new GameParameters(gameParameters);
+		undoBoards = new Stack<>();
+		redoBoards = new Stack<>();
+
 		configureGuiStyle();
 
 		frame = new JFrame();
@@ -78,8 +77,64 @@ public class GUI {
 		int x = (int) (screenSize.getWidth() - frame.getWidth()) / 2;
 		int y = (int) (screenSize.getHeight() - frame.getHeight()) / 2;
 		frame.setLocation(x, y);
+
+		frame.addKeyListener(gameKeyListener);
+		frame.addKeyListener(undoRedoKeyListener);
 	}
 
+	private static final KeyListener gameKeyListener = new KeyListener() {
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// System.out.println("keyTyped = " + KeyEvent.getKeyText(e.getKeyCode()));
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// System.out.println("keyPressed = " + KeyEvent.getKeyText(e.getKeyCode()));
+			String button = KeyEvent.getKeyText(e.getKeyCode());
+
+			for (int i = 0; i < 9; i++) {
+				if (button.equals(i + 1 + "")) {
+					if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+						humanVsAiButtons[i].doClick();
+					}
+					if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+						humanVsHumanButtons[i].doClick();
+					}
+					if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
+						clientServerButtons[i].doClick();
+					}
+					break;
+				}
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// System.out.println("keyReleased = " + KeyEvent.getKeyText(e.getKeyCode()));
+		}
+	};
+
+	private static final KeyListener undoRedoKeyListener = new KeyListener() {
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// System.out.println("keyTyped = " + KeyEvent.getKeyText(e.getKeyCode()));
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0) && (e.getKeyCode() == KeyEvent.VK_Z)) {
+				undo();
+			} else if (((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0) && (e.getKeyCode() == KeyEvent.VK_Y)) {
+				redo();
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// System.out.println("keyReleased = " + KeyEvent.getKeyText(e.getKeyCode()));
+		}
+	};
 
 	private static void configureGuiStyle() {
 		try {
@@ -112,19 +167,19 @@ public class GUI {
 		// Adding the menu bar
 		menuBar = new JMenuBar();
 
-		fileMenu = new JMenu("File");
-		newGameItem = new JMenuItem("New Game");
+		JMenu fileMenu = new JMenu("File");
+		JMenuItem newGameItem = new JMenuItem("New Game");
 		undoItem = new JMenuItem("Undo    Ctrl+Z");
 		redoItem = new JMenuItem("Redo    Ctrl+Y");
-		settingsItem = new JMenuItem("Settings");
-		exitItem = new JMenuItem("Exit");
+		JMenuItem settingsItem = new JMenuItem("Settings");
+		JMenuItem exitItem = new JMenuItem("Exit");
 
 		undoItem.setEnabled(false);
 		redoItem.setEnabled(false);
 
-		helpMenu = new JMenu("Help");
-		howToPlayItem = new JMenuItem("How to Play");
-		aboutItem = new JMenuItem("About");
+		JMenu helpMenu = new JMenu("Help");
+		JMenuItem howToPlayItem = new JMenuItem("How to Play");
+		JMenuItem aboutItem = new JMenuItem("About");
 		helpMenu.add(howToPlayItem);
 		helpMenu.add(aboutItem);
 
@@ -176,7 +231,7 @@ public class GUI {
 		aboutItem.addActionListener(e -> {
 			JLabel label = new JLabel(
 					"<html>© Created by: Christos Kormaris<br>"
-					+ "Version " + GuiConstants.VERSION + "</html>"
+							+ "Version " + GuiConstants.VERSION + "</html>"
 			);
 			JOptionPane.showMessageDialog(frame, label, "About", JOptionPane.INFORMATION_MESSAGE);
 		});
@@ -466,9 +521,6 @@ public class GUI {
 			panel.add(humanVsAiButtons[i]);
 		}
 
-		if (frame.getKeyListeners().length == 0) {
-			frame.addKeyListener(gameKeyListener);
-		}
 		frame.setFocusable(true);
 
 		frame.setVisible(true);
@@ -523,8 +575,6 @@ public class GUI {
 			panel.add(humanVsHumanButtons[id]);
 		}
 
-		if (frame.getKeyListeners().length == 0)
-			frame.addKeyListener(gameKeyListener);
 		frame.setFocusable(true);
 
 		frame.setVisible(true);
@@ -616,9 +666,6 @@ public class GUI {
 			panel.add(clientServerButtons[i]);
 		}
 
-		if (frame.getKeyListeners().length == 0) {
-			frame.addKeyListener(gameKeyListener);
-		}
 		frame.setFocusable(true);
 
 		frame.setVisible(true);
@@ -733,46 +780,6 @@ public class GUI {
 		redoItem.setEnabled(false);
 	}
 
-	public static KeyListener gameKeyListener = new KeyListener() {
-		@Override
-		public void keyTyped(KeyEvent e) {
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// System.out.println("keyPressed = " + KeyEvent.getKeyText(e.getKeyCode()));
-			String button = KeyEvent.getKeyText(e.getKeyCode());
-
-			for (int i = 0; i < 9; i++) {
-				if (button.equals(i + 1 + "")) {
-					if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-						humanVsAiButtons[i].doClick();
-					}
-					if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-						humanVsHumanButtons[i].doClick();
-					}
-					if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-						clientServerButtons[i].doClick();
-					}
-					break;
-				}
-			}
-
-			if (((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0) &&
-					(e.getKeyCode() == KeyEvent.VK_Z)) {
-				undo();
-			} else if (((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0) &&
-					(e.getKeyCode() == KeyEvent.VK_Y)) {
-				redo();
-			}
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			// System.out.println("keyReleased = " + KeyEvent.getKeyText(e.getKeyCode()));
-		}
-	};
-
 	public static void main(String[] args) {
 		// These are the default values.
 		// Feel free to change them, before running.
@@ -793,8 +800,7 @@ public class GUI {
 		gameParameters.clientPort = 4001;
 		*/
 
-		@SuppressWarnings("unused")
-		GUI gui = new GUI("My TicTacToe");
+		GUI.create(TITLE);
 
 		if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
 			GUI.createHumanVsAiNewGame();

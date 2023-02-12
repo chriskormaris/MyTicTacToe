@@ -13,8 +13,7 @@ public class ClientServerExample1 {
 		GUI.gameParameters.setClientIP("127.0.0.1");
 		GUI.gameParameters.setClientPort(4001);
 
-		@SuppressWarnings("unused")
-		GUI gui = new GUI("My TicTacToe ClientServer 1");
+		GUI.create("My TicTacToe ClientServer 1");
 
 		GUI.createClientServerNewGame();
 	}
