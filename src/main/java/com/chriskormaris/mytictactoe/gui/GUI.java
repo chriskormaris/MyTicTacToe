@@ -98,11 +98,11 @@ public class GUI {
 					}
 				}
 			}
-		} catch (Exception e1) {
+		} catch (Exception ex1) {
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} catch (Exception e2) {
-				e2.printStackTrace();
+			} catch (Exception ex2) {
+				ex2.printStackTrace();
 			}
 		}
 	}
@@ -649,8 +649,8 @@ public class GUI {
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
 				frame.paint(frame.getGraphics());
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 
 			if (!GUI.board.isTerminal()) {
@@ -662,8 +662,8 @@ public class GUI {
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
 				frame.paint(frame.getGraphics());
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (Exception ex) {
+				ex.printStackTrace();
 			}
 
 		}
@@ -675,95 +675,42 @@ public class GUI {
 	public static void gameOver() {
 		// System.out.println("Game Over function called!");
 
+		String message = "";
 		if (board.getWinner() == Constants.X) {
 			System.out.println("Player 1 \"X\" wins!");
-			int input = JOptionPane.showConfirmDialog(frame,
-					"Player 1 \"X\" wins!\nPlay again?",
-					"Game Over", JOptionPane.YES_NO_OPTION);
-			if (input == JOptionPane.OK_OPTION) {
-				if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-					createHumanVsAiNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-					createHumanVsHumanNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-					createAiVsAiNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-					createClientServerNewGame();
-				}
-			} else if (input == JOptionPane.NO_OPTION
-					|| input == JOptionPane.CLOSED_OPTION) {
-				if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-					for (HumanVsAiButton button : humanVsAiButtons) {
-						button.removeActionListener(button);
-					}
-				} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						button.removeActionListener(button);
-					}
-				} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-					for (ClientServerButton button : clientServerButtons) {
-						button.removeActionListener(button);
-					}
-				}
-			}
+			message = "Player 1 \"X\" wins!\nPlay again?";
 		} else if (board.getWinner() == Constants.O) {
 			System.out.println("Player 2 \"O\" wins!");
-			int input = JOptionPane.showConfirmDialog(frame,
-					"Player 2 \"O\" wins!\nPlay again?",
-					"Game Over", JOptionPane.YES_NO_OPTION);
-			if (input == JOptionPane.OK_OPTION) {
-				if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-					createHumanVsAiNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-					createHumanVsHumanNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-					createAiVsAiNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-					createClientServerNewGame();
-				}
-			} else if (input == JOptionPane.NO_OPTION
-					|| input == JOptionPane.CLOSED_OPTION) {
-				if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-					for (HumanVsAiButton button : humanVsAiButtons) {
-						button.removeActionListener(button);
-					}
-				} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						button.removeActionListener(button);
-					}
-				} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-					for (ClientServerButton button : clientServerButtons) {
-						button.removeActionListener(button);
-					}
-				}
-			}
+			message = "Player 2 \"O\" wins!\nPlay again?";
 		} else if (Board.isGameBoardFull(board.getGameBoard()) && board.getWinner() == Constants.EMPTY) {
 			System.out.println("It is a draw!");
-			int input = JOptionPane.showConfirmDialog(frame, "It is a draw!\nPlay again?",
-					"Game Over", JOptionPane.YES_NO_OPTION);
-			if (input == JOptionPane.OK_OPTION) {
-				if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-					createHumanVsAiNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-					createHumanVsHumanNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-					createAiVsAiNewGame();
-				} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-					createClientServerNewGame();
+			message = "It is a draw!\nPlay again?";
+		}
+		int input = JOptionPane.showConfirmDialog(frame, message, "Game Over", JOptionPane.YES_NO_OPTION);
+		if (input == JOptionPane.OK_OPTION) {
+			undoBoards.clear();
+			redoBoards.clear();
+			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+				createHumanVsAiNewGame();
+			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+				createHumanVsHumanNewGame();
+			} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
+				createAiVsAiNewGame();
+			} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
+				createClientServerNewGame();
+			}
+		} else if (input == JOptionPane.NO_OPTION || input == JOptionPane.CLOSED_OPTION) {
+			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+				for (HumanVsAiButton button : humanVsAiButtons) {
+					button.removeActionListener(button);
 				}
-			} else if (input == JOptionPane.NO_OPTION || input == JOptionPane.CLOSED_OPTION) {
-				if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-					for (HumanVsAiButton button : humanVsAiButtons) {
-						button.removeActionListener(button);
-					}
-				} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						button.removeActionListener(button);
-					}
-				} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-					for (ClientServerButton button : clientServerButtons) {
-						button.removeActionListener(button);
-					}
+			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+				for (HumanVsHumanButton button : humanVsHumanButtons) {
+					button.removeActionListener(button);
+				}
+			} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
+				for (ClientServerButton button : clientServerButtons) {
+					button.removeActionListener(button);
 				}
 			}
 		}
