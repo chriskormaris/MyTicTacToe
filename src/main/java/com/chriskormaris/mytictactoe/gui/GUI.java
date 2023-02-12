@@ -132,7 +132,6 @@ public class GUI {
 		menuBar.add(helpMenu);
 
 		newGameItem.addActionListener(e -> {
-
 			gameParameters = new GameParameters(newGameParameters);
 
 			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
@@ -168,16 +167,17 @@ public class GUI {
 		howToPlayItem.addActionListener(
 				e -> JOptionPane.showMessageDialog(
 						frame,
-						"Click on the buttons or press 1-9 on your keyboard to insert a new symbol.\n"
-								+ "To win you must place 3 symbols in an row, horizontally, vertically or diagonally.",
+						GuiConstants.RULES,
 						"How to Play",
 						JOptionPane.INFORMATION_MESSAGE
 				)
 		);
 
 		aboutItem.addActionListener(e -> {
-			JLabel label = new JLabel("<html>© Created by: Christos Kormaris<br>"
-					+ "Version " + GuiConstants.VERSION + "</html>");
+			JLabel label = new JLabel(
+					"<html>© Created by: Christos Kormaris<br>"
+					+ "Version " + GuiConstants.VERSION + "</html>"
+			);
 			JOptionPane.showMessageDialog(frame, label, "About", JOptionPane.INFORMATION_MESSAGE);
 		});
 
