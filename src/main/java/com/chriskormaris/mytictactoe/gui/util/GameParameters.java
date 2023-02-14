@@ -1,10 +1,10 @@
 package com.chriskormaris.mytictactoe.gui.util;
 
-import com.chriskormaris.mytictactoe.gui.enumeration.Color;
-import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 import com.chriskormaris.mytictactoe.api.enumeration.AiType;
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
 import com.chriskormaris.mytictactoe.api.util.Constants;
+import com.chriskormaris.mytictactoe.gui.enumeration.Color;
+import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 
 import javax.swing.*;
 
@@ -12,7 +12,8 @@ public class GameParameters {
 
 	private GuiStyle guiStyle;
 	private GameMode gameMode;
-	private AiType aiType;
+	private AiType ai1Type;
+	private AiType ai2Type;
 	private int ai1MaxDepth;
 	private int ai2MaxDepth;
 	private Color player1Color;
@@ -28,7 +29,8 @@ public class GameParameters {
 	public GameParameters() {
 		this.guiStyle = GuiStyle.SYSTEM_STYLE;
 		this.gameMode = GameMode.HUMAN_VS_AI;
-		this.aiType = AiType.BEST_RESPONSE_AI;
+		this.ai1Type = AiType.BEST_RESPONSE_AI;
+		this.ai2Type = AiType.BEST_RESPONSE_AI;
 		this.ai1MaxDepth = 3;
 		this.ai2MaxDepth = 3;
 		this.player1Color = Color.BLUE;
@@ -44,7 +46,8 @@ public class GameParameters {
 	public GameParameters(GameParameters otherGameParameters) {
 		this.guiStyle = otherGameParameters.guiStyle;
 		this.gameMode = otherGameParameters.gameMode;
-		this.aiType = otherGameParameters.aiType;
+		this.ai1Type = otherGameParameters.ai1Type;
+		this.ai2Type = otherGameParameters.ai2Type;
 		this.ai1MaxDepth = otherGameParameters.ai1MaxDepth;
 		this.ai2MaxDepth = otherGameParameters.ai2MaxDepth;
 		this.player1Color = otherGameParameters.player1Color;
@@ -60,7 +63,8 @@ public class GameParameters {
 	public GameParameters(
 			GuiStyle guiStyle,
 			GameMode gameMode,
-			AiType aiType,
+			AiType ai1Type,
+			AiType ai2Type,
 			int ai1MaxDepth,
 			int ai2MaxDepth,
 			Color player1Color,
@@ -74,7 +78,8 @@ public class GameParameters {
 	) {
 		this.guiStyle = guiStyle;
 		this.gameMode = gameMode;
-		this.aiType = aiType;
+		this.ai1Type = ai1Type;
+		this.ai2Type = ai2Type;
 		this.ai1MaxDepth = ai1MaxDepth;
 		this.ai2MaxDepth = ai2MaxDepth;
 		this.player1Color = player1Color;
@@ -103,12 +108,20 @@ public class GameParameters {
 		this.gameMode = gameMode;
 	}
 
-	public AiType getAiType() {
-		return aiType;
+	public AiType getAi1Type() {
+		return ai1Type;
 	}
 
-	public void setAiType(AiType aiType) {
-		this.aiType = aiType;
+	public void setAi1Type(AiType ai1Type) {
+		this.ai1Type = ai1Type;
+	}
+
+	public AiType getAi2Type() {
+		return ai2Type;
+	}
+
+	public void setAi2Type(AiType ai2Type) {
+		this.ai2Type = ai2Type;
 	}
 
 	public int getAi1MaxDepth() {

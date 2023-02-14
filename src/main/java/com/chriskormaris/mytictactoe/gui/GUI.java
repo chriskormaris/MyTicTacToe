@@ -488,12 +488,13 @@ public class GUI {
 		}
 
 		int aiPlayerSymbol = (gameParameters.getPlayerSymbol() == Constants.X) ? Constants.O : Constants.X;
+
 		AI ai = null;
-		if (gameParameters.getAiType() == AiType.BEST_RESPONSE_AI) {
+		if (gameParameters.getAi1Type() == AiType.BEST_RESPONSE_AI) {
 			ai = new BestResponseAI(aiPlayerSymbol);
-		} else if (gameParameters.getAiType() == AiType.MINIMAX_AI) {
+		} else if (gameParameters.getAi1Type() == AiType.MINIMAX_AI) {
 			ai = new MinimaxAI(gameParameters.getAi1MaxDepth(), aiPlayerSymbol);
-		} else if (gameParameters.getAiType() == AiType.RANDOM_AI) {
+		} else {
 			ai = new RandomChoiceAI(aiPlayerSymbol);
 		}
 
@@ -589,15 +590,20 @@ public class GUI {
 		}
 
 		AI ai1 = null;
-		AI ai2 = null;
-		if (gameParameters.getAiType() == AiType.BEST_RESPONSE_AI) {
+		if (gameParameters.getAi1Type() == AiType.BEST_RESPONSE_AI) {
 			ai1 = new BestResponseAI(Constants.X);
-			ai2 = new BestResponseAI(Constants.O);
-		} else if (gameParameters.getAiType() == AiType.MINIMAX_AI) {
+		} else if (gameParameters.getAi1Type() == AiType.MINIMAX_AI) {
 			ai1 = new MinimaxAI(gameParameters.getAi1MaxDepth(), Constants.X);
-			ai2 = new MinimaxAI(gameParameters.getAi2MaxDepth(), Constants.O);
-		} else if (gameParameters.getAiType() == AiType.RANDOM_AI) {
+		} else {
 			ai1 = new RandomChoiceAI(Constants.X);
+		}
+
+		AI ai2 = null;
+		if (gameParameters.getAi2Type() == AiType.BEST_RESPONSE_AI) {
+			ai2 = new BestResponseAI(Constants.O);
+		} else if (gameParameters.getAi2Type() == AiType.MINIMAX_AI) {
+			ai2 = new MinimaxAI(gameParameters.getAi2MaxDepth(), Constants.O);
+		} else {
 			ai2 = new RandomChoiceAI(Constants.O);
 		}
 
@@ -686,13 +692,13 @@ public class GUI {
 	}
 
 
-	private static void playAiVsAi(AI ai1Player, AI ai2Player) {
+	private static void playAiVsAi(AI ai1, AI ai2) {
 		while (!GUI.board.isTerminal()) {
 
 			// AI 1 Move
-			aiVsAiMove(ai1Player);
+			aiVsAiMove(ai1);
 
-			// Sleep for 200 ms
+			// Sleep ms
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
 				frame.paint(frame.getGraphics());
@@ -702,10 +708,10 @@ public class GUI {
 
 			if (!GUI.board.isTerminal()) {
 				// AI 2 Move
-				aiVsAiMove(ai2Player);
+				aiVsAiMove(ai2);
 			}
 
-			// Sleep for 200 ms
+			// Sleep ms
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
 				frame.paint(frame.getGraphics());
@@ -781,23 +787,22 @@ public class GUI {
 	}
 
 	public static void main(String[] args) {
-		// These are the default values.
-		// Feel free to change them, before running.
-		// You can also change them later, from the GUI window.
+		// Here, you can change the game parameters, before running the application.
+		// You can also change them later, from the Settings window.
 		/*
-		gameParameters.guiStyle = Constants.SystemStyle;
-		gameParameters.gameMode = Constants.HumanVsAi;
-		// gameParameters.gameMode = Constants.AiVsAi;
-		// gameParameters.maxDepth1 = Constants.BestResponse;
-		gameParameters.maxDepth1 = 4;
-		// gameParameters.maxDepth2 = Constants.BestResponse;
-		gameParameters.maxDepth2 = 1;
-		gameParameters.player1Color = Constants.BLUE;
-		gameParameters.player2Color = Constants.RED;
-		gameParameters.clientServerSymbol = Constants.X;
-		gameParameters.serverPort = 4000;
-		gameParameters.clientIP = "127.0.0.1";
-		gameParameters.clientPort = 4001;
+		gameParameters = new GameParameters();
+		gameParameters.setGuiStyle(GuiStyle.SYSTEM_STYLE);
+		gameParameters.setGameMode(GameMode.HUMAN_VS_AI);
+		gameParameters.setGameMode(GameMode.AI_VS_AI);
+		gameParameters.setAi1Type(AiType.BEST_RESPONSE_AI);
+		gameParameters.setAi1MaxDepth(4);
+		gameParameters.setAi2MaxDepth(4);
+		gameParameters.setPlayer1Color(Color.BLUE);
+		gameParameters.setPlayer2Color(Color.RED);
+		gameParameters.setPlayerSymbol(Constants.X);
+		gameParameters.setServerPort(4000);
+		gameParameters.setClientIP("127.0.0.1");
+		gameParameters.setClientPort(4001);
 		*/
 
 		create(TITLE);
