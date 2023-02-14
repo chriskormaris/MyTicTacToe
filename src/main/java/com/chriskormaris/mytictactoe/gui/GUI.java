@@ -14,6 +14,7 @@ import com.chriskormaris.mytictactoe.gui.button.ClientServerButton;
 import com.chriskormaris.mytictactoe.gui.button.HumanVsAiButton;
 import com.chriskormaris.mytictactoe.gui.button.HumanVsHumanButton;
 import com.chriskormaris.mytictactoe.gui.client_server.Server;
+import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 import com.chriskormaris.mytictactoe.gui.util.GameParameters;
 import com.chriskormaris.mytictactoe.gui.util.GuiConstants;
@@ -37,6 +38,9 @@ public class GUI {
 
 	public static GameParameters gameParameters;
 	public static GameParameters newGameParameters;
+
+	public static ImageIcon XIcon;
+	public static ImageIcon OIcon;
 
 	private static JFrame frame;
 
@@ -62,6 +66,16 @@ public class GUI {
 	public static void create(String title) {
 		gameParameters = new GameParameters();
 		newGameParameters = new GameParameters(gameParameters);
+
+		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+				Constants.X,
+				Color.BLUE
+		)));
+		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+				Constants.O,
+				Color.RED
+		)));
+
 		undoBoards = new Stack<>();
 		redoBoards = new Stack<>();
 
@@ -489,7 +503,7 @@ public class GUI {
 
 		int aiPlayerSymbol = (gameParameters.getPlayerSymbol() == Constants.X) ? Constants.O : Constants.X;
 
-		AI ai = null;
+		AI ai;
 		if (gameParameters.getAi1Type() == AiType.BEST_RESPONSE_AI) {
 			ai = new BestResponseAI(aiPlayerSymbol);
 		} else if (gameParameters.getAi1Type() == AiType.MINIMAX_AI) {
@@ -536,7 +550,7 @@ public class GUI {
 
 			for (HumanVsAiButton button : GUI.humanVsAiButtons) {
 				if (button.id == aiMoveButtonId) {
-					button.setIcon(gameParameters.getXIcon());
+					button.setIcon(XIcon);
 					button.removeActionListener(button);
 				}
 			}
@@ -589,7 +603,7 @@ public class GUI {
 			addMenus();
 		}
 
-		AI ai1 = null;
+		AI ai1;
 		if (gameParameters.getAi1Type() == AiType.BEST_RESPONSE_AI) {
 			ai1 = new BestResponseAI(Constants.X);
 		} else if (gameParameters.getAi1Type() == AiType.MINIMAX_AI) {
@@ -598,7 +612,7 @@ public class GUI {
 			ai1 = new RandomChoiceAI(Constants.X);
 		}
 
-		AI ai2 = null;
+		AI ai2;
 		if (gameParameters.getAi2Type() == AiType.BEST_RESPONSE_AI) {
 			ai2 = new BestResponseAI(Constants.O);
 		} else if (gameParameters.getAi2Type() == AiType.MINIMAX_AI) {

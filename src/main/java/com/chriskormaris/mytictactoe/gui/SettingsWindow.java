@@ -311,15 +311,6 @@ public class SettingsWindow extends JFrame {
 						return;
 					}
 
-					ImageIcon XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-							Constants.X,
-							player1Color
-					)));
-					ImageIcon OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-							Constants.O,
-							player2Color
-					)));
-
 					// Change game parameters based on the settings.
 					GUI.newGameParameters = new GameParameters(
 							guiStyle,
@@ -333,10 +324,17 @@ public class SettingsWindow extends JFrame {
 							playerSymbol,
 							serverPort,
 							clientIP,
-							clientPort,
-							XIcon,
-							OIcon
+							clientPort
 					);
+
+					GUI.XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+							Constants.X,
+							player1Color
+					)));
+					GUI.OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+							Constants.O,
+							player2Color
+					)));
 
 					JOptionPane.showMessageDialog(
 							null,

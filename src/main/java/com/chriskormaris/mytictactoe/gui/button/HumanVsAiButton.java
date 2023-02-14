@@ -1,10 +1,10 @@
 package com.chriskormaris.mytictactoe.gui.button;
 
-import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.api.ai.AI;
 import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.board.Move;
 import com.chriskormaris.mytictactoe.api.util.Constants;
+import com.chriskormaris.mytictactoe.gui.GUI;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -33,9 +33,9 @@ public class HumanVsAiButton extends XOButton {
 		GUI.undoItem.setEnabled(true);
 
 		if (GUI.gameParameters.getPlayerSymbol() == Constants.X) {
-			setIcon(GUI.gameParameters.getXIcon());
+			setIcon(GUI.XIcon);
 		} else if (GUI.gameParameters.getPlayerSymbol() == Constants.O) {
-			setIcon(GUI.gameParameters.getOIcon());
+			setIcon(GUI.OIcon);
 		}
 
 		// get cell coordinates by id
@@ -70,9 +70,9 @@ public class HumanVsAiButton extends XOButton {
 		for (HumanVsAiButton button : GUI.humanVsAiButtons) {
 			if (button.id == aiMoveButtonId) {
 				if (GUI.gameParameters.getPlayerSymbol() == Constants.X) {
-					button.setIcon(GUI.gameParameters.getOIcon());
+					button.setIcon(GUI.OIcon);
 				} else if (GUI.gameParameters.getPlayerSymbol() == Constants.O) {
-					button.setIcon(GUI.gameParameters.getXIcon());
+					button.setIcon(GUI.XIcon);
 				}
 				button.removeActionListener(button);
 			}

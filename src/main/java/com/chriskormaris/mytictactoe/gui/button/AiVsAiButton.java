@@ -1,8 +1,8 @@
 package com.chriskormaris.mytictactoe.gui.button;
 
-import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.util.Constants;
+import com.chriskormaris.mytictactoe.gui.GUI;
 
 import java.awt.event.ActionEvent;
 
@@ -31,9 +31,9 @@ public class AiVsAiButton extends XOButton {
 		// System.out.println("com.chriskormaris.gui.button cell: [" + cell.get(0) + "]" + "[" + cell.get(1) + "]");
 
 		if (aiPlayer == Constants.X) {
-			setIcon(GUI.gameParameters.getXIcon());
+			setIcon(GUI.XIcon);
 		} else if (aiPlayer == Constants.O) {
-			setIcon(GUI.gameParameters.getOIcon());
+			setIcon(GUI.OIcon);
 		}
 
 		Board.printBoard(GUI.board.getGameBoard());

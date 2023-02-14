@@ -6,8 +6,6 @@ import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 
-import javax.swing.*;
-
 public class GameParameters {
 
 	private GuiStyle guiStyle;
@@ -22,8 +20,6 @@ public class GameParameters {
 	private int serverPort;
 	private String clientIP;
 	private int clientPort;
-	private ImageIcon XIcon;
-	private ImageIcon OIcon;
 
 	// Default constructor
 	public GameParameters() {
@@ -39,8 +35,6 @@ public class GameParameters {
 		this.serverPort = Constants.SERVER_PORT;
 		this.clientIP = Constants.LOCALHOST;
 		this.clientPort = Constants.CLIENT_PORT;
-		this.XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, Color.BLUE)));
-		this.OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, Color.RED)));
 	}
 
 	public GameParameters(GameParameters otherGameParameters) {
@@ -56,8 +50,6 @@ public class GameParameters {
 		this.serverPort = otherGameParameters.serverPort;
 		this.clientIP = otherGameParameters.clientIP;
 		this.clientPort = otherGameParameters.clientPort;
-		this.XIcon = otherGameParameters.XIcon;
-		this.OIcon = otherGameParameters.OIcon;
 	}
 
 	public GameParameters(
@@ -72,9 +64,7 @@ public class GameParameters {
 			int playerSymbol,
 			int serverPort,
 			String clientIP,
-			int clientPort,
-			ImageIcon XIcon,
-			ImageIcon OIcon
+			int clientPort
 	) {
 		this.guiStyle = guiStyle;
 		this.gameMode = gameMode;
@@ -88,8 +78,6 @@ public class GameParameters {
 		this.serverPort = serverPort;
 		this.clientIP = clientIP;
 		this.clientPort = clientPort;
-		this.XIcon = XIcon;
-		this.OIcon = OIcon;
 	}
 
 	public GuiStyle getGuiStyle() {
@@ -186,22 +174,6 @@ public class GameParameters {
 
 	public void setClientPort(int clientPort) {
 		this.clientPort = clientPort;
-	}
-
-	public ImageIcon getXIcon() {
-		return XIcon;
-	}
-
-	public void setXIcon(ImageIcon XIcon) {
-		this.XIcon = XIcon;
-	}
-
-	public ImageIcon getOIcon() {
-		return OIcon;
-	}
-
-	public void setOIcon(ImageIcon OIcon) {
-		this.OIcon = OIcon;
 	}
 
 }

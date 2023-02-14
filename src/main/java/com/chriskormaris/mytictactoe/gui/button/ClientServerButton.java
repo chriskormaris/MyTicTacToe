@@ -1,9 +1,9 @@
 package com.chriskormaris.mytictactoe.gui.button;
 
-import com.chriskormaris.mytictactoe.gui.GUI;
-import com.chriskormaris.mytictactoe.gui.client_server.Client;
 import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.util.Constants;
+import com.chriskormaris.mytictactoe.gui.GUI;
+import com.chriskormaris.mytictactoe.gui.client_server.Client;
 
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
@@ -54,12 +54,12 @@ public class ClientServerButton extends XOButton implements Serializable {
 		}
 
 		// add X or O on the board GUI
-		if (turn == Constants.EMPTY) {
-			setIcon(null);
-		} else if (turn == Constants.X) {
-			setIcon(GUI.gameParameters.getXIcon());
+		if (turn == Constants.X) {
+			setIcon(GUI.XIcon);
 		} else if (turn == Constants.O) {
-			setIcon(GUI.gameParameters.getOIcon());
+			setIcon(GUI.OIcon);
+		} else {
+			setIcon(null);
 		}
 
 		// get cell coordinates by id
