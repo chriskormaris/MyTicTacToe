@@ -800,16 +800,16 @@ public class GUI {
 		gameParameters.clientPort = 4001;
 		*/
 
-		GUI.create(TITLE);
+		create(TITLE);
 
 		if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-			GUI.createHumanVsAiNewGame();
+			createHumanVsAiNewGame();
 		} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-			GUI.createHumanVsHumanNewGame();
+			createHumanVsHumanNewGame();
 		} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-			GUI.createAiVsAiNewGame();
+			createAiVsAiNewGame();
 		} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-			GUI.createClientServerNewGame();
+			createClientServerNewGame();
 		}
 	}
 
