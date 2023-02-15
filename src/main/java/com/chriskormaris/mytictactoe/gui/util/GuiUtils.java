@@ -1,8 +1,11 @@
 package com.chriskormaris.mytictactoe.gui.util;
 
-import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.api.util.Constants;
+import com.chriskormaris.mytictactoe.gui.enumeration.Color;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class GuiUtils {
 
 	public static String getIconPath(int player, Color color) {

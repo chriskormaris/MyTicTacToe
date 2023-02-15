@@ -5,7 +5,13 @@ import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
 import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class GameParameters {
 
 	private GuiStyle guiStyle;
@@ -50,130 +56,6 @@ public class GameParameters {
 		this.serverPort = otherGameParameters.serverPort;
 		this.clientIP = otherGameParameters.clientIP;
 		this.clientPort = otherGameParameters.clientPort;
-	}
-
-	public GameParameters(
-			GuiStyle guiStyle,
-			GameMode gameMode,
-			AiType ai1Type,
-			AiType ai2Type,
-			int ai1MaxDepth,
-			int ai2MaxDepth,
-			Color player1Color,
-			Color player2Color,
-			int playerSymbol,
-			int serverPort,
-			String clientIP,
-			int clientPort
-	) {
-		this.guiStyle = guiStyle;
-		this.gameMode = gameMode;
-		this.ai1Type = ai1Type;
-		this.ai2Type = ai2Type;
-		this.ai1MaxDepth = ai1MaxDepth;
-		this.ai2MaxDepth = ai2MaxDepth;
-		this.player1Color = player1Color;
-		this.player2Color = player2Color;
-		this.playerSymbol = playerSymbol;
-		this.serverPort = serverPort;
-		this.clientIP = clientIP;
-		this.clientPort = clientPort;
-	}
-
-	public GuiStyle getGuiStyle() {
-		return guiStyle;
-	}
-
-	public void setGuiStyle(GuiStyle guiStyle) {
-		this.guiStyle = guiStyle;
-	}
-
-	public GameMode getGameMode() {
-		return gameMode;
-	}
-
-	public void setGameMode(GameMode gameMode) {
-		this.gameMode = gameMode;
-	}
-
-	public AiType getAi1Type() {
-		return ai1Type;
-	}
-
-	public void setAi1Type(AiType ai1Type) {
-		this.ai1Type = ai1Type;
-	}
-
-	public AiType getAi2Type() {
-		return ai2Type;
-	}
-
-	public void setAi2Type(AiType ai2Type) {
-		this.ai2Type = ai2Type;
-	}
-
-	public int getAi1MaxDepth() {
-		return ai1MaxDepth;
-	}
-
-	public void setAi1MaxDepth(int ai1MaxDepth) {
-		this.ai1MaxDepth = ai1MaxDepth;
-	}
-
-	public int getAi2MaxDepth() {
-		return ai2MaxDepth;
-	}
-
-	public void setAi2MaxDepth(int ai2MaxDepth) {
-		this.ai2MaxDepth = ai2MaxDepth;
-	}
-
-	public Color getPlayer1Color() {
-		return player1Color;
-	}
-
-	public void setPlayer1Color(Color player1Color) {
-		this.player1Color = player1Color;
-	}
-
-	public Color getPlayer2Color() {
-		return player2Color;
-	}
-
-	public void setPlayer2Color(Color player2Color) {
-		this.player2Color = player2Color;
-	}
-
-	public int getPlayerSymbol() {
-		return playerSymbol;
-	}
-
-	public void setPlayerSymbol(int playerSymbol) {
-		this.playerSymbol = playerSymbol;
-	}
-
-	public int getServerPort() {
-		return serverPort;
-	}
-
-	public void setServerPort(int serverPort) {
-		this.serverPort = serverPort;
-	}
-
-	public String getClientIP() {
-		return clientIP;
-	}
-
-	public void setClientIP(String clientIP) {
-		this.clientIP = clientIP;
-	}
-
-	public int getClientPort() {
-		return clientPort;
-	}
-
-	public void setClientPort(int clientPort) {
-		this.clientPort = clientPort;
 	}
 
 }

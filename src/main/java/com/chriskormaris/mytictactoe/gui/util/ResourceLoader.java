@@ -1,8 +1,12 @@
 package com.chriskormaris.mytictactoe.gui.util;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
 import java.net.URL;
 
-final public class ResourceLoader {
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ResourceLoader {
 
 	public static URL load(String path) {
 		// InputStream input = ResourceLoader.class.getResourceAsStream(path);

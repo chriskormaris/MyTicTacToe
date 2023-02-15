@@ -1,5 +1,9 @@
 package com.chriskormaris.mytictactoe.api.util;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Constants {
 
 	// Variables for the board values
@@ -12,8 +16,5 @@ public class Constants {
 	public static final String LOCALHOST = "127.0.0.1";
 	public static final int SERVER_PORT = 4000;
 	public static final int CLIENT_PORT = 4001;
-
-	private Constants() {
-	}  // Prevents instantiation.
 
 }

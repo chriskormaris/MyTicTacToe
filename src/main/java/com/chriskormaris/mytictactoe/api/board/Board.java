@@ -1,10 +1,14 @@
 package com.chriskormaris.mytictactoe.api.board;
 
 import com.chriskormaris.mytictactoe.api.util.Constants;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Board {
 
 
@@ -105,40 +109,6 @@ public class Board {
 			System.out.println("*");
 		}
 		System.out.println("*********");
-	}
-
-	public Move getLastMove() {
-		return lastMove;
-	}
-
-	public void setLastMove(Move lastMove) {
-		this.lastMove = new Move(lastMove);
-	}
-
-	public int getLastPlayer() {
-		return lastPlayer;
-	}
-
-	public void setLastPlayer(int lastPlayer) {
-		this.lastPlayer = lastPlayer;
-	}
-
-	public int[][] getGameBoard() {
-		return gameBoard;
-	}
-
-	public void setGameBoard(int[][] gameBoard) {
-		for (int i = 0; i < 3; i++) {
-			System.arraycopy(gameBoard[i], 0, this.gameBoard[i], 0, 3);
-		}
-	}
-
-	public int getWinner() {
-		return winner;
-	}
-
-	public void setWinner(int winner) {
-		this.winner = winner;
 	}
 
 	// Make a move; it places a symbol on the board
@@ -345,10 +315,11 @@ public class Board {
 	}
 
 	public void changeLastSymbolPlayed() {
-		if (this.lastPlayer == Constants.X)
+		if (this.lastPlayer == Constants.X) {
 			this.lastPlayer = Constants.O;
-		else if (this.lastPlayer == Constants.O)
+		} else if (this.lastPlayer == Constants.O) {
 			this.lastPlayer = Constants.X;
+		}
 	}
 
 }

@@ -297,8 +297,12 @@ public class SettingsWindow extends JFrame {
 							.toUpperCase().replace("-", "_").replace(" ", "_"));
 					int ai1MaxDepth = ai1_max_depth_drop_down.getSelectedIndex() + 1;
 					int ai2MaxDepth = ai2_max_depth_drop_down.getSelectedIndex() + 1;
-					com.chriskormaris.mytictactoe.gui.enumeration.Color player1Color = Color.valueOf(player1_color_drop_down.getSelectedItem().toString());
-					com.chriskormaris.mytictactoe.gui.enumeration.Color player2Color = Color.valueOf(player2_color_drop_down.getSelectedItem().toString());
+					com.chriskormaris.mytictactoe.gui.enumeration.Color player1Color = Color.valueOf(
+							player1_color_drop_down.getSelectedItem().toString()
+					);
+					com.chriskormaris.mytictactoe.gui.enumeration.Color player2Color = Color.valueOf(
+							player2_color_drop_down.getSelectedItem().toString()
+					);
 					int playerSymbol = (player_symbol_drop_down.getSelectedIndex()) == 0 ? Constants.X : Constants.O;
 					int serverPort = Integer.parseInt(server_port_text_field.getText());
 					String clientIP = client_ip_text_field.getText();

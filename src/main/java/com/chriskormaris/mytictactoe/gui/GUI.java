@@ -20,6 +20,8 @@ import com.chriskormaris.mytictactoe.gui.util.GameParameters;
 import com.chriskormaris.mytictactoe.gui.util.GuiConstants;
 import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
 import com.chriskormaris.mytictactoe.gui.util.ResourceLoader;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -34,6 +36,7 @@ import java.util.Stack;
 import static com.chriskormaris.mytictactoe.gui.util.GuiConstants.TITLE;
 
 
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class GUI {
 
 	public static GameParameters gameParameters;
