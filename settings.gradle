@@ -1,0 +1,6 @@
+rootProject.name = 'MyTicTacToe'
+
+include 'api'
+include 'gui'
+include 'client-server-gui'
+

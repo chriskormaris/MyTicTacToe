@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.gui.client_server;
 
-import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.api.board.Move;
+import com.chriskormaris.mytictactoe.gui.GUI;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,10 +14,6 @@ public class Client extends Thread {
 	int serverPort;
 	int playerSymbol;
 
-	public Client() {
-
-	}
-
 	public Client(String IP, int port, int playerSymbol) {
 		this.serverIP = IP;
 		this.serverPort = port;
@@ -26,7 +22,6 @@ public class Client extends Thread {
 
 	@Override
 	public void run() {
-
 		Socket requestSocket = null;
 		ObjectOutputStream out = null;
 
@@ -41,8 +36,8 @@ public class Client extends Thread {
 
 			out.writeInt(playerSymbol);
 			out.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		} finally {
 			try {
 				if (out != null) {
@@ -51,8 +46,8 @@ public class Client extends Thread {
 				if (requestSocket != null) {
 					requestSocket.close();
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
 			}
 		}
 	}

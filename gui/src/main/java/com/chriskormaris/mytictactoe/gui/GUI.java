@@ -62,7 +62,7 @@ public class GUI {
 	public static JMenuItem undoItem;
 	public static JMenuItem redoItem;
 
-	// These Stack objects are used for the "Undo" and "Redo" functionalities.
+	// These Stack objects are used for the "undo" and "redo" functionalities.
 	private static Stack<Board> undoBoards;
 	private static Stack<Board> redoBoards;
 
@@ -693,8 +693,12 @@ public class GUI {
 		panel.revalidate();
 		panel.repaint();
 		for (int i = 0; i < 9; i++) {
-			clientServerButtons[i] = new ClientServerButton(i, gameParameters.getClientIP(),
-					gameParameters.getClientPort(), gameParameters.getPlayerSymbol());
+			clientServerButtons[i] = new ClientServerButton(
+					i,
+					gameParameters.getClientIP(),
+					gameParameters.getClientPort(),
+					gameParameters.getPlayerSymbol()
+			);
 			panel.add(clientServerButtons[i]);
 		}
 
