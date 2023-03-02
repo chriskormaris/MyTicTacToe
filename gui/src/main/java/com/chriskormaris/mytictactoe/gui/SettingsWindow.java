@@ -15,18 +15,18 @@ import java.awt.event.ActionListener;
 
 public class SettingsWindow extends JFrame {
 
-	private final JComboBox<String> gui_style_drop_down;
-	private final JComboBox<String> game_mode_drop_down;
-	private final JComboBox<String> ai1_type_drop_down;
-	private final JComboBox<String> ai2_type_drop_down;
-	private final JComboBox<String> ai1_max_depth_drop_down;
-	private final JComboBox<String> ai2_max_depth_drop_down;
-	private final JComboBox<String> player1_color_drop_down;
-	private final JComboBox<String> player2_color_drop_down;
-	private final JComboBox<String> player_symbol_drop_down;
-	private final JTextField server_port_text_field;
-	private final JTextField client_ip_text_field;
-	private final JTextField client_port_text_field;
+	private final JComboBox<String> guiStyleDropDown;
+	private final JComboBox<String> gameModeDropDown;
+	private final JComboBox<String> ai1TypeDropDown;
+	private final JComboBox<String> ai2TypeDropDown;
+	private final JComboBox<String> ai1MaxDepthDropDown;
+	private final JComboBox<String> ai2MaxDepthDropDown;
+	private final JComboBox<String> player1ColorDropDown;
+	private final JComboBox<String> player2ColorDropDown;
+	private final JComboBox<String> playerSymbolDropDown;
+	private final JTextField serverPortTextField;
+	private final JTextField clientIpTextField;
+	private final JTextField clientPortTextField;
 
 	private final JButton apply;
 	private final JButton cancel;
@@ -90,160 +90,160 @@ public class SettingsWindow extends JFrame {
 		add(clientIpLabel);
 		add(clientPortLabel);
 
-		gui_style_drop_down = new JComboBox<>();
-		gui_style_drop_down.addItem("System style");
-		gui_style_drop_down.addItem("Cross-Platform style");
-		gui_style_drop_down.addItem("Nimbus style");
+		guiStyleDropDown = new JComboBox<>();
+		guiStyleDropDown.addItem("System style");
+		guiStyleDropDown.addItem("Cross-Platform style");
+		guiStyleDropDown.addItem("Nimbus style");
 
 		if (selectedGuiStyle == GuiStyle.SYSTEM_STYLE) {
-			gui_style_drop_down.setSelectedIndex(0);
+			guiStyleDropDown.setSelectedIndex(0);
 		} else if (selectedGuiStyle == GuiStyle.CROSS_PLATFORM_STYLE) {
-			gui_style_drop_down.setSelectedIndex(1);
+			guiStyleDropDown.setSelectedIndex(1);
 		} else if (selectedGuiStyle == GuiStyle.NIMBUS_STYLE) {
-			gui_style_drop_down.setSelectedIndex(2);
+			guiStyleDropDown.setSelectedIndex(2);
 		}
 
-		game_mode_drop_down = new JComboBox<>();
-		game_mode_drop_down.addItem("Human Vs AI");
-		game_mode_drop_down.addItem("Human Vs Human");
-		game_mode_drop_down.addItem("AI Vs AI");
-		game_mode_drop_down.addItem("Client-Server");
+		gameModeDropDown = new JComboBox<>();
+		gameModeDropDown.addItem("Human Vs AI");
+		gameModeDropDown.addItem("Human Vs Human");
+		gameModeDropDown.addItem("AI Vs AI");
+		gameModeDropDown.addItem("Client-Server");
 
 		if (selectedMode == GameMode.HUMAN_VS_AI) {
-			game_mode_drop_down.setSelectedIndex(0);
+			gameModeDropDown.setSelectedIndex(0);
 		} else if (selectedMode == GameMode.HUMAN_VS_HUMAN) {
-			game_mode_drop_down.setSelectedIndex(1);
+			gameModeDropDown.setSelectedIndex(1);
 		} else if (selectedMode == GameMode.AI_VS_AI) {
-			game_mode_drop_down.setSelectedIndex(2);
+			gameModeDropDown.setSelectedIndex(2);
 		} else if (selectedMode == GameMode.CLIENT_SERVER) {
-			game_mode_drop_down.setSelectedIndex(3);
+			gameModeDropDown.setSelectedIndex(3);
 		}
 
-		ai1_type_drop_down = new JComboBox<>();
-		ai1_type_drop_down.addItem("Best Response AI");
-		ai1_type_drop_down.addItem("Minimax AI");
-		ai1_type_drop_down.addItem("Random AI");
+		ai1TypeDropDown = new JComboBox<>();
+		ai1TypeDropDown.addItem("Best Response AI");
+		ai1TypeDropDown.addItem("Minimax AI");
+		ai1TypeDropDown.addItem("Random AI");
 
 		if (ai1Type == AiType.BEST_RESPONSE_AI) {
-			ai1_type_drop_down.setSelectedIndex(0);
+			ai1TypeDropDown.setSelectedIndex(0);
 		} else if (ai1Type == AiType.MINIMAX_AI) {
-			ai1_type_drop_down.setSelectedIndex(1);
+			ai1TypeDropDown.setSelectedIndex(1);
 		} else if (ai1Type == AiType.RANDOM_AI) {
-			ai1_type_drop_down.setSelectedIndex(2);
+			ai1TypeDropDown.setSelectedIndex(2);
 		}
 
-		ai2_type_drop_down = new JComboBox<>();
-		ai2_type_drop_down.addItem("Best Response AI");
-		ai2_type_drop_down.addItem("Minimax AI");
-		ai2_type_drop_down.addItem("Random AI");
+		ai2TypeDropDown = new JComboBox<>();
+		ai2TypeDropDown.addItem("Best Response AI");
+		ai2TypeDropDown.addItem("Minimax AI");
+		ai2TypeDropDown.addItem("Random AI");
 
 		if (ai2Type == AiType.BEST_RESPONSE_AI) {
-			ai2_type_drop_down.setSelectedIndex(0);
+			ai2TypeDropDown.setSelectedIndex(0);
 		} else if (ai2Type == AiType.MINIMAX_AI) {
-			ai2_type_drop_down.setSelectedIndex(1);
+			ai2TypeDropDown.setSelectedIndex(1);
 		} else if (ai2Type == AiType.RANDOM_AI) {
-			ai2_type_drop_down.setSelectedIndex(2);
+			ai2TypeDropDown.setSelectedIndex(2);
 		}
 
-		ai1_max_depth_drop_down = new JComboBox<>();
-		ai1_max_depth_drop_down.addItem("1");
-		ai1_max_depth_drop_down.addItem("2");
-		ai1_max_depth_drop_down.addItem("3");
-		ai1_max_depth_drop_down.addItem("4");
-		ai1_max_depth_drop_down.addItem("5");
+		ai1MaxDepthDropDown = new JComboBox<>();
+		ai1MaxDepthDropDown.addItem("1");
+		ai1MaxDepthDropDown.addItem("2");
+		ai1MaxDepthDropDown.addItem("3");
+		ai1MaxDepthDropDown.addItem("4");
+		ai1MaxDepthDropDown.addItem("5");
 
-		ai1_max_depth_drop_down.setSelectedIndex(maxDepth1 - 1);
+		ai1MaxDepthDropDown.setSelectedIndex(maxDepth1 - 1);
 
-		ai2_max_depth_drop_down = new JComboBox<>();
-		ai2_max_depth_drop_down.addItem("1");
-		ai2_max_depth_drop_down.addItem("2");
-		ai2_max_depth_drop_down.addItem("3");
-		ai2_max_depth_drop_down.addItem("4");
-		ai2_max_depth_drop_down.addItem("5");
+		ai2MaxDepthDropDown = new JComboBox<>();
+		ai2MaxDepthDropDown.addItem("1");
+		ai2MaxDepthDropDown.addItem("2");
+		ai2MaxDepthDropDown.addItem("3");
+		ai2MaxDepthDropDown.addItem("4");
+		ai2MaxDepthDropDown.addItem("5");
 
-		ai2_max_depth_drop_down.setSelectedIndex(maxDepth2 - 1);
+		ai2MaxDepthDropDown.setSelectedIndex(maxDepth2 - 1);
 
-		player1_color_drop_down = new JComboBox<>();
-		player1_color_drop_down.addItem(String.valueOf(Color.BLUE));
-		player1_color_drop_down.addItem(String.valueOf(Color.RED));
-		player1_color_drop_down.addItem(String.valueOf(Color.BLACK));
-		player1_color_drop_down.addItem(String.valueOf(Color.GREEN));
-		player1_color_drop_down.addItem(String.valueOf(Color.ORANGE));
-		player1_color_drop_down.addItem(String.valueOf(Color.PURPLE));
-		player1_color_drop_down.addItem(String.valueOf(Color.YELLOW));
+		player1ColorDropDown = new JComboBox<>();
+		player1ColorDropDown.addItem(String.valueOf(Color.BLUE));
+		player1ColorDropDown.addItem(String.valueOf(Color.RED));
+		player1ColorDropDown.addItem(String.valueOf(Color.BLACK));
+		player1ColorDropDown.addItem(String.valueOf(Color.GREEN));
+		player1ColorDropDown.addItem(String.valueOf(Color.ORANGE));
+		player1ColorDropDown.addItem(String.valueOf(Color.PURPLE));
+		player1ColorDropDown.addItem(String.valueOf(Color.YELLOW));
 
 		if (selectedPlayer1Color == Color.BLUE) {
-			player1_color_drop_down.setSelectedIndex(0);
+			player1ColorDropDown.setSelectedIndex(0);
 		} else if (selectedPlayer1Color == Color.RED) {
-			player1_color_drop_down.setSelectedIndex(1);
+			player1ColorDropDown.setSelectedIndex(1);
 		} else if (selectedPlayer1Color == Color.BLACK) {
-			player1_color_drop_down.setSelectedIndex(2);
+			player1ColorDropDown.setSelectedIndex(2);
 		} else if (selectedPlayer1Color == Color.GREEN) {
-			player1_color_drop_down.setSelectedIndex(3);
+			player1ColorDropDown.setSelectedIndex(3);
 		} else if (selectedPlayer1Color == Color.ORANGE) {
-			player1_color_drop_down.setSelectedIndex(4);
+			player1ColorDropDown.setSelectedIndex(4);
 		} else if (selectedPlayer1Color == Color.PURPLE) {
-			player1_color_drop_down.setSelectedIndex(5);
+			player1ColorDropDown.setSelectedIndex(5);
 		} else if (selectedPlayer1Color == Color.YELLOW) {
-			player1_color_drop_down.setSelectedIndex(6);
+			player1ColorDropDown.setSelectedIndex(6);
 		}
 
-		player2_color_drop_down = new JComboBox<>();
-		player2_color_drop_down.addItem(String.valueOf(Color.BLUE));
-		player2_color_drop_down.addItem(String.valueOf(Color.RED));
-		player2_color_drop_down.addItem(String.valueOf(Color.BLACK));
-		player2_color_drop_down.addItem(String.valueOf(Color.GREEN));
-		player2_color_drop_down.addItem(String.valueOf(Color.ORANGE));
-		player2_color_drop_down.addItem(String.valueOf(Color.PURPLE));
-		player2_color_drop_down.addItem(String.valueOf(Color.YELLOW));
+		player2ColorDropDown = new JComboBox<>();
+		player2ColorDropDown.addItem(String.valueOf(Color.BLUE));
+		player2ColorDropDown.addItem(String.valueOf(Color.RED));
+		player2ColorDropDown.addItem(String.valueOf(Color.BLACK));
+		player2ColorDropDown.addItem(String.valueOf(Color.GREEN));
+		player2ColorDropDown.addItem(String.valueOf(Color.ORANGE));
+		player2ColorDropDown.addItem(String.valueOf(Color.PURPLE));
+		player2ColorDropDown.addItem(String.valueOf(Color.YELLOW));
 
 		if (selectedPlayer2Color == Color.BLUE) {
-			player2_color_drop_down.setSelectedIndex(0);
+			player2ColorDropDown.setSelectedIndex(0);
 		} else if (selectedPlayer2Color == Color.RED) {
-			player2_color_drop_down.setSelectedIndex(1);
+			player2ColorDropDown.setSelectedIndex(1);
 		} else if (selectedPlayer2Color == Color.BLACK) {
-			player2_color_drop_down.setSelectedIndex(2);
+			player2ColorDropDown.setSelectedIndex(2);
 		} else if (selectedPlayer2Color == Color.GREEN) {
-			player2_color_drop_down.setSelectedIndex(3);
+			player2ColorDropDown.setSelectedIndex(3);
 		} else if (selectedPlayer2Color == Color.ORANGE) {
-			player2_color_drop_down.setSelectedIndex(4);
+			player2ColorDropDown.setSelectedIndex(4);
 		} else if (selectedPlayer2Color == Color.PURPLE) {
-			player2_color_drop_down.setSelectedIndex(5);
+			player2ColorDropDown.setSelectedIndex(5);
 		} else if (selectedPlayer2Color == Color.YELLOW) {
-			player2_color_drop_down.setSelectedIndex(6);
+			player2ColorDropDown.setSelectedIndex(6);
 		}
 
-		player_symbol_drop_down = new JComboBox<>();
-		player_symbol_drop_down.addItem("X");
-		player_symbol_drop_down.addItem("O");
+		playerSymbolDropDown = new JComboBox<>();
+		playerSymbolDropDown.addItem("X");
+		playerSymbolDropDown.addItem("O");
 
 		if (playerSymbol == Constants.X) {
-			player_symbol_drop_down.setSelectedIndex(0);
+			playerSymbolDropDown.setSelectedIndex(0);
 		} else if (playerSymbol == Constants.O) {
-			player_symbol_drop_down.setSelectedIndex(1);
+			playerSymbolDropDown.setSelectedIndex(1);
 		}
 
-		server_port_text_field = new JTextField();
-		server_port_text_field.setText(serverPort + "");
+		serverPortTextField = new JTextField();
+		serverPortTextField.setText(serverPort + "");
 
-		client_ip_text_field = new JTextField(clientIP);
-		client_ip_text_field.setText(clientIP);
+		clientIpTextField = new JTextField(clientIP);
+		clientIpTextField.setText(clientIP);
 
-		client_port_text_field = new JTextField(clientPort);
-		client_port_text_field.setText(clientPort + "");
+		clientPortTextField = new JTextField(clientPort);
+		clientPortTextField.setText(clientPort + "");
 
-		add(gui_style_drop_down);
-		add(game_mode_drop_down);
-		add(ai1_type_drop_down);
-		add(ai2_type_drop_down);
-		add(ai1_max_depth_drop_down);
-		add(ai2_max_depth_drop_down);
-		add(player1_color_drop_down);
-		add(player2_color_drop_down);
-		add(player_symbol_drop_down);
-		add(server_port_text_field);
-		add(client_ip_text_field);
-		add(client_port_text_field);
+		add(guiStyleDropDown);
+		add(gameModeDropDown);
+		add(ai1TypeDropDown);
+		add(ai2TypeDropDown);
+		add(ai1MaxDepthDropDown);
+		add(ai2MaxDepthDropDown);
+		add(player1ColorDropDown);
+		add(player2ColorDropDown);
+		add(playerSymbolDropDown);
+		add(serverPortTextField);
+		add(clientIpTextField);
+		add(clientPortTextField);
 
 		guiStyleLabel.setBounds(20, 25, 250, 25);
 		gameModeLabel.setBounds(20, 60, 250, 25);
@@ -258,18 +258,18 @@ public class SettingsWindow extends JFrame {
 		clientIpLabel.setBounds(20, 375, 250, 25);
 		clientPortLabel.setBounds(20, 410, 250, 25);
 
-		gui_style_drop_down.setBounds(260, 25, 160, 25);
-		game_mode_drop_down.setBounds(260, 60, 160, 25);
-		ai1_type_drop_down.setBounds(260, 95, 160, 25);
-		ai2_type_drop_down.setBounds(260, 130, 160, 25);
-		ai1_max_depth_drop_down.setBounds(260, 165, 160, 25);
-		ai2_max_depth_drop_down.setBounds(260, 200, 160, 25);
-		player1_color_drop_down.setBounds(260, 235, 160, 25);
-		player2_color_drop_down.setBounds(260, 270, 160, 25);
-		player_symbol_drop_down.setBounds(260, 305, 160, 25);
-		server_port_text_field.setBounds(260, 340, 160, 25);
-		client_ip_text_field.setBounds(260, 375, 160, 25);
-		client_port_text_field.setBounds(260, 410, 160, 25);
+		guiStyleDropDown.setBounds(260, 25, 160, 25);
+		gameModeDropDown.setBounds(260, 60, 160, 25);
+		ai1TypeDropDown.setBounds(260, 95, 160, 25);
+		ai2TypeDropDown.setBounds(260, 130, 160, 25);
+		ai1MaxDepthDropDown.setBounds(260, 165, 160, 25);
+		ai2MaxDepthDropDown.setBounds(260, 200, 160, 25);
+		player1ColorDropDown.setBounds(260, 235, 160, 25);
+		player2ColorDropDown.setBounds(260, 270, 160, 25);
+		playerSymbolDropDown.setBounds(260, 305, 160, 25);
+		serverPortTextField.setBounds(260, 340, 160, 25);
+		clientIpTextField.setBounds(260, 375, 160, 25);
+		clientPortTextField.setBounds(260, 410, 160, 25);
 
 		apply = new JButton("Apply");
 		cancel = new JButton("Cancel");
@@ -292,26 +292,26 @@ public class SettingsWindow extends JFrame {
 				dispose();
 			} else if (ev.getSource() == apply) {
 				try {
-					GuiStyle guiStyle = GuiStyle.valueOf(gui_style_drop_down.getSelectedItem().toString()
+					GuiStyle guiStyle = GuiStyle.valueOf(guiStyleDropDown.getSelectedItem().toString()
 							.toUpperCase().replace("-", "_").replace(" ", "_"));
-					GameMode gameMode = GameMode.valueOf(game_mode_drop_down.getSelectedItem().toString()
+					GameMode gameMode = GameMode.valueOf(gameModeDropDown.getSelectedItem().toString()
 							.toUpperCase().replace("-", "_").replace(" ", "_"));
-					AiType ai1Type = AiType.valueOf(ai1_type_drop_down.getSelectedItem().toString()
+					AiType ai1Type = AiType.valueOf(ai1TypeDropDown.getSelectedItem().toString()
 							.toUpperCase().replace("-", "_").replace(" ", "_"));
-					AiType ai2Type = AiType.valueOf(ai2_type_drop_down.getSelectedItem().toString()
+					AiType ai2Type = AiType.valueOf(ai2TypeDropDown.getSelectedItem().toString()
 							.toUpperCase().replace("-", "_").replace(" ", "_"));
-					int ai1MaxDepth = ai1_max_depth_drop_down.getSelectedIndex() + 1;
-					int ai2MaxDepth = ai2_max_depth_drop_down.getSelectedIndex() + 1;
+					int ai1MaxDepth = ai1MaxDepthDropDown.getSelectedIndex() + 1;
+					int ai2MaxDepth = ai2MaxDepthDropDown.getSelectedIndex() + 1;
 					com.chriskormaris.mytictactoe.gui.enumeration.Color player1Color = Color.valueOf(
-							player1_color_drop_down.getSelectedItem().toString()
+							player1ColorDropDown.getSelectedItem().toString()
 					);
 					com.chriskormaris.mytictactoe.gui.enumeration.Color player2Color = Color.valueOf(
-							player2_color_drop_down.getSelectedItem().toString()
+							player2ColorDropDown.getSelectedItem().toString()
 					);
-					int playerSymbol = (player_symbol_drop_down.getSelectedIndex()) == 0 ? Constants.X : Constants.O;
-					int serverPort = Integer.parseInt(server_port_text_field.getText());
-					String clientIP = client_ip_text_field.getText();
-					int clientPort = Integer.parseInt(client_port_text_field.getText());
+					int playerSymbol = (playerSymbolDropDown.getSelectedIndex()) == 0 ? Constants.X : Constants.O;
+					int serverPort = Integer.parseInt(serverPortTextField.getText());
+					String clientIP = clientIpTextField.getText();
+					int clientPort = Integer.parseInt(clientPortTextField.getText());
 
 					if (player1Color == player2Color) {
 						JOptionPane.showMessageDialog(
