@@ -6,8 +6,6 @@ import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
 import com.chriskormaris.mytictactoe.gui.util.GameParameters;
-import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
-import com.chriskormaris.mytictactoe.gui.util.ResourceLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,12 +27,19 @@ public class SettingsWindow extends JFrame {
 	private final JTextField server_port_text_field;
 	private final JTextField client_ip_text_field;
 	private final JTextField client_port_text_field;
+
 	private final JButton apply;
 	private final JButton cancel;
 
 
-	public SettingsWindow(Component parentComponent) {
+	private final Component parentComponent;
+	private final GameParameters newGameParameters;
+
+	public SettingsWindow(Component parentComponent, GameParameters gameParameters, GameParameters newGameParameters) {
 		super("Settings");
+
+		this.parentComponent = parentComponent;
+		this.newGameParameters = newGameParameters;
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(null);
@@ -46,18 +51,18 @@ public class SettingsWindow extends JFrame {
 
 		EventHandler handler = new EventHandler();
 
-		GuiStyle selectedGuiStyle = GUI.gameParameters.getGuiStyle();
-		GameMode selectedMode = GUI.gameParameters.getGameMode();
-		AiType ai1Type = GUI.gameParameters.getAi1Type();
-		AiType ai2Type = GUI.gameParameters.getAi2Type();
-		int maxDepth1 = GUI.gameParameters.getAi1MaxDepth();
-		int maxDepth2 = GUI.gameParameters.getAi2MaxDepth();
-		com.chriskormaris.mytictactoe.gui.enumeration.Color selectedPlayer1Color = GUI.gameParameters.getPlayer1Color();
-		com.chriskormaris.mytictactoe.gui.enumeration.Color selectedPlayer2Color = GUI.gameParameters.getPlayer2Color();
-		int playerSymbol = GUI.gameParameters.getPlayerSymbol();
-		int serverPort = GUI.gameParameters.getServerPort();
-		String clientIP = GUI.gameParameters.getClientIP();
-		int clientPort = GUI.gameParameters.getClientPort();
+		GuiStyle selectedGuiStyle = gameParameters.getGuiStyle();
+		GameMode selectedMode = gameParameters.getGameMode();
+		AiType ai1Type = gameParameters.getAi1Type();
+		AiType ai2Type = gameParameters.getAi2Type();
+		int maxDepth1 = gameParameters.getAi1MaxDepth();
+		int maxDepth2 = gameParameters.getAi2MaxDepth();
+		Color selectedPlayer1Color = gameParameters.getPlayer1Color();
+		Color selectedPlayer2Color = gameParameters.getPlayer2Color();
+		int playerSymbol = gameParameters.getPlayerSymbol();
+		int serverPort = gameParameters.getServerPort();
+		String clientIP = gameParameters.getClientIP();
+		int clientPort = gameParameters.getClientPort();
 
 		JLabel guiStyleLabel = new JLabel("GUI style");
 		JLabel gameModeLabel = new JLabel("Game mode");
@@ -309,39 +314,31 @@ public class SettingsWindow extends JFrame {
 					int clientPort = Integer.parseInt(client_port_text_field.getText());
 
 					if (player1Color == player2Color) {
-						JOptionPane.showMessageDialog(null,
+						JOptionPane.showMessageDialog(
+								parentComponent,
 								"Player 1 and Player 2 cannot have the same color of symbols!",
-								"ERROR", JOptionPane.ERROR_MESSAGE);
+								"ERROR",
+								JOptionPane.ERROR_MESSAGE
+						);
 						return;
 					}
 
 					// Change game parameters based on the settings.
-					GUI.newGameParameters = new GameParameters(
-							guiStyle,
-							gameMode,
-							ai1Type,
-							ai2Type,
-							ai1MaxDepth,
-							ai2MaxDepth,
-							player1Color,
-							player2Color,
-							playerSymbol,
-							serverPort,
-							clientIP,
-							clientPort
-					);
-
-					GUI.XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-							Constants.X,
-							player1Color
-					)));
-					GUI.OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-							Constants.O,
-							player2Color
-					)));
+					newGameParameters.setGuiStyle(guiStyle);
+					newGameParameters.setGameMode(gameMode);
+					newGameParameters.setAi1Type(ai1Type);
+					newGameParameters.setAi2Type(ai2Type);
+					newGameParameters.setAi1MaxDepth(ai1MaxDepth);
+					newGameParameters.setAi2MaxDepth(ai2MaxDepth);
+					newGameParameters.setPlayer1Color(player1Color);
+					newGameParameters.setPlayer2Color(player2Color);
+					newGameParameters.setPlayerSymbol(playerSymbol);
+					newGameParameters.setServerPort(serverPort);
+					newGameParameters.setClientIP(clientIP);
+					newGameParameters.setClientPort(clientPort);
 
 					JOptionPane.showMessageDialog(
-							null,
+							parentComponent,
 							"Game settings have been changed.\n" +
 									"The changes will be applied in the next new game.",
 							"",

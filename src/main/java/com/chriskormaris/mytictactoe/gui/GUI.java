@@ -206,6 +206,15 @@ public class GUI {
 		newGameItem.addActionListener(e -> {
 			gameParameters = new GameParameters(newGameParameters);
 
+			XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+					Constants.X,
+					gameParameters.getPlayer1Color()
+			)));
+			OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+					Constants.O,
+					gameParameters.getPlayer2Color()
+			)));
+
 			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
 				createHumanVsAiNewGame();
 			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
@@ -230,7 +239,7 @@ public class GUI {
 		redoItem.addActionListener(e -> redo());
 
 		settingsItem.addActionListener(e -> {
-			SettingsWindow settings = new SettingsWindow(frame);
+			SettingsWindow settings = new SettingsWindow(frame, gameParameters, newGameParameters);
 			settings.setVisible(true);
 		});
 
