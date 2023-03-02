@@ -55,8 +55,8 @@ public class SettingsWindow extends JFrame {
 		GameMode selectedMode = gameParameters.getGameMode();
 		AiType ai1Type = gameParameters.getAi1Type();
 		AiType ai2Type = gameParameters.getAi2Type();
-		int maxDepth1 = gameParameters.getAi1MaxDepth();
-		int maxDepth2 = gameParameters.getAi2MaxDepth();
+		int ai1MaxDepth = gameParameters.getAi1MaxDepth();
+		int ai2MaxDepth = gameParameters.getAi2MaxDepth();
 		Color selectedPlayer1Color = gameParameters.getPlayer1Color();
 		Color selectedPlayer2Color = gameParameters.getPlayer2Color();
 		int playerSymbol = gameParameters.getPlayerSymbol();
@@ -152,7 +152,7 @@ public class SettingsWindow extends JFrame {
 		ai1MaxDepthDropDown.addItem("4");
 		ai1MaxDepthDropDown.addItem("5");
 
-		ai1MaxDepthDropDown.setSelectedIndex(maxDepth1 - 1);
+		ai1MaxDepthDropDown.setSelectedIndex(ai1MaxDepth - 1);
 
 		ai2MaxDepthDropDown = new JComboBox<>();
 		ai2MaxDepthDropDown.addItem("1");
@@ -161,7 +161,7 @@ public class SettingsWindow extends JFrame {
 		ai2MaxDepthDropDown.addItem("4");
 		ai2MaxDepthDropDown.addItem("5");
 
-		ai2MaxDepthDropDown.setSelectedIndex(maxDepth2 - 1);
+		ai2MaxDepthDropDown.setSelectedIndex(ai2MaxDepth - 1);
 
 		player1ColorDropDown = new JComboBox<>();
 		player1ColorDropDown.addItem(String.valueOf(Color.BLUE));
