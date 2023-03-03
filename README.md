@@ -23,6 +23,6 @@ Video for this project:
 ![screenshot](/screenshots/3_nimbus_style.png)
 
 
-### Citation
+### References
 The GUI of the Java Swing application was inspired from this coding video:
 - https://www.youtube.com/watch?v=Db3cC5iPrOM
