@@ -46,8 +46,7 @@ public class BestResponseAI extends AI {
 		 * |- - -|
 		 * |- - -|
 		 * |- - -| */
-		if (getAiPlayer() == Constants.X
-				&& Board.isGameBoardEmpty(gameBoard)) {
+		if (getAiPlayer() == Constants.X && Board.isGameBoardEmpty(gameBoard)) {
 			/* |- - -|
 			 * |- X -|
 			 * |- - -| */
