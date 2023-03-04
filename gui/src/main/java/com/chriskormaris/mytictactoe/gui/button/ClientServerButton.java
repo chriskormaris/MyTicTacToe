@@ -78,8 +78,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 		}
 		try {
 			this.removeActionListener(this);
-		} catch (NullPointerException ex) {
-			// Do nothing
+		} catch (NullPointerException ignored) {
 		}
 		GUI.clientServerButtons[id] = this;
 	}

@@ -86,8 +86,7 @@ public class HumanVsAiButton extends XOButton {
 		} else {
 			try {
 				this.removeActionListener(this);
-			} catch (NullPointerException ex) {
-				// Do nothing
+			} catch (NullPointerException ignored) {
 			}
 		}
 

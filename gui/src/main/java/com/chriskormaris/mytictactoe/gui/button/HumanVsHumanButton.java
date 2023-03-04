@@ -52,8 +52,7 @@ public class HumanVsHumanButton extends XOButton {
 
 		try {
 			this.removeActionListener(this);
-		} catch (NullPointerException ex) {
-			// Do nothing
+		} catch (NullPointerException ignored) {
 		}
 
 	}
