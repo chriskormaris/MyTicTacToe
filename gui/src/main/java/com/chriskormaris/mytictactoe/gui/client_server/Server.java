@@ -1,8 +1,8 @@
 package com.chriskormaris.mytictactoe.gui.client_server;
 
-import com.chriskormaris.mytictactoe.api.board.Move;
 import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.gui.button.ClientServerButton;
+import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -33,13 +33,13 @@ public class Server extends Thread {
 			serverSocket = new ServerSocket(serverPort);
 
 			while (true) {
-
 				connection = serverSocket.accept();
 				System.out.println("Server accepted connection!");
 				in = new ObjectInputStream(connection.getInputStream());
 
-				Move lastMove = (Move) in.readObject();
-				int id = GUI.getIdByBoardCell(lastMove.getRow(), lastMove.getColumn());
+				int lastMoveRow = in.readInt();
+				int lastMoveColumn = in.readInt();
+				int id = GuiUtils.getIdByBoardCell(lastMoveRow, lastMoveColumn);
 				// System.out.println(id);
 
 				int opposingPlayerSymbol = in.readInt();
@@ -61,7 +61,7 @@ public class Server extends Thread {
 				}
 			}
 
-		} catch (IOException | ClassNotFoundException ex) {
+		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {
 			try {

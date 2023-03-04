@@ -5,6 +5,7 @@ import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.board.Move;
 import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.GUI;
+import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
@@ -50,8 +51,7 @@ public class HumanVsAiButton extends XOButton {
 		} else {
 			try {
 				this.removeActionListener(this);
-			} catch (NullPointerException ex) {
-				// Do nothing
+			} catch (NullPointerException ignored) {
 			}
 		}
 
@@ -64,7 +64,7 @@ public class HumanVsAiButton extends XOButton {
 		GUI.makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
 		// System.out.println("board value: " + TicTacToeGUI.board.evaluate());
 
-		int aiMoveButtonId = GUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
+		int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 		// System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");
 
 		for (HumanVsAiButton button : GUI.humanVsAiButtons) {

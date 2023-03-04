@@ -19,4 +19,8 @@ public class GuiUtils {
 		return null;
 	}
 
+	public static int getIdByBoardCell(int row, int col) {
+		return row * 3 + col;
+	}
+
 }

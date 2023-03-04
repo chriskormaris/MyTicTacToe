@@ -31,7 +31,10 @@ public class Client extends Thread {
 			out = new ObjectOutputStream(requestSocket.getOutputStream());
 
 			Move lastMove = GUI.board.getLastMove();
-			out.writeObject(lastMove);
+			out.writeInt(lastMove.getRow());
+			out.flush();
+
+			out.writeInt(lastMove.getColumn());
 			out.flush();
 
 			out.writeInt(playerSymbol);

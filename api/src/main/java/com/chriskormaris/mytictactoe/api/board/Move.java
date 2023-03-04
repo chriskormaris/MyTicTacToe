@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serializable;
-
 /* A class describing a move in the board
  * Every produced child corresponds to a move,
  * and we need to keep the moves as well as the states.
@@ -13,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class Move implements Serializable {
+public class Move {
 
 	private int row;
 	private int column;

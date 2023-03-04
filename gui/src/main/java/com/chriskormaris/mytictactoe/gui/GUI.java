@@ -502,10 +502,6 @@ public class GUI {
 		return cell;
 	}
 
-	public static int getIdByBoardCell(int row, int col) {
-		return row * 3 + col;
-	}
-
 	public static void createHumanVsAiNewGame() {
 		configureGuiStyle();
 
@@ -556,7 +552,7 @@ public class GUI {
 			Move aiMove = ai.getNextMove(board);
 			makeMove(aiMove.getRow(), aiMove.getColumn(), Constants.X);
 
-			int aiMoveButtonId = GUI.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
+			int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 			// System.out.print("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: ");
 			// System.out.println(aiMove.getValue());
 
@@ -712,7 +708,7 @@ public class GUI {
 
 		makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
 
-		int ai_button_id = getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
+		int ai_button_id = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 		for (AiVsAiButton button : aiVsAiButtons) {
 			if (button.id == ai_button_id) {
 				button.aiPlayer = ai.getAiPlayer();
