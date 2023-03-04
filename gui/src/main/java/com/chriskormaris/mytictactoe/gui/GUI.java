@@ -764,6 +764,8 @@ public class GUI {
 		} else if (Board.isGameBoardFull(board.getGameBoard()) && board.getWinner() == Constants.EMPTY) {
 			System.out.println("It is a draw!");
 			message = "It is a draw!\nPlay again?";
+		} else {
+			return;
 		}
 		int input = JOptionPane.showConfirmDialog(frame, message, "Game Over", JOptionPane.YES_NO_OPTION);
 		if (input == JOptionPane.OK_OPTION) {
