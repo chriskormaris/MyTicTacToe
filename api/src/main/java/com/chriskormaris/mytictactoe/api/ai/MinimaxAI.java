@@ -18,8 +18,8 @@ public class MinimaxAI extends AI {
 		maxDepth = 3;
 	}
 
-	public MinimaxAI(int maxDepth, int playerLetter) {
-		super(playerLetter);
+	public MinimaxAI(int maxDepth, int playerSymbol) {
+		super(playerSymbol);
 		this.maxDepth = maxDepth;
 	}
 

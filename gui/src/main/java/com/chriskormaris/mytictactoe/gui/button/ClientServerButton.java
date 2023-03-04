@@ -18,7 +18,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 	String serverIP;
 	int serverPort;
 	Client client;
-	int playerLetter;
+	int playerSymbol;
 
 
 	public ClientServerButton(int id, String serverIP, int serverPort, int playerSymbol) {
@@ -29,7 +29,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 		this.serverIP = serverIP;
 		this.serverPort = serverPort;
 		this.client = new Client(serverIP, serverPort, playerSymbol);
-		this.playerLetter = playerSymbol;
+		this.playerSymbol = playerSymbol;
 	}
 
 
@@ -44,7 +44,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 			turn = Constants.X;
 		}
 
-		if (turn != playerLetter) {
+		if (turn != playerSymbol) {
 			return;
 		}
 
@@ -68,7 +68,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 		Board.printBoard(GUI.board.getGameBoard());
 
 		if (!programmaticallyPressed) {
-			this.client = new Client(serverIP, serverPort, playerLetter);
+			this.client = new Client(serverIP, serverPort, playerSymbol);
 			this.client.start();
 
 			// check if the game is over
