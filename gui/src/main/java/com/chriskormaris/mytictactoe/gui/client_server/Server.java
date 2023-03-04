@@ -40,10 +40,10 @@ public class Server extends Thread {
 
 				int lastMoveRow = in.readInt();
 				int lastMoveColumn = in.readInt();
+				int opposingPlayerSymbol = in.readInt();
+
 				int id = GuiUtils.getIdByBoardCell(lastMoveRow, lastMoveColumn);
 				// System.out.println(id);
-
-				int opposingPlayerSymbol = in.readInt();
 
 				GUI.board.setLastPlayer(opposingPlayerSymbol);
 
