@@ -28,8 +28,9 @@ public class Server extends Thread {
 		Socket connection = null;
 		ObjectInputStream in = null;
 		try {
-			System.out.println("Server thread with id " + this.getId() +
-					": Server listening at port: " + serverPort + "...");
+			System.out.println(
+					"Server thread with id " + this.getId() + ": Server listening at port: " + serverPort + "..."
+			);
 			serverSocket = new ServerSocket(serverPort);
 
 			while (true) {
