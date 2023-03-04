@@ -61,8 +61,8 @@ public class Server extends Thread {
 				}
 			}
 
-		} catch (IOException | ClassNotFoundException e) {
-			e.printStackTrace();
+		} catch (IOException | ClassNotFoundException ex) {
+			ex.printStackTrace();
 		} finally {
 			try {
 				if (in != null) {
@@ -74,8 +74,8 @@ public class Server extends Thread {
 				if (serverSocket != null) {
 					serverSocket.close();
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException ex) {
+				ex.printStackTrace();
 			}
 		}
 		GUI.gameOver();

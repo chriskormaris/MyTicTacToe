@@ -345,8 +345,8 @@ public class SettingsWindow extends JFrame {
 							JOptionPane.INFORMATION_MESSAGE
 					);
 					dispose();
-				} catch (Exception e) {
-					System.err.println("ERROR : " + e.getMessage());
+				} catch (Exception ex) {
+					System.err.println("ERROR : " + ex.getMessage());
 				}
 
 			}  // else if.
