@@ -29,10 +29,10 @@ public class BestResponseAI extends AI {
 	public Move getNextMove(Board board) {
 		int[][] gameBoard = board.getGameBoard();
 
-		int number_of_empty_cells = Board.getNumberOfEmptyCells(gameBoard);
-		// System.out.println("number of empty cells: " + number_of_empty_cells);
+		int numberOfEmptyCells = Board.getNumberOfEmptyCells(gameBoard);
+		// System.out.println("number of empty cells: " + numberOfEmptyCells);
 
-		if (number_of_empty_cells == 0) {
+		if (numberOfEmptyCells == 0) {
 			return null;
 		}
 
@@ -72,7 +72,7 @@ public class BestResponseAI extends AI {
 				|| gameBoard[0][2] == Constants.X || gameBoard[1][0] == Constants.X
 				|| gameBoard[1][2] == Constants.X || gameBoard[2][0] == Constants.X
 				|| gameBoard[2][1] == Constants.X || gameBoard[2][2] == Constants.X))
-				&& gameBoard[1][1] == Constants.EMPTY && number_of_empty_cells == 8) {
+				&& gameBoard[1][1] == Constants.EMPTY && numberOfEmptyCells == 8) {
 			/* |X - -| |- X -| |- - X| |- - -|
 			 * |- O -| |- O -| |- O -| |X O -|
 			 * |- - -| |- - -| |- - -| |- - -|
@@ -89,23 +89,22 @@ public class BestResponseAI extends AI {
 		/* |- - -|
 		 * |- X -|
 		 * |- - -| */
-		if (getAiPlayer() == Constants.O
-				&& gameBoard[1][1] == Constants.X && number_of_empty_cells == 8) {
+		if (getAiPlayer() == Constants.O && gameBoard[1][1] == Constants.X && numberOfEmptyCells == 8) {
 			/* |O - -| |- - O| |- - -| |- - -|
 			 * |- X -| |- X -| |- X -| |- X -|
 			 * |- - -| |- - -| |O - -| |- - O| */
 			// System.out.println("INSIDE CASE 10");
-			int random_number = r.nextInt(4);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(4);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.O);
 			}
-			if (random_number == 2) {
+			if (randomNumber == 2) {
 				return new Move(2, 0, Constants.O);
 			}
-			if (random_number == 3) {
+			if (randomNumber == 3) {
 				return new Move(2, 2, Constants.O);
 			}
 		}
@@ -123,22 +122,22 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[1][0] == Constants.O && gameBoard[1][1] == Constants.X)
 				|| (gameBoard[1][2] == Constants.O && gameBoard[1][1] == Constants.X)
 				|| (gameBoard[2][1] == Constants.O && gameBoard[1][1] == Constants.X))
-				&& number_of_empty_cells == 7) {
+				&& numberOfEmptyCells == 7) {
 			/* |X O -| |- - X| |- - -| |- - -|
 			 * |- X -| |O X -| |- X O| |- X -|
 			 * |- - -| |- - -| |X - -| |- O X| */
 			// System.out.println("INSIDE CASE 11-14");
-			int random_number = r.nextInt(4);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(4);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.X);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.X);
 			}
-			if (random_number == 2) {
+			if (randomNumber == 2) {
 				return new Move(2, 0, Constants.X);
 			}
-			if (random_number == 3) {
+			if (randomNumber == 3) {
 				return new Move(2, 2, Constants.X);
 			}
 		}
@@ -151,19 +150,19 @@ public class BestResponseAI extends AI {
 		 * */
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[0][0] == Constants.O && gameBoard[1][1] == Constants.X)
-				&& number_of_empty_cells == 7) {
+				&& numberOfEmptyCells == 7) {
 			/* |O - X| |O - -| |O - -|
 			 * |- X -| |X X -| |- X -|
 			 * |- - -| |- - -| |- - X| */
 			// System.out.println("INSIDE CASE 15");
-			int random_number = r.nextInt(3);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(3);
+			if (randomNumber == 0) {
 				return new Move(0, 2, Constants.X);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 0, Constants.X);
 			}
-			if (random_number == 2) {
+			if (randomNumber == 2) {
 				return new Move(2, 2, Constants.X);
 			}
 		}
@@ -175,19 +174,19 @@ public class BestResponseAI extends AI {
 		 * |- - -| */
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[0][2] == Constants.O && gameBoard[1][1] == Constants.X)
-				&& number_of_empty_cells == 7) {
+				&& numberOfEmptyCells == 7) {
 			/* |X - O| |- - O| |- - O|
 			 * |- X -| |- X -| |- X -|
 			 * |- - -| |X - -| |- - X| */
 			// System.out.println("INSIDE CASE 16");
-			int random_number = r.nextInt(3);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(3);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.X);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 0, Constants.X);
 			}
-			if (random_number == 2) {
+			if (randomNumber == 2) {
 				return new Move(2, 2, Constants.X);
 			}
 		}
@@ -199,19 +198,19 @@ public class BestResponseAI extends AI {
 		 * |O - -| */
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[2][0] == Constants.O && gameBoard[1][1] == Constants.X)
-				&& number_of_empty_cells == 7) {
+				&& numberOfEmptyCells == 7) {
 			/* |X - -| |- - X| |- - -|
 			 * |- X -| |- X -| |- X -|
 			 * |O - -| |O - -| |O - X| */
 			// System.out.println("INSIDE CASE 17");
-			int random_number = r.nextInt(3);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(3);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.X);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.X);
 			}
-			if (random_number == 2) {
+			if (randomNumber == 2) {
 				return new Move(2, 2, Constants.X);
 			}
 		}
@@ -223,19 +222,19 @@ public class BestResponseAI extends AI {
 		 * |- - O| */
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[2][2] == Constants.O && gameBoard[1][1] == Constants.X)
-				&& number_of_empty_cells == 7) {
+				&& numberOfEmptyCells == 7) {
 			/* |X - -| |- - X| |- - -|
 			 * |- X -| |- X -| |- X -|
 			 * |- - O| |- - O| |X - O| */
 			// System.out.println("INSIDE CASE 18");
-			int random_number = r.nextInt(3);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(3);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.X);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.X);
 			}
-			if (random_number == 2) {
+			if (randomNumber == 2) {
 				return new Move(2, 0, Constants.X);
 			}
 		}
@@ -243,7 +242,7 @@ public class BestResponseAI extends AI {
 
 		/* Number of Empty Cells: 6 */
 
-		Move bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 6);
+		Move bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 6);
 		if (bestResponseMove != null) return bestResponseMove;
 
 		/* Given boards:
@@ -256,16 +255,16 @@ public class BestResponseAI extends AI {
 				||
 				(gameBoard[2][2] == Constants.X && gameBoard[1][1] == Constants.X
 						&& gameBoard[0][0] == Constants.O))
-				&& number_of_empty_cells == 6) {
+				&& numberOfEmptyCells == 6) {
 			/* |X - O| |X - -|   |O - O| |O - -|
 			 * |- X -| |- X -| - |- X -| |- X -|
 			 * |- - O| |O - O|   |- - X| |O - X| */
 			// System.out.println("INSIDE CASE C1-C2");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 2, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 0, Constants.O);
 			}
 		}
@@ -277,16 +276,16 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[0][1] == Constants.X && gameBoard[1][1] == Constants.X
 				&& gameBoard[2][0] == Constants.O)
-				&& number_of_empty_cells == 6) {
+				&& numberOfEmptyCells == 6) {
 			/* |- X -| |- X -|
 			 * |- X -| |- X -|
 			 * |O O -| |- O O| */
 			// System.out.println("INSIDE CASE C3");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(2, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 2, Constants.O);
 			}
 		}
@@ -298,16 +297,16 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
 				&& gameBoard[1][2] == Constants.O)
-				&& number_of_empty_cells == 6) {
+				&& numberOfEmptyCells == 6) {
 			/* |- - O| |- - -|
 			 * |X X O| |X X O|
 			 * |- - -| |- - O| */
 			// System.out.println("INSIDE CASE C4");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 2, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 2, Constants.O);
 			}
 		}
@@ -320,16 +319,16 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
 				&& gameBoard[1][2] == Constants.O)
-				&& number_of_empty_cells == 6) {
+				&& numberOfEmptyCells == 6) {
 			/* |O - -| |- - -|
 			 * |O X X| |O X X|
 			 * |- - -| |O - -| */
 			// System.out.println("INSIDE CASE C5");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 0, Constants.O);
 			}
 		}
@@ -344,16 +343,16 @@ public class BestResponseAI extends AI {
 				||
 				(gameBoard[2][0] == Constants.X && gameBoard[1][1] == Constants.X
 						&& gameBoard[0][2] == Constants.O))
-				&& number_of_empty_cells == 6) {
+				&& numberOfEmptyCells == 6) {
 			/* |O - X| |- - X|   |O - O| |- - O|
 			 * |- X -| |- X -| - |- X -| |- X -|
 			 * |O - -| |O - O|   |X - -| |X - O| */
 			// System.out.println("INSIDE CASE C6-C7");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 2, Constants.O);
 			}
 		}
@@ -366,16 +365,16 @@ public class BestResponseAI extends AI {
 				&& (gameBoard[0][1] == Constants.X
 				&& gameBoard[1][1] == Constants.X
 				&& gameBoard[2][0] == Constants.O)
-				&& number_of_empty_cells == 6) {
+				&& numberOfEmptyCells == 6) {
 			/* |O O -| |- O O|
 			 * |- X -| |- X -|
 			 * |- X -| |- X -| */
 			// System.out.println("INSIDE CASE C8");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.O);
 			}
 		}
@@ -383,7 +382,7 @@ public class BestResponseAI extends AI {
 
 		/* Number of Empty Cells: 5 */
 
-		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 5);
+		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 5);
 		if (bestResponseMove != null) return bestResponseMove;
 
 		/* Non-winning and non-losing case, that suggests the move [0][0] (for 5 empty cells). */
@@ -393,7 +392,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X
 				&& gameBoard[1][2] == Constants.O && gameBoard[2][1] == Constants.O)
-				&& number_of_empty_cells == 5) {
+				&& numberOfEmptyCells == 5) {
 			/* |X X -|
 			 * |X - O|
 			 * |- O -| */
@@ -408,7 +407,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
 				&& gameBoard[1][0] == Constants.O && gameBoard[2][1] == Constants.O)
-				&& number_of_empty_cells == 5) {
+				&& numberOfEmptyCells == 5) {
 			/* |- X X|
 			 * |O - X|
 			 * |- O -| */
@@ -423,7 +422,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X
 				&& gameBoard[1][0] == Constants.X && gameBoard[2][1] == Constants.O)
-				&& number_of_empty_cells == 5) {
+				&& numberOfEmptyCells == 5) {
 			/* |- O -|
 			 * |X - O|
 			 * |X X -| */
@@ -438,7 +437,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.X
 				&& (gameBoard[0][2] == Constants.X && gameBoard[2][1] == Constants.X
 				&& gameBoard[0][1] == Constants.O && gameBoard[1][0] == Constants.O)
-				&& number_of_empty_cells == 5) {
+				&& numberOfEmptyCells == 5) {
 			/* |- O -|
 			 * |O - X|
 			 * |- X X| */
@@ -448,7 +447,7 @@ public class BestResponseAI extends AI {
 
 
 		/* Number of Empty Cells: 4 */
-		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 4);
+		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 4);
 		if (bestResponseMove != null) return bestResponseMove;
 
 		/* Non-winning and non-losing case, that suggests the move [2][2] (for 4 empty cells). */
@@ -458,7 +457,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
 				&& gameBoard[1][2] == Constants.O && gameBoard[2][1] == Constants.O)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |- X -|
 			 * |X X O|
 			 * |- O O| */
@@ -473,7 +472,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[0][1] == Constants.X && gameBoard[1][2] == Constants.X && gameBoard[1][1] == Constants.X
 				&& gameBoard[1][0] == Constants.O && gameBoard[2][1] == Constants.O)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |- X -|
 			 * |O X X|
 			 * |O O -| */
@@ -488,7 +487,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[0][1] == Constants.O && gameBoard[1][2] == Constants.O && gameBoard[1][1] == Constants.X
 				&& gameBoard[1][0] == Constants.X && gameBoard[2][1] == Constants.X)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |- O O|
 			 * |X X O|
 			 * |- X -| */
@@ -503,7 +502,7 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.X && gameBoard[1][2] == Constants.X
 				&& gameBoard[0][1] == Constants.O && gameBoard[1][0] == Constants.O)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |O O -|
 			 * |O X X|
 			 * |- X -| */
@@ -518,16 +517,16 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.X
 				&& gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.O)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |- X O| |- X -|
 			 * |O O X| |O O X|
 			 * |- X -| |- X O| */
 			// System.out.println("INSIDE CASE B5");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 2, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 2, Constants.O);
 			}
 		}
@@ -539,16 +538,16 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.O
 				&& gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |O X -| |- X -|
 			 * |X O O| |X O O|
 			 * |- X -| |O X -| */
 			// System.out.println("INSIDE CASE B6");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 0, Constants.O);
 			}
 		}
@@ -560,16 +559,16 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[2][1] == Constants.O && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.X
 				&& gameBoard[0][1] == Constants.X && gameBoard[1][0] == Constants.X)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |O X -| |- X O|
 			 * |X O X| |X O X|
 			 * |- O -| |- O -| */
 			// System.out.println("INSIDE CASE B5");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.O);
 			}
 		}
@@ -581,33 +580,33 @@ public class BestResponseAI extends AI {
 		if (getAiPlayer() == Constants.O
 				&& (gameBoard[2][1] == Constants.X && gameBoard[1][1] == Constants.O && gameBoard[1][2] == Constants.X
 				&& gameBoard[0][1] == Constants.O && gameBoard[1][0] == Constants.X)
-				&& number_of_empty_cells == 4) {
+				&& numberOfEmptyCells == 4) {
 			/* |- O -| |- O -|
 			 * |X O X| |X O X|
 			 * |O X -| |- X O| */
 			// System.out.println("INSIDE CASE B6");
-			int random_number = r.nextInt(2);
-			if (random_number == 0) {
+			int randomNumber = r.nextInt(2);
+			if (randomNumber == 0) {
 				return new Move(2, 0, Constants.O);
 			}
-			if (random_number == 1) {
+			if (randomNumber == 1) {
 				return new Move(2, 2, Constants.O);
 			}
 		}
 
 
 		/* Number of Empty Cells: 3 */
-		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 3);
+		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 3);
 		if (bestResponseMove != null) return bestResponseMove;
 
 
 		/* Number of Empty Cells: 2 */
-		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 2);
+		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 2);
 		if (bestResponseMove != null) return bestResponseMove;
 
 
 		/* Number of Empty Cells: 1 */
-		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, number_of_empty_cells, 1);
+		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 1);
 		if (bestResponseMove != null) return bestResponseMove;
 
 
@@ -627,16 +626,16 @@ public class BestResponseAI extends AI {
 
 
 		if (emptyCells.size() > 0) {
-			int random_number = r.nextInt(emptyCells.size()) + 1;
+			int randomNumber = r.nextInt(emptyCells.size()) + 1;
 			if (getAiPlayer() == Constants.X
-					&& number_of_empty_cells % 2 == 1) {
-				return new Move(emptyCells.get(random_number - 1).get(0),
-						emptyCells.get(random_number - 1).get(1),
+					&& numberOfEmptyCells % 2 == 1) {
+				return new Move(emptyCells.get(randomNumber - 1).get(0),
+						emptyCells.get(randomNumber - 1).get(1),
 						Constants.X);
 			} else if (getAiPlayer() == Constants.O
-					&& number_of_empty_cells % 2 == 0) {
-				return new Move(emptyCells.get(random_number - 1).get(0),
-						emptyCells.get(random_number - 1).get(1),
+					&& numberOfEmptyCells % 2 == 0) {
+				return new Move(emptyCells.get(randomNumber - 1).get(0),
+						emptyCells.get(randomNumber - 1).get(1),
 						Constants.O);
 			}
 		}
@@ -645,11 +644,11 @@ public class BestResponseAI extends AI {
 	}
 
 
-	private Move casesThatSuggestWinOrNoLose(int[][] gameBoard, int number_of_empty_cells, int given_number_of_empty_cells) {
-		// System.out.println("Inside cases that suggest win or lose, empty cells: " + number_of_empty_cells);
+	private Move casesThatSuggestWinOrNoLose(int[][] gameBoard, int numberOfEmptyCells, int givenNumberOfEmptyCells) {
+		// System.out.println("Inside cases that suggest win or lose, empty cells: " + numberOfEmptyCells);
 		int currentPlayer, otherPlayer;
 
-		if (number_of_empty_cells % 2 == 1) {
+		if (numberOfEmptyCells % 2 == 1) {
 			currentPlayer = Constants.X;
 			otherPlayer = Constants.O;
 		} else {
@@ -670,7 +669,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[0][1] == currentPlayer && gameBoard[0][2] == currentPlayer)
 				|| (gameBoard[1][0] == currentPlayer && gameBoard[2][0] == currentPlayer))
 				&& gameBoard[0][0] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |X * *| |X X X| |X * *|
 			 * |* X *| |* * *| |X * *|
 			 * |* * X| |* * *| |X * *| */
@@ -685,7 +684,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[0][0] == currentPlayer && gameBoard[0][2] == currentPlayer)
 				|| (gameBoard[1][1] == currentPlayer && gameBoard[2][1] == currentPlayer))
 				&& gameBoard[0][1] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |X X X| |* X *|
 			 * |* * *| |* X *|
 			 * |* * *| |* X *| */
@@ -701,7 +700,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[0][0] == currentPlayer && gameBoard[0][1] == currentPlayer)
 				|| (gameBoard[1][2] == currentPlayer && gameBoard[2][2] == currentPlayer))
 				&& gameBoard[0][2] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * X| |X X X| |- * X|
 			 * |* X *| |* * *| |* * X|
 			 * |X * *| |* * *| |* * X| */
@@ -716,7 +715,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[0][0] == currentPlayer && gameBoard[2][0] == currentPlayer)
 				|| (gameBoard[1][1] == currentPlayer && gameBoard[1][2] == currentPlayer))
 				&& gameBoard[1][0] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |X * *| |* * *|
 			 * |X * *| |X X X|
 			 * |X * *| |* * *| */
@@ -733,7 +732,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[0][2] == currentPlayer && gameBoard[2][0] == currentPlayer)
 				|| (gameBoard[1][0] == currentPlayer && gameBoard[1][2] == currentPlayer))
 				&& gameBoard[1][1] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |X * *| |* X *| |* * X| |* * *|
 			 * |* X *| |* X *| |* X *| |X X X|
 			 * |* * X| |* X *| |X * *| |* * *| */
@@ -748,7 +747,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[0][2] == currentPlayer && gameBoard[2][2] == currentPlayer)
 				|| (gameBoard[1][0] == currentPlayer && gameBoard[1][1] == currentPlayer))
 				&& gameBoard[1][2] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * X| |* * *|
 			 * |* * X| |X X X|
 			 * |* * X| |* * *| */
@@ -764,7 +763,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[2][1] == currentPlayer && gameBoard[2][2] == currentPlayer)
 				|| (gameBoard[0][0] == currentPlayer && gameBoard[1][0] == currentPlayer))
 				&& gameBoard[2][0] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * X| |* * *| |X * *|
 			 * |* X *| |* * *| |X * *|
 			 * |X * *| |X X X| |X * *| */
@@ -779,7 +778,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[2][0] == currentPlayer && gameBoard[2][2] == currentPlayer)
 				|| (gameBoard[0][1] == currentPlayer && gameBoard[1][1] == currentPlayer))
 				&& gameBoard[2][1] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * *| |* X *|
 			 * |* * *| |* X *|
 			 * |X X X| |* X *| */
@@ -795,7 +794,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[2][0] == currentPlayer && gameBoard[2][1] == currentPlayer)
 				|| (gameBoard[0][2] == currentPlayer && gameBoard[1][2] == currentPlayer))
 				&& gameBoard[2][2] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |X * *| |* * *| |* * X|
 			 * |* X *| |* * *| |* * X|
 			 * |* * X| |X X X| |* * X| */
@@ -814,7 +813,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[0][1] == otherPlayer && gameBoard[0][2] == otherPlayer)
 				|| (gameBoard[1][0] == otherPlayer && gameBoard[2][0] == otherPlayer))
 				&& gameBoard[0][0] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |> * *| |> O O| |> * *|
 			 * |* O *| |* * *| |O * *|
 			 * |* * O| |* * *| |O * *| */
@@ -829,7 +828,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[0][0] == otherPlayer && gameBoard[0][2] == otherPlayer)
 				|| (gameBoard[1][1] == otherPlayer && gameBoard[2][1] == otherPlayer))
 				&& gameBoard[0][1] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |O X O| |* X *|
 			 * |* * *| |* O *|
 			 * |* * *| |* O *| */
@@ -845,7 +844,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[0][0] == otherPlayer && gameBoard[0][1] == otherPlayer)
 				|| (gameBoard[1][2] == otherPlayer && gameBoard[2][2] == otherPlayer))
 				&& gameBoard[0][2] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * X| |O O X| |- * X|
 			 * |* O *| |* * *| |* * O|
 			 * |O * *| |* * *| |* * O| */
@@ -860,7 +859,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[0][0] == otherPlayer && gameBoard[2][0] == otherPlayer)
 				|| (gameBoard[1][1] == otherPlayer && gameBoard[1][2] == otherPlayer))
 				&& gameBoard[1][0] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |O * *| |* * *|
 			 * |X * *| |X O O|
 			 * |O * *| |* * *| */
@@ -877,7 +876,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[0][2] == otherPlayer && gameBoard[2][0] == otherPlayer)
 				|| (gameBoard[1][0] == otherPlayer && gameBoard[1][2] == otherPlayer))
 				&& gameBoard[1][1] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |O * *| |* O *| |* * O| |* * *|
 			 * |* X *| |* X *| |* X *| |O X O|
 			 * |* * O| |* O *| |O * *| |* * *| */
@@ -892,7 +891,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[0][2] == otherPlayer && gameBoard[2][2] == otherPlayer)
 				|| (gameBoard[1][0] == otherPlayer && gameBoard[1][1] == otherPlayer))
 				&& gameBoard[1][2] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * O| |* * *|
 			 * |* * X| |O O X|
 			 * |* * O| |* * *| */
@@ -908,7 +907,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[2][1] == otherPlayer && gameBoard[2][2] == otherPlayer)
 				|| (gameBoard[0][0] == otherPlayer && gameBoard[1][0] == otherPlayer))
 				&& gameBoard[2][0] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * O| |* * *| |O * *|
 			 * |* O *| |* * *| |O * *|
 			 * |X * *| |X O O| |X * *| */
@@ -923,7 +922,7 @@ public class BestResponseAI extends AI {
 		if (((gameBoard[2][0] == otherPlayer && gameBoard[2][2] == otherPlayer)
 				|| (gameBoard[0][1] == otherPlayer && gameBoard[1][1] == otherPlayer))
 				&& gameBoard[2][1] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |* * *| |* O *|
 			 * |* * *| |* O *|
 			 * |O X O| |* X *| */
@@ -939,7 +938,7 @@ public class BestResponseAI extends AI {
 				|| (gameBoard[2][0] == otherPlayer && gameBoard[2][1] == otherPlayer)
 				|| (gameBoard[0][2] == otherPlayer && gameBoard[1][2] == otherPlayer))
 				&& gameBoard[2][2] == Constants.EMPTY
-				&& number_of_empty_cells == given_number_of_empty_cells) {
+				&& numberOfEmptyCells == givenNumberOfEmptyCells) {
 			/* |O * *| |* * *| |* * O|
 			 * |* O *| |* * *| |* * O|
 			 * |* * X| |O O X| |* * X| */
