@@ -548,7 +548,6 @@ public class GUI {
 					button.removeActionListener(button);
 				}
 			}
-
 		}
 	}
 

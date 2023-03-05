@@ -43,6 +43,8 @@ public class HumanVsAiButton extends XOButton {
 
 		GUI.makeMove(cell.get(0), cell.get(1), playerSymbol);
 
+		System.out.println(GUI.board);
+
 		// Check if the game is over.
 		if (GUI.board.isTerminal()) {
 			GUI.gameOver();
@@ -54,17 +56,11 @@ public class HumanVsAiButton extends XOButton {
 			}
 		}
 
-		// System.out.println(GUI.board.getLastMove());
-		// Board.printBoard(GUI.board.getGameBoard());
-
 		Move aiMove = this.ai.getNextMove(GUI.board);
-		// System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: " + aiMove.getValue());
 
 		GUI.makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
-		// System.out.println("board value: " + TicTacToeGUI.board.evaluate());
 
 		int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
-		// System.out.println("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getCol() +"]");
 
 		for (HumanVsAiButton button : GUI.humanVsAiButtons) {
 			if (button.id == aiMoveButtonId) {

@@ -82,35 +82,6 @@ public class Board {
 		return number_of_empty_cells;
 	}
 
-	// Prints the board, using "X", "O" and 1-9 for ids
-	@Override
-	public String toString() {
-		StringBuilder output = new StringBuilder("*********");
-		int counter = 1;
-		for (int row = 0; row < 3; row++) {
-			output.append("* ");
-			for (int column = 0; column < 3; column++) {
-				switch (gameBoard[row][column]) {
-					case Constants.X:
-						output.append("X ");
-						break;
-					case Constants.O:
-						output.append("O ");
-						break;
-					case Constants.EMPTY:
-						output.append(counter).append(" ");
-						break;
-					default:
-						break;
-				}
-				counter++;
-			}
-			output.append("*");
-		}
-		output.append("*********");
-		return output.toString();
-	}
-
 	// Make a move; it places a symbol on the board
 	public void makeMove(int row, int column, int player) {
 		this.gameBoard[row][column] = player;
@@ -289,6 +260,36 @@ public class Board {
 		} else if (this.lastPlayer == Constants.O) {
 			this.lastPlayer = Constants.X;
 		}
+	}
+
+	// Prints the board, using "X", "O" and 1-9 for ids
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder();
+		output.append("*********\n");
+		int counter = 1;
+		for (int row = 0; row < 3; row++) {
+			output.append("* ");
+			for (int column = 0; column < 3; column++) {
+				switch (gameBoard[row][column]) {
+					case Constants.X:
+						output.append("X ");
+						break;
+					case Constants.O:
+						output.append("O ");
+						break;
+					case Constants.EMPTY:
+						output.append(counter).append(" ");
+						break;
+					default:
+						break;
+				}
+				counter++;
+			}
+			output.append("*\n");
+		}
+		output.append("*********\n");
+		return output.toString();
 	}
 
 }
