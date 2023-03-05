@@ -1,6 +1,5 @@
 package com.chriskormaris.mytictactoe.gui.button;
 
-import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.gui.client_server.Client;
@@ -35,8 +34,6 @@ public class ClientServerButton extends XOButton implements Serializable {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// GUI.undoItem.setEnabled(false);  // uncomment only if needed
-
 		int turn = Constants.EMPTY;
 		if (GUI.board.getLastPlayer() == Constants.X) {
 			turn = Constants.O;
@@ -65,7 +62,8 @@ public class ClientServerButton extends XOButton implements Serializable {
 		// get cell coordinates by id
 		List<Integer> cell = GUI.getBoardCellById(id);
 		GUI.makeMove(cell.get(0), cell.get(1), turn);
-		Board.printBoard(GUI.board.getGameBoard());
+
+		System.out.println(GUI.board);
 
 		if (!programmaticallyPressed) {
 			this.client = new Client(serverIP, serverPort, playerSymbol);

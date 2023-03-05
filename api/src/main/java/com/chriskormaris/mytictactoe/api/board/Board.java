@@ -54,7 +54,6 @@ public class Board {
 				}
 			}
 		}
-		// System.out.println("Game board is empty!");
 		return true;
 	}
 
@@ -68,7 +67,6 @@ public class Board {
 				}
 			}
 		}
-		// System.out.println("Game board is full!");
 		return true;
 	}
 
@@ -85,30 +83,32 @@ public class Board {
 	}
 
 	// Prints the board, using "X", "O" and 1-9 for ids
-	public static void printBoard(int[][] gameBoard) {
-		System.out.println("*********");
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder("*********");
 		int counter = 1;
 		for (int row = 0; row < 3; row++) {
-			System.out.print("* ");
+			output.append("* ");
 			for (int column = 0; column < 3; column++) {
 				switch (gameBoard[row][column]) {
 					case Constants.X:
-						System.out.print("X ");
+						output.append("X ");
 						break;
 					case Constants.O:
-						System.out.print("O ");
+						output.append("O ");
 						break;
 					case Constants.EMPTY:
-						System.out.print(counter + " ");
+						output.append(counter).append(" ");
 						break;
 					default:
 						break;
 				}
 				counter++;
 			}
-			System.out.println("*");
+			output.append("*");
 		}
-		System.out.println("*********");
+		output.append("*********");
+		return output.toString();
 	}
 
 	// Make a move; it places a symbol on the board
@@ -142,35 +142,6 @@ public class Board {
 		return children;
 	}
 
-	// Prints the board.
-    /*
-	public void print() {
-		System.out.println("*********");
-		int counter = 1;
-		for(int row=0; row<3; row++) {
-			System.out.print("* ");
-			for(int column=0; column<3; column++) {
-				switch (gameBoard[row][column]) {
-					case Constants.X:
-						System.out.print("X ");
-						break;
-					case Constants.O:
-						System.out.print("O ");
-						break;
-					case Constants.EMPTY:
-						System.out.print(counter + " ");
-						break;
-					default:
-						break;
-				}
-				counter++;
-			}
-			System.out.println("*");
-		}
-		System.out.println("*********");
-	}
-	*/
-
 	public List<Move> getValidMoves(int symbol) {
 		List<Move> moves = new ArrayList<>();
 		for (int row = 0; row < 3; row++) {
@@ -183,12 +154,10 @@ public class Board {
 		return moves;
 	}
 
-	/*
-	 * +100 for EACH 3-in-a-line for X.
+	/* +100 for EACH 3-in-a-line for X.
 	 * +10 for EACH 2-in-a-line (with 1 empty cell) for X.
 	 * +1 for EACH 1-in-a-line (with 2 empty cells) for X.
-	 * Negative scores for O, i.e., -100, -10, -1 for EACH O's 3-in-a-line, 2-in-a-line and 1-in-a-line.
-	 */
+	 * Negative scores for O, i.e., -100, -10, -1 for EACH O's 3-in-a-line, 2-in-a-line and 1-in-a-line. */
 	public int evaluate() {
 		int Xlines = 0;
 		int Olines = 0;

@@ -43,7 +43,6 @@ public class Server extends Thread {
 				int opposingPlayerSymbol = in.readInt();
 
 				int id = GuiUtils.getIdByBoardCell(lastMoveRow, lastMoveColumn);
-				// System.out.println(id);
 
 				GUI.board.setLastPlayer(opposingPlayerSymbol);
 

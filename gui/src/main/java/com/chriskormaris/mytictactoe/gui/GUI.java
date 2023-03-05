@@ -102,12 +102,10 @@ public class GUI {
 	private static final KeyListener gameKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
-			// System.out.println("keyTyped = " + KeyEvent.getKeyText(e.getKeyCode()));
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// System.out.println("keyPressed = " + KeyEvent.getKeyText(e.getKeyCode()));
 			String button = KeyEvent.getKeyText(e.getKeyCode());
 
 			for (int i = 0; i < 9; i++) {
@@ -128,14 +126,12 @@ public class GUI {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// System.out.println("keyReleased = " + KeyEvent.getKeyText(e.getKeyCode()));
 		}
 	};
 
 	private static final KeyListener undoRedoKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
-			// System.out.println("keyTyped = " + KeyEvent.getKeyText(e.getKeyCode()));
 		}
 
 		@Override
@@ -149,7 +145,6 @@ public class GUI {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// System.out.println("keyReleased = " + KeyEvent.getKeyText(e.getKeyCode()));
 		}
 	};
 
@@ -231,7 +226,7 @@ public class GUI {
 			undoItem.setEnabled(false);
 			redoItem.setEnabled(false);
 
-			Board.printBoard(board.getGameBoard());
+			System.out.println(board);
 		});
 
 		undoItem.addActionListener(e -> undo());
@@ -276,7 +271,6 @@ public class GUI {
 		if (!undoBoards.isEmpty()) {
 			System.out.println("Undo is pressed!");
 
-			// System.out.println("undo");
 			// This is the "undo" implementation for Human VS Human mode.
 			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
 				try {
@@ -310,8 +304,7 @@ public class GUI {
 
 					redoItem.setEnabled(true);
 
-					Board.printBoard(board.getGameBoard());
-
+					System.out.println(board);
 				} catch (ArrayIndexOutOfBoundsException ex) {
 					System.err.println("No move has been made yet!");
 					System.err.flush();
@@ -320,9 +313,7 @@ public class GUI {
 
 			// This is the "undo" implementation for Human VS AI mode.
 			else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-
 				try {
-
 					redoBoards.push(new Board(board));
 					board = undoBoards.pop();
 
@@ -353,8 +344,7 @@ public class GUI {
 
 					redoItem.setEnabled(true);
 
-					Board.printBoard(board.getGameBoard());
-
+					System.out.println(board);
 				} catch (ArrayIndexOutOfBoundsException ex) {
 					System.err.println("No move has been made yet!");
 					System.err.flush();
@@ -368,7 +358,6 @@ public class GUI {
 		if (!redoBoards.isEmpty()) {
 			System.out.println("Redo is pressed!");
 
-			// System.out.println("undo");
 			// This is the "redo" implementation for Human VS Human mode.
 			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
 				try {
@@ -407,7 +396,7 @@ public class GUI {
 
 					undoItem.setEnabled(true);
 
-					Board.printBoard(board.getGameBoard());
+					System.out.println(board);
 
 					boolean isGameOver = board.isTerminal();
 					if (isGameOver) {
@@ -455,7 +444,7 @@ public class GUI {
 
 					undoItem.setEnabled(true);
 
-					Board.printBoard(board.getGameBoard());
+					System.out.println(board);
 
 					boolean isGameOver = board.isTerminal();
 					if (isGameOver) {
@@ -481,8 +470,7 @@ public class GUI {
 	 * f(1, 2) = 0 = 1*3 + 2
 	 * f(2, 0) = 0 = 2*3 + 0
 	 * f(2, 1) = 0 = 2*3 + 1
-	 * f(2, 2) = 0 = 2*3 + 2
-	 */
+	 * f(2, 2) = 0 = 2*3 + 2 */
 	public static List<Integer> getBoardCellById(int id) {
 		List<Integer> cell = new ArrayList<>();
 		int i = 0, j = 0;
@@ -553,8 +541,6 @@ public class GUI {
 			makeMove(aiMove.getRow(), aiMove.getColumn(), Constants.X);
 
 			int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
-			// System.out.print("AI Move [" + aiMove.getRow() + "]" + "[" + aiMove.getColumn() +"]: ");
-			// System.out.println(aiMove.getValue());
 
 			for (HumanVsAiButton button : GUI.humanVsAiButtons) {
 				if (button.id == aiMoveButtonId) {
@@ -752,9 +738,7 @@ public class GUI {
 
 
 	public static void gameOver() {
-		// System.out.println("Game Over function called!");
-
-		String message = "";
+		String message;
 		if (board.getWinner() == Constants.X) {
 			System.out.println("Player 1 \"X\" wins!");
 			message = "Player 1 \"X\" wins!\nPlay again?";
@@ -805,9 +789,7 @@ public class GUI {
 		}
 
 		board.getGameBoard()[row][col] = player;
-		// System.out.println("previous move: " + board.getLastMove());
 		board.setLastMove(new Move(row, col));
-		// System.out.println("this move: " + board.getLastMove());
 		board.setLastPlayer(player);
 
 		redoBoards.clear();

@@ -1,6 +1,5 @@
 package com.chriskormaris.mytictactoe.gui.button;
 
-import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.GUI;
 
@@ -44,17 +43,18 @@ public class HumanVsHumanButton extends XOButton {
 		// get cell coordinates by id
 		List<Integer> cell = GUI.getBoardCellById(id);
 		GUI.makeMove(cell.get(0), cell.get(1), turn);
-		Board.printBoard(GUI.board.getGameBoard());
+
+		System.out.println(GUI.board);
 
 		// check if the game is over
-		if (GUI.board.isTerminal())
+		if (GUI.board.isTerminal()) {
 			GUI.gameOver();
-
-		try {
-			this.removeActionListener(this);
-		} catch (NullPointerException ignored) {
+		} else {
+			try {
+				this.removeActionListener(this);
+			} catch (NullPointerException ignored) {
+			}
 		}
-
 	}
 
 }

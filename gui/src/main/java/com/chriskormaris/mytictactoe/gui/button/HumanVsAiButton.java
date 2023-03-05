@@ -1,7 +1,6 @@
 package com.chriskormaris.mytictactoe.gui.button;
 
 import com.chriskormaris.mytictactoe.api.ai.AI;
-import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.board.Move;
 import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.GUI;
@@ -78,7 +77,7 @@ public class HumanVsAiButton extends XOButton {
 			}
 		}
 
-		Board.printBoard(GUI.board.getGameBoard());
+		System.out.println(GUI.board);
 
 		// Check if the game is over.
 		if (GUI.board.isTerminal()) {
@@ -89,7 +88,6 @@ public class HumanVsAiButton extends XOButton {
 			} catch (NullPointerException ignored) {
 			}
 		}
-
 	}
 
 }
