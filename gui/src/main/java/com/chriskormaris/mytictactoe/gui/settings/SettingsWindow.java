@@ -1,4 +1,4 @@
-package com.chriskormaris.mytictactoe.gui;
+package com.chriskormaris.mytictactoe.gui.settings;
 
 import com.chriskormaris.mytictactoe.api.enumeration.AiType;
 import com.chriskormaris.mytictactoe.api.enumeration.GameMode;
