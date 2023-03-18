@@ -14,30 +14,34 @@ public class ClientServerButton extends XOButton implements Serializable {
 	// Empty: 0, X: 1, O: 0
 	public int id;
 	public boolean programmaticallyPressed = false;
+
 	String serverIP;
 	int serverPort;
 	Client client;
 	int playerSymbol;
 
+	GUI gui;
 
-	public ClientServerButton(int id, String serverIP, int serverPort, int playerSymbol) {
+
+	public ClientServerButton(int id, String serverIP, int serverPort, int playerSymbol, GUI gui) {
 		setFocusable(false);
 		this.id = id;
 		this.addActionListener(this);
 		setIcon(null);
 		this.serverIP = serverIP;
 		this.serverPort = serverPort;
-		this.client = new Client(serverIP, serverPort, playerSymbol);
+		this.client = new Client(serverIP, serverPort, playerSymbol, gui.board);
 		this.playerSymbol = playerSymbol;
+		this.gui = gui;
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int turn = Constants.EMPTY;
-		if (GUI.board.getLastPlayer() == Constants.X) {
+		if (gui.board.getLastPlayer() == Constants.X) {
 			turn = Constants.O;
-		} else if (GUI.board.getLastPlayer() == Constants.O) {
+		} else if (gui.board.getLastPlayer() == Constants.O) {
 			turn = Constants.X;
 		}
 
@@ -46,39 +50,39 @@ public class ClientServerButton extends XOButton implements Serializable {
 		}
 
 		if (programmaticallyPressed) {
-			turn = GUI.board.getLastPlayer();
-			GUI.board.changeLastSymbolPlayed();
+			turn = gui.board.getLastPlayer();
+			gui.board.changeLastSymbolPlayed();
 		}
 
 		// add X or O on the board GUI
 		if (turn == Constants.X) {
-			setIcon(GUI.XIcon);
+			setIcon(gui.XIcon);
 		} else if (turn == Constants.O) {
-			setIcon(GUI.OIcon);
+			setIcon(gui.OIcon);
 		} else {
 			setIcon(null);
 		}
 
 		// get cell coordinates by id
-		List<Integer> cell = GUI.getBoardCellById(id);
-		GUI.makeMove(cell.get(0), cell.get(1), turn);
+		List<Integer> cell = gui.getBoardCellById(id);
+		gui.makeMove(cell.get(0), cell.get(1), turn);
 
-		System.out.println(GUI.board);
+		System.out.println(gui.board);
 
 		if (!programmaticallyPressed) {
-			this.client = new Client(serverIP, serverPort, playerSymbol);
+			this.client = new Client(serverIP, serverPort, playerSymbol, gui.board);
 			this.client.start();
 
 			// check if the game is over
-			if (GUI.board.isTerminal()) {
-				GUI.gameOver();
+			if (gui.board.isTerminal()) {
+				gui.gameOver();
 			}
 		}
 		try {
 			this.removeActionListener(this);
 		} catch (NullPointerException ignored) {
 		}
-		GUI.clientServerButtons[id] = this;
+		gui.clientServerButtons[id] = this;
 	}
 
 }

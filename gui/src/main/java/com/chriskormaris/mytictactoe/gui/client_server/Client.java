@@ -1,7 +1,7 @@
 package com.chriskormaris.mytictactoe.gui.client_server;
 
+import com.chriskormaris.mytictactoe.api.board.Board;
 import com.chriskormaris.mytictactoe.api.board.Move;
-import com.chriskormaris.mytictactoe.gui.GUI;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -13,11 +13,13 @@ public class Client extends Thread {
 	String serverIP;
 	int serverPort;
 	int playerSymbol;
+	Board board;
 
-	public Client(String IP, int port, int playerSymbol) {
+	public Client(String IP, int port, int playerSymbol, Board board) {
 		this.serverIP = IP;
 		this.serverPort = port;
 		this.playerSymbol = playerSymbol;
+		this.board = board;
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class Client extends Thread {
 			System.out.println("Client has started! Established connection with server at port: " + serverPort + "...");
 			out = new ObjectOutputStream(requestSocket.getOutputStream());
 
-			Move lastMove = GUI.board.getLastMove();
+			Move lastMove = board.getLastMove();
 			out.writeInt(lastMove.getRow());
 			out.flush();
 

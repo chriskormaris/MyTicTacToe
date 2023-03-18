@@ -20,8 +20,6 @@ import com.chriskormaris.mytictactoe.gui.util.GameParameters;
 import com.chriskormaris.mytictactoe.gui.util.GuiConstants;
 import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
 import com.chriskormaris.mytictactoe.gui.util.ResourceLoader;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -33,40 +31,41 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static com.chriskormaris.mytictactoe.gui.util.GuiConstants.TITLE;
 
+public class GUI extends JFrame {
 
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-public class GUI {
+	public GameParameters gameParameters;
+	public GameParameters newGameParameters;
 
-	public static GameParameters gameParameters;
-	public static GameParameters newGameParameters;
+	public ImageIcon XIcon;
+	public ImageIcon OIcon;
 
-	public static ImageIcon XIcon;
-	public static ImageIcon OIcon;
+	private JPanel panel;
+	private GridLayout layout;
 
-	private static JFrame frame;
+	public HumanVsHumanButton[] humanVsHumanButtons;
+	public HumanVsAiButton[] humanVsAiButtons;
+	public AiVsAiButton[] aiVsAiButtons;
+	public ClientServerButton[] clientServerButtons;
 
-	private static JPanel panel;
-	private static GridLayout layout;
-
-	public static HumanVsHumanButton[] humanVsHumanButtons;
-	public static HumanVsAiButton[] humanVsAiButtons;
-	public static AiVsAiButton[] aiVsAiButtons;
-	public static ClientServerButton[] clientServerButtons;
-
-	public static Board board;
+	public Board board;
 
 	// Menu bars and items
-	private static JMenuBar menuBar;
-	public static JMenuItem undoItem;
-	public static JMenuItem redoItem;
+	private JMenuBar menuBar;
+	public JMenuItem undoItem;
+	public JMenuItem redoItem;
 
 	// These Stack objects are used for the "undo" and "redo" functionalities.
-	private static Stack<Board> undoBoards;
-	private static Stack<Board> redoBoards;
+	private Stack<Board> undoBoards;
+	private Stack<Board> redoBoards;
 
-	public static void create(String title) {
+	public GUI() {
+		this(GuiConstants.TITLE);
+	}
+
+	public GUI(String title) {
+		super(title);
+
 		gameParameters = new GameParameters();
 		newGameParameters = new GameParameters(gameParameters);
 
@@ -84,22 +83,20 @@ public class GUI {
 
 		configureGuiStyle();
 
-		frame = new JFrame();
-
-		frame.setSize(500, 500);
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle(title);
+		this.setSize(500, 500);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setTitle(title);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (int) (screenSize.getWidth() - frame.getWidth()) / 2;
-		int y = (int) (screenSize.getHeight() - frame.getHeight()) / 2;
-		frame.setLocation(x, y);
+		int x = (int) (screenSize.getWidth() - this.getWidth()) / 2;
+		int y = (int) (screenSize.getHeight() - this.getHeight()) / 2;
+		this.setLocation(x, y);
 
-		frame.addKeyListener(gameKeyListener);
-		frame.addKeyListener(undoRedoKeyListener);
+		this.addKeyListener(gameKeyListener);
+		this.addKeyListener(undoRedoKeyListener);
 	}
 
-	private static final KeyListener gameKeyListener = new KeyListener() {
+	private final KeyListener gameKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
 		}
@@ -129,7 +126,7 @@ public class GUI {
 		}
 	};
 
-	private static final KeyListener undoRedoKeyListener = new KeyListener() {
+	private final KeyListener undoRedoKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
 		}
@@ -148,7 +145,7 @@ public class GUI {
 		}
 	};
 
-	private static void configureGuiStyle() {
+	private void configureGuiStyle() {
 		try {
 			if (gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
 				// Option 1
@@ -175,7 +172,7 @@ public class GUI {
 	}
 
 
-	private static void addMenus() {
+	private void addMenus() {
 		// Adding the menu bar
 		menuBar = new JMenuBar();
 
@@ -234,7 +231,7 @@ public class GUI {
 		redoItem.addActionListener(e -> redo());
 
 		settingsItem.addActionListener(e -> {
-			SettingsWindow settings = new SettingsWindow(frame, gameParameters, newGameParameters);
+			SettingsWindow settings = new SettingsWindow(this, gameParameters, newGameParameters);
 			settings.setVisible(true);
 		});
 
@@ -242,7 +239,7 @@ public class GUI {
 
 		howToPlayItem.addActionListener(
 				e -> JOptionPane.showMessageDialog(
-						frame,
+						this,
 						GuiConstants.RULES,
 						"How to Play",
 						JOptionPane.INFORMATION_MESSAGE
@@ -254,7 +251,7 @@ public class GUI {
 					"<html>© Created by: Christos Kormaris<br>"
 							+ "Version " + GuiConstants.VERSION + "</html>"
 			);
-			JOptionPane.showMessageDialog(frame, label, "About", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, label, "About", JOptionPane.INFORMATION_MESSAGE);
 		});
 
 		fileMenu.add(newGameItem);
@@ -263,11 +260,11 @@ public class GUI {
 		fileMenu.add(settingsItem);
 		fileMenu.add(exitItem);
 
-		frame.setJMenuBar(menuBar);
+		this.setJMenuBar(menuBar);
 	}
 
 
-	public static void undo() {
+	public void undo() {
 		if (!undoBoards.isEmpty()) {
 			System.out.println("Undo is pressed!");
 
@@ -278,7 +275,7 @@ public class GUI {
 					board = undoBoards.pop();
 
 					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						List<Integer> cell = GUI.getBoardCellById(button.id);
+						List<Integer> cell = getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -318,7 +315,7 @@ public class GUI {
 					board = undoBoards.pop();
 
 					for (HumanVsAiButton button : humanVsAiButtons) {
-						List<Integer> cell = GUI.getBoardCellById(button.id);
+						List<Integer> cell = getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -354,7 +351,7 @@ public class GUI {
 	}
 
 
-	public static void redo() {
+	public void redo() {
 		if (!redoBoards.isEmpty()) {
 			System.out.println("Redo is pressed!");
 
@@ -366,7 +363,7 @@ public class GUI {
 					board = new Board(redoBoards.pop());
 
 					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						List<Integer> cell = GUI.getBoardCellById(button.id);
+						List<Integer> cell = getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -414,7 +411,7 @@ public class GUI {
 					board = new Board(redoBoards.pop());
 
 					for (HumanVsAiButton button : humanVsAiButtons) {
-						List<Integer> cell = GUI.getBoardCellById(button.id);
+						List<Integer> cell = getBoardCellById(button.id);
 						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 									Constants.X,
@@ -471,7 +468,7 @@ public class GUI {
 	 * f(2, 0) = 0 = 2*3 + 0
 	 * f(2, 1) = 0 = 2*3 + 1
 	 * f(2, 2) = 0 = 2*3 + 2 */
-	public static List<Integer> getBoardCellById(int id) {
+	public List<Integer> getBoardCellById(int id) {
 		List<Integer> cell = new ArrayList<>();
 		int i = 0, j = 0;
 		if (id / 3 == 0) {  // we know that i=0
@@ -490,7 +487,7 @@ public class GUI {
 		return cell;
 	}
 
-	public static void createHumanVsAiNewGame() {
+	public void createHumanVsAiNewGame() {
 		configureGuiStyle();
 
 		if (menuBar == null) {
@@ -509,13 +506,13 @@ public class GUI {
 		}
 
 		if (panel != null) {
-			frame.remove(panel);
-			frame.revalidate();
-			frame.repaint();
+			this.remove(panel);
+			this.revalidate();
+			this.repaint();
 		}
 
 		panel = new JPanel();
-		frame.add(panel);
+		this.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -528,13 +525,13 @@ public class GUI {
 		panel.revalidate();
 		panel.repaint();
 		for (int i = 0; i < 9; i++) {
-			humanVsAiButtons[i] = new HumanVsAiButton(i, gameParameters.getPlayerSymbol(), ai);
+			humanVsAiButtons[i] = new HumanVsAiButton(i, gameParameters.getPlayerSymbol(), ai, this);
 			panel.add(humanVsAiButtons[i]);
 		}
 
-		frame.setFocusable(true);
+		this.setFocusable(true);
 
-		frame.setVisible(true);
+		this.setVisible(true);
 
 		if (gameParameters.getPlayerSymbol() == Constants.O) {
 			Move aiMove = ai.getNextMove(board);
@@ -542,7 +539,7 @@ public class GUI {
 
 			int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 
-			for (HumanVsAiButton button : GUI.humanVsAiButtons) {
+			for (HumanVsAiButton button : humanVsAiButtons) {
 				if (button.id == aiMoveButtonId) {
 					button.setIcon(XIcon);
 					button.removeActionListener(button);
@@ -552,7 +549,7 @@ public class GUI {
 	}
 
 
-	public static void createHumanVsHumanNewGame() {
+	public void createHumanVsHumanNewGame() {
 		configureGuiStyle();
 
 		if (menuBar == null) {
@@ -560,13 +557,13 @@ public class GUI {
 		}
 
 		if (panel != null) {
-			frame.remove(panel);
-			frame.revalidate();
-			frame.repaint();
+			this.remove(panel);
+			this.revalidate();
+			this.repaint();
 		}
 
 		panel = new JPanel();
-		frame.add(panel);
+		this.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -579,17 +576,17 @@ public class GUI {
 		panel.revalidate();
 		panel.repaint();
 		for (int id = 0; id < 9; id++) {
-			humanVsHumanButtons[id] = new HumanVsHumanButton(id);
+			humanVsHumanButtons[id] = new HumanVsHumanButton(id, this);
 			panel.add(humanVsHumanButtons[id]);
 		}
 
-		frame.setFocusable(true);
+		this.setFocusable(true);
 
-		frame.setVisible(true);
+		this.setVisible(true);
 	}
 
 
-	public static void createAiVsAiNewGame() {
+	public void createAiVsAiNewGame() {
 		configureGuiStyle();
 
 		if (menuBar == null) {
@@ -615,13 +612,13 @@ public class GUI {
 		}
 
 		if (panel != null) {
-			frame.remove(panel);
-			frame.revalidate();
-			frame.repaint();
+			this.remove(panel);
+			this.revalidate();
+			this.repaint();
 		}
 
 		panel = new JPanel();
-		frame.add(panel);
+		this.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -634,34 +631,34 @@ public class GUI {
 		panel.revalidate();
 		panel.repaint();
 		for (int i = 0; i < 9; i++) {
-			aiVsAiButtons[i] = new AiVsAiButton(i);
+			aiVsAiButtons[i] = new AiVsAiButton(i, this);
 			panel.add(aiVsAiButtons[i]);
 		}
 
-		frame.setVisible(true);
+		this.setVisible(true);
 
 		playAiVsAi(ai1, ai2);
 	}
 
 
-	public static void createClientServerNewGame() {
+	public void createClientServerNewGame() {
 		configureGuiStyle();
 
 		if (menuBar == null) {
 			addMenus();
 		}
 
-		Server server = new Server(gameParameters.getServerPort());
+		Server server = new Server(gameParameters.getServerPort(), this);
 		server.start();
 
 		if (panel != null) {
-			frame.remove(panel);
-			frame.revalidate();
-			frame.repaint();
+			this.remove(panel);
+			this.revalidate();
+			this.repaint();
 		}
 
 		panel = new JPanel();
-		frame.add(panel);
+		this.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -678,17 +675,18 @@ public class GUI {
 					i,
 					gameParameters.getClientIP(),
 					gameParameters.getClientPort(),
-					gameParameters.getPlayerSymbol()
+					gameParameters.getPlayerSymbol(),
+					this
 			);
 			panel.add(clientServerButtons[i]);
 		}
 
-		frame.setFocusable(true);
+		this.setFocusable(true);
 
-		frame.setVisible(true);
+		this.setVisible(true);
 	}
 
-	private static void aiVsAiMove(AI ai) {
+	private void aiVsAiMove(AI ai) {
 		Move aiMove = ai.getNextMove(board);
 
 		makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
@@ -703,8 +701,8 @@ public class GUI {
 	}
 
 
-	private static void playAiVsAi(AI ai1, AI ai2) {
-		while (!GUI.board.isTerminal()) {
+	private void playAiVsAi(AI ai1, AI ai2) {
+		while (!board.isTerminal()) {
 
 			// AI 1 Move
 			aiVsAiMove(ai1);
@@ -712,12 +710,12 @@ public class GUI {
 			// Sleep ms
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
-				frame.paint(frame.getGraphics());
+				this.paint(this.getGraphics());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 
-			if (!GUI.board.isTerminal()) {
+			if (!board.isTerminal()) {
 				// AI 2 Move
 				aiVsAiMove(ai2);
 			}
@@ -725,7 +723,7 @@ public class GUI {
 			// Sleep ms
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
-				frame.paint(frame.getGraphics());
+				this.paint(this.getGraphics());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -736,7 +734,7 @@ public class GUI {
 	}
 
 
-	public static void gameOver() {
+	public void gameOver() {
 		String message;
 		if (board.getWinner() == Constants.X) {
 			System.out.println("Player 1 \"X\" wins!");
@@ -750,7 +748,7 @@ public class GUI {
 		} else {
 			return;
 		}
-		int input = JOptionPane.showConfirmDialog(frame, message, "Game Over", JOptionPane.YES_NO_OPTION);
+		int input = JOptionPane.showConfirmDialog(this, message, "Game Over", JOptionPane.YES_NO_OPTION);
 		if (input == JOptionPane.OK_OPTION) {
 			undoBoards.clear();
 			redoBoards.clear();
@@ -781,7 +779,7 @@ public class GUI {
 	}
 
 	// Make a move; it places a symbol on the board
-	public static void makeMove(int row, int col, int player) {
+	public void makeMove(int row, int col, int player) {
 		if ((player == Constants.X && gameParameters.getGameMode() == GameMode.HUMAN_VS_AI)
 				|| (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN)) {
 			undoBoards.push(new Board(board));
@@ -796,34 +794,34 @@ public class GUI {
 	}
 
 	public static void main(String[] args) {
+		GUI gui = new GUI();
+
 		// Here, you can change the game parameters, before running the application.
 		// You can also change them later, from the Settings window.
 		/*
-		gameParameters = new GameParameters();
-		gameParameters.setGuiStyle(GuiStyle.SYSTEM_STYLE);
-		gameParameters.setGameMode(GameMode.HUMAN_VS_AI);
-		gameParameters.setGameMode(GameMode.AI_VS_AI);
-		gameParameters.setAi1Type(AiType.BEST_RESPONSE_AI);
-		gameParameters.setAi1MaxDepth(4);
-		gameParameters.setAi2MaxDepth(4);
-		gameParameters.setPlayer1Color(Color.BLUE);
-		gameParameters.setPlayer2Color(Color.RED);
-		gameParameters.setPlayerSymbol(Constants.X);
-		gameParameters.setServerPort(4000);
-		gameParameters.setClientIP("127.0.0.1");
-		gameParameters.setClientPort(4001);
+		gui.gameParameters = new GameParameters();
+		gui.gameParameters.setGuiStyle(GuiStyle.SYSTEM_STYLE);
+		gui.gameParameters.setGameMode(GameMode.HUMAN_VS_AI);
+		gui.gameParameters.setGameMode(GameMode.AI_VS_AI);
+		gui.gameParameters.setAi1Type(AiType.BEST_RESPONSE_AI);
+		gui.gameParameters.setAi1MaxDepth(4);
+		gui.gameParameters.setAi2MaxDepth(4);
+		gui.gameParameters.setPlayer1Color(Color.BLUE);
+		gui.gameParameters.setPlayer2Color(Color.RED);
+		gui.gameParameters.setPlayerSymbol(Constants.X);
+		gui.gameParameters.setServerPort(4000);
+		gui.gameParameters.setClientIP("127.0.0.1");
+		gui.gameParameters.setClientPort(4001);
 		*/
 
-		create(TITLE);
-
-		if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-			createHumanVsAiNewGame();
-		} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-			createHumanVsHumanNewGame();
-		} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-			createAiVsAiNewGame();
-		} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-			createClientServerNewGame();
+		if (gui.gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+			gui.createHumanVsAiNewGame();
+		} else if (gui.gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+			gui.createHumanVsHumanNewGame();
+		} else if (gui.gameParameters.getGameMode() == GameMode.AI_VS_AI) {
+			gui.createAiVsAiNewGame();
+		} else if (gui.gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
+			gui.createClientServerNewGame();
 		}
 	}
 

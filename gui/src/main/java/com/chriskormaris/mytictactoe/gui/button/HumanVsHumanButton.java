@@ -11,44 +11,47 @@ public class HumanVsHumanButton extends XOButton {
 
 	// Empty: 0, X: 1, O: 0
 	public int id;
+	GUI gui;
 
 
-	public HumanVsHumanButton(int id) {
+	public HumanVsHumanButton(int id, GUI gui) {
 		setFocusable(false);
 		this.id = id;
 		this.addActionListener(this);
 		setIcon(null);
+		this.gui = gui;
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		GUI.undoItem.setEnabled(true);
+		gui.undoItem.setEnabled(true);
 
 		int turn = Constants.EMPTY;
-		if (GUI.board.getLastPlayer() == Constants.X)
+		if (gui.board.getLastPlayer() == Constants.X) {
 			turn = Constants.O;
-		else if (GUI.board.getLastPlayer() == Constants.O)
+		} else if (gui.board.getLastPlayer() == Constants.O) {
 			turn = Constants.X;
+		}
 
 		// add X or O on the board GUI
 		if (turn == Constants.X) {
-			setIcon(GUI.XIcon);
+			setIcon(gui.XIcon);
 		} else if (turn == Constants.O) {
-			setIcon(GUI.OIcon);
+			setIcon(gui.OIcon);
 		} else {
 			setIcon(null);
 		}
 
 		// get cell coordinates by id
-		List<Integer> cell = GUI.getBoardCellById(id);
-		GUI.makeMove(cell.get(0), cell.get(1), turn);
+		List<Integer> cell = gui.getBoardCellById(id);
+		gui.makeMove(cell.get(0), cell.get(1), turn);
 
-		System.out.println(GUI.board);
+		System.out.println(gui.board);
 
 		// check if the game is over
-		if (GUI.board.isTerminal()) {
-			GUI.gameOver();
+		if (gui.board.isTerminal()) {
+			gui.gameOver();
 		} else {
 			try {
 				this.removeActionListener(this);

@@ -12,25 +12,28 @@ public class AiVsAiButton extends XOButton {
 	public int id;
 	public int aiPlayer;
 
+	GUI gui;
 
-	public AiVsAiButton(int id) {
+
+	public AiVsAiButton(int id, GUI gui) {
 		setFocusable(false);
 		this.id = id;
 		this.addActionListener(this);
 		setIcon(null);
 		this.aiPlayer = Constants.EMPTY;
+		this.gui = gui;
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (aiPlayer == Constants.X) {
-			setIcon(GUI.XIcon);
+			setIcon(gui.XIcon);
 		} else if (aiPlayer == Constants.O) {
-			setIcon(GUI.OIcon);
+			setIcon(gui.OIcon);
 		}
 
-		System.out.println(GUI.board);
+		System.out.println(gui.board);
 
 		removeActionListener(this);
 	}

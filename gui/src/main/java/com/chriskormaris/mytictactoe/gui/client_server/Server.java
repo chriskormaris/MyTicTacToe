@@ -12,13 +12,11 @@ import java.net.Socket;
 public class Server extends Thread {
 
 	int serverPort;
+	GUI gui;
 
-	public Server() {
-
-	}
-
-	public Server(int port) {
+	public Server(int port, GUI gui) {
 		this.serverPort = port;
+		this.gui = gui;
 	}
 
 	@Override
@@ -44,9 +42,9 @@ public class Server extends Thread {
 
 				int id = GuiUtils.getIdByBoardCell(lastMoveRow, lastMoveColumn);
 
-				GUI.board.setLastPlayer(opposingPlayerSymbol);
+				gui.board.setLastPlayer(opposingPlayerSymbol);
 
-				for (ClientServerButton button : GUI.clientServerButtons) {
+				for (ClientServerButton button : gui.clientServerButtons) {
 					if (button.id == id) {
 						// Programmatically press the com.chriskormaris.gui.button.
 						button.programmaticallyPressed = true;
@@ -56,7 +54,7 @@ public class Server extends Thread {
 				}
 				// GUI.board.printBoard();
 
-				if (GUI.board.isTerminal()) {
+				if (gui.board.isTerminal()) {
 					break;
 				}
 			}
@@ -78,8 +76,7 @@ public class Server extends Thread {
 				ex.printStackTrace();
 			}
 		}
-		GUI.gameOver();
-
+		gui.gameOver();
 	}
 
 }

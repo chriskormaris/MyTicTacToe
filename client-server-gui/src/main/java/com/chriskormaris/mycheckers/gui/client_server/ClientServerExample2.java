@@ -8,7 +8,7 @@ import com.chriskormaris.mytictactoe.gui.util.GameParameters;
 public class ClientServerExample2 {
 
 	public static void main(String[] args) {
-		GUI.create("My TicTacToe ClientServer 2");
+		GUI gui = new GUI("My TicTacToe ClientServer 2");
 
 		GameParameters newGameParameters = new GameParameters();
 		newGameParameters.setGameMode(GameMode.CLIENT_SERVER);
@@ -17,9 +17,9 @@ public class ClientServerExample2 {
 		newGameParameters.setClientIP("127.0.0.1");
 		newGameParameters.setClientPort(4000);
 
-		GUI.gameParameters = new GameParameters(newGameParameters);
+		gui.gameParameters = new GameParameters(newGameParameters);
 
-		GUI.createClientServerNewGame();
+		gui.createClientServerNewGame();
 	}
 
 }

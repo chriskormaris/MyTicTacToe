@@ -15,39 +15,41 @@ public class HumanVsAiButton extends XOButton {
 	// Empty: 0, X: 1, O: 0
 	public int id;
 	int playerSymbol;
+
 	AI ai;
+	GUI gui;
 
-
-	public HumanVsAiButton(int id, int playerSymbol, AI ai) {
+	public HumanVsAiButton(int id, int playerSymbol, AI ai, GUI gui) {
 		setFocusable(false);
 		this.id = id;
 		this.playerSymbol = playerSymbol;
 		this.addActionListener(this);
 		setIcon(null);
 		this.ai = ai;
+		this.gui = gui;
 	}
 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		GUI.undoItem.setEnabled(true);
+		gui.undoItem.setEnabled(true);
 
-		if (GUI.gameParameters.getPlayerSymbol() == Constants.X) {
-			setIcon(GUI.XIcon);
-		} else if (GUI.gameParameters.getPlayerSymbol() == Constants.O) {
-			setIcon(GUI.OIcon);
+		if (gui.gameParameters.getPlayerSymbol() == Constants.X) {
+			setIcon(gui.XIcon);
+		} else if (gui.gameParameters.getPlayerSymbol() == Constants.O) {
+			setIcon(gui.OIcon);
 		}
 
 		// get cell coordinates by id
-		List<Integer> cell = GUI.getBoardCellById(id);
+		List<Integer> cell = gui.getBoardCellById(id);
 
-		GUI.makeMove(cell.get(0), cell.get(1), playerSymbol);
+		gui.makeMove(cell.get(0), cell.get(1), playerSymbol);
 
-		System.out.println(GUI.board);
+		System.out.println(gui.board);
 
 		// Check if the game is over.
-		if (GUI.board.isTerminal()) {
-			GUI.gameOver();
+		if (gui.board.isTerminal()) {
+			gui.gameOver();
 			return;
 		} else {
 			try {
@@ -56,28 +58,28 @@ public class HumanVsAiButton extends XOButton {
 			}
 		}
 
-		Move aiMove = this.ai.getNextMove(GUI.board);
+		Move aiMove = this.ai.getNextMove(gui.board);
 
-		GUI.makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
+		gui.makeMove(aiMove.getRow(), aiMove.getColumn(), ai.getAiPlayer());
 
 		int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 
-		for (HumanVsAiButton button : GUI.humanVsAiButtons) {
+		for (HumanVsAiButton button : gui.humanVsAiButtons) {
 			if (button.id == aiMoveButtonId) {
-				if (GUI.gameParameters.getPlayerSymbol() == Constants.X) {
-					button.setIcon(GUI.OIcon);
-				} else if (GUI.gameParameters.getPlayerSymbol() == Constants.O) {
-					button.setIcon(GUI.XIcon);
+				if (gui.gameParameters.getPlayerSymbol() == Constants.X) {
+					button.setIcon(gui.OIcon);
+				} else if (gui.gameParameters.getPlayerSymbol() == Constants.O) {
+					button.setIcon(gui.XIcon);
 				}
 				button.removeActionListener(button);
 			}
 		}
 
-		System.out.println(GUI.board);
+		System.out.println(gui.board);
 
 		// Check if the game is over.
-		if (GUI.board.isTerminal()) {
-			GUI.gameOver();
+		if (gui.board.isTerminal()) {
+			gui.gameOver();
 		} else {
 			try {
 				this.removeActionListener(this);
