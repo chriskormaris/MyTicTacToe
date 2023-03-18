@@ -85,17 +85,17 @@ public class GUI extends JFrame {
 
 		configureGuiStyle();
 
-		this.setSize(500, 500);
-		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle(title);
+		super.setSize(500, 500);
+		super.setResizable(false);
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super.setTitle(title);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (int) (screenSize.getWidth() - this.getWidth()) / 2;
-		int y = (int) (screenSize.getHeight() - this.getHeight()) / 2;
-		this.setLocation(x, y);
+		int x = (int) (screenSize.getWidth() - super.getWidth()) / 2;
+		int y = (int) (screenSize.getHeight() - super.getHeight()) / 2;
+		super.setLocation(x, y);
 
-		this.addKeyListener(gameKeyListener);
-		this.addKeyListener(undoRedoKeyListener);
+		super.addKeyListener(gameKeyListener);
+		super.addKeyListener(undoRedoKeyListener);
 	}
 
 	KeyListener gameKeyListener = new KeyListener() {
@@ -260,7 +260,7 @@ public class GUI extends JFrame {
 		fileMenu.add(settingsItem);
 		fileMenu.add(exitItem);
 
-		this.setJMenuBar(menuBar);
+		super.setJMenuBar(menuBar);
 	}
 
 
@@ -508,13 +508,13 @@ public class GUI extends JFrame {
 		}
 
 		if (panel != null) {
-			this.remove(panel);
-			this.revalidate();
-			this.repaint();
+			super.remove(panel);
+			super.revalidate();
+			super.repaint();
 		}
 
 		panel = new JPanel();
-		this.add(panel);
+		super.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -531,9 +531,9 @@ public class GUI extends JFrame {
 			panel.add(humanVsAiButtons[i]);
 		}
 
-		this.setFocusable(true);
+		super.setFocusable(true);
 
-		this.setVisible(true);
+		super.setVisible(true);
 
 		if (gameParameters.getPlayerSymbol() == Constants.O) {
 			Move aiMove = ai.getNextMove(board);
@@ -561,13 +561,13 @@ public class GUI extends JFrame {
 		}
 
 		if (panel != null) {
-			this.remove(panel);
-			this.revalidate();
-			this.repaint();
+			super.remove(panel);
+			super.revalidate();
+			super.repaint();
 		}
 
 		panel = new JPanel();
-		this.add(panel);
+		super.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -584,9 +584,9 @@ public class GUI extends JFrame {
 			panel.add(humanVsHumanButtons[id]);
 		}
 
-		this.setFocusable(true);
+		super.setFocusable(true);
 
-		this.setVisible(true);
+		super.setVisible(true);
 	}
 
 
@@ -618,13 +618,13 @@ public class GUI extends JFrame {
 		}
 
 		if (panel != null) {
-			this.remove(panel);
-			this.revalidate();
-			this.repaint();
+			super.remove(panel);
+			super.revalidate();
+			super.repaint();
 		}
 
 		panel = new JPanel();
-		this.add(panel);
+		super.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -641,7 +641,7 @@ public class GUI extends JFrame {
 			panel.add(aiVsAiButtons[i]);
 		}
 
-		this.setVisible(true);
+		super.setVisible(true);
 
 		playAiVsAi(ai1, ai2);
 	}
@@ -660,13 +660,13 @@ public class GUI extends JFrame {
 		server.start();
 
 		if (panel != null) {
-			this.remove(panel);
-			this.revalidate();
-			this.repaint();
+			super.remove(panel);
+			super.revalidate();
+			super.repaint();
 		}
 
 		panel = new JPanel();
-		this.add(panel);
+		super.add(panel);
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
@@ -689,9 +689,9 @@ public class GUI extends JFrame {
 			panel.add(clientServerButtons[i]);
 		}
 
-		this.setFocusable(true);
+		super.setFocusable(true);
 
-		this.setVisible(true);
+		super.setVisible(true);
 	}
 
 	private void aiVsAiMove(AI ai) {
@@ -718,7 +718,7 @@ public class GUI extends JFrame {
 			// Sleep ms
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
-				this.paint(this.getGraphics());
+				super.paint(super.getGraphics());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -731,7 +731,7 @@ public class GUI extends JFrame {
 			// Sleep ms
 			try {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
-				this.paint(this.getGraphics());
+				super.paint(super.getGraphics());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
