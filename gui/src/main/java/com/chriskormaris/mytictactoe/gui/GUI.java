@@ -40,8 +40,8 @@ public class GUI extends JFrame {
 	public ImageIcon XIcon;
 	public ImageIcon OIcon;
 
-	private JPanel panel;
-	private GridLayout layout;
+	JPanel panel;
+	GridLayout layout;
 
 	public HumanVsHumanButton[] humanVsHumanButtons;
 	public HumanVsAiButton[] humanVsAiButtons;
@@ -51,13 +51,14 @@ public class GUI extends JFrame {
 	public Board board;
 
 	// Menu bars and items
-	private JMenuBar menuBar;
+	JMenuBar menuBar;
+
 	public JMenuItem undoItem;
 	public JMenuItem redoItem;
 
 	// These Stack objects are used for the "undo" and "redo" functionalities.
-	private Stack<Board> undoBoards;
-	private Stack<Board> redoBoards;
+	final Stack<Board> undoBoards;
+	final Stack<Board> redoBoards;
 
 	public GUI() {
 		this(GuiConstants.TITLE);
@@ -96,7 +97,7 @@ public class GUI extends JFrame {
 		this.addKeyListener(undoRedoKeyListener);
 	}
 
-	private final KeyListener gameKeyListener = new KeyListener() {
+	KeyListener gameKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
 		}
@@ -126,7 +127,7 @@ public class GUI extends JFrame {
 		}
 	};
 
-	private final KeyListener undoRedoKeyListener = new KeyListener() {
+	KeyListener undoRedoKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
 		}
@@ -196,8 +197,6 @@ public class GUI extends JFrame {
 		menuBar.add(helpMenu);
 
 		newGameItem.addActionListener(e -> {
-			gameParameters = new GameParameters(newGameParameters);
-
 			XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 					Constants.X,
 					gameParameters.getPlayer1Color()
@@ -459,15 +458,15 @@ public class GUI extends JFrame {
 
 	/* This method returns a pair of 2 integers from 0-2, given an id from 0-8.
 	 * We need something like a function, namely f, that contains the following points:
-	 * f(0, 0) = 0 = 0*3 + 0
-	 * f(0, 1) = 0 = 0*3 + 1
-	 * f(0, 2) = 0 = 0*3 + 2
-	 * f(1, 0) = 0 = 1*3 + 0
-	 * f(1, 1) = 0 = 1*3 + 1
-	 * f(1, 2) = 0 = 1*3 + 2
-	 * f(2, 0) = 0 = 2*3 + 0
-	 * f(2, 1) = 0 = 2*3 + 1
-	 * f(2, 2) = 0 = 2*3 + 2 */
+	 * f(0, 0) = 0 = 0 * 3 + 0
+	 * f(0, 1) = 0 = 0 * 3 + 1
+	 * f(0, 2) = 0 = 0 * 3 + 2
+	 * f(1, 0) = 0 = 1 * 3 + 0
+	 * f(1, 1) = 0 = 1 * 3 + 1
+	 * f(1, 2) = 0 = 1 * 3 + 2
+	 * f(2, 0) = 0 = 2 * 3 + 0
+	 * f(2, 1) = 0 = 2 * 3 + 1
+	 * f(2, 2) = 0 = 2 * 3 + 2 */
 	public List<Integer> getBoardCellById(int id) {
 		List<Integer> cell = new ArrayList<>();
 		int i = 0, j = 0;
@@ -488,6 +487,8 @@ public class GUI extends JFrame {
 	}
 
 	public void createHumanVsAiNewGame() {
+		gameParameters = new GameParameters(newGameParameters);
+
 		configureGuiStyle();
 
 		if (menuBar == null) {
@@ -550,6 +551,8 @@ public class GUI extends JFrame {
 
 
 	public void createHumanVsHumanNewGame() {
+		gameParameters = new GameParameters(newGameParameters);
+
 		configureGuiStyle();
 
 		if (menuBar == null) {
@@ -587,6 +590,8 @@ public class GUI extends JFrame {
 
 
 	public void createAiVsAiNewGame() {
+		gameParameters = new GameParameters(newGameParameters);
+
 		configureGuiStyle();
 
 		if (menuBar == null) {
@@ -642,6 +647,8 @@ public class GUI extends JFrame {
 
 
 	public void createClientServerNewGame() {
+		gameParameters = new GameParameters(newGameParameters);
+
 		configureGuiStyle();
 
 		if (menuBar == null) {
@@ -799,28 +806,28 @@ public class GUI extends JFrame {
 		// Here, you can change the game parameters, before running the application.
 		// You can also change them later, from the Settings window.
 		/*
-		gui.gameParameters = new GameParameters();
-		gui.gameParameters.setGuiStyle(GuiStyle.SYSTEM_STYLE);
-		gui.gameParameters.setGameMode(GameMode.HUMAN_VS_AI);
-		gui.gameParameters.setGameMode(GameMode.AI_VS_AI);
-		gui.gameParameters.setAi1Type(AiType.BEST_RESPONSE_AI);
-		gui.gameParameters.setAi1MaxDepth(4);
-		gui.gameParameters.setAi2MaxDepth(4);
-		gui.gameParameters.setPlayer1Color(Color.BLUE);
-		gui.gameParameters.setPlayer2Color(Color.RED);
-		gui.gameParameters.setPlayerSymbol(Constants.X);
-		gui.gameParameters.setServerPort(4000);
-		gui.gameParameters.setClientIP("127.0.0.1");
-		gui.gameParameters.setClientPort(4001);
+		gui.newGameParameters = new GameParameters();
+		gui.newGameParameters.setGuiStyle(GuiStyle.SYSTEM_STYLE);
+		gui.newGameParameters.setGameMode(GameMode.HUMAN_VS_AI);
+		gui.newGameParameters.setGameMode(GameMode.AI_VS_AI);
+		gui.newGameParameters.setAi1Type(AiType.BEST_RESPONSE_AI);
+		gui.newGameParameters.setAi1MaxDepth(4);
+		gui.newGameParameters.setAi2MaxDepth(4);
+		gui.newGameParameters.setPlayer1Color(Color.BLUE);
+		gui.newGameParameters.setPlayer2Color(Color.RED);
+		gui.newGameParameters.setPlayerSymbol(Constants.X);
+		gui.newGameParameters.setServerPort(4000);
+		gui.newGameParameters.setClientIP("127.0.0.1");
+		gui.newGameParameters.setClientPort(4001);
 		*/
 
-		if (gui.gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+		if (gui.newGameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
 			gui.createHumanVsAiNewGame();
-		} else if (gui.gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+		} else if (gui.newGameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
 			gui.createHumanVsHumanNewGame();
-		} else if (gui.gameParameters.getGameMode() == GameMode.AI_VS_AI) {
+		} else if (gui.newGameParameters.getGameMode() == GameMode.AI_VS_AI) {
 			gui.createAiVsAiNewGame();
-		} else if (gui.gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
+		} else if (gui.newGameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
 			gui.createClientServerNewGame();
 		}
 	}
