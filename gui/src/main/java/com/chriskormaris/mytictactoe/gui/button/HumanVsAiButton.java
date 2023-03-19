@@ -13,20 +13,14 @@ import java.util.List;
 public class HumanVsAiButton extends XOButton {
 
 	// Empty: 0, X: 1, O: 0
-	public int id;
 	int playerSymbol;
 
 	AI ai;
-	GUI gui;
 
 	public HumanVsAiButton(int id, int playerSymbol, AI ai, GUI gui) {
-		setFocusable(false);
-		this.id = id;
+		super(id, gui);
 		this.playerSymbol = playerSymbol;
-		this.addActionListener(this);
-		setIcon(null);
 		this.ai = ai;
-		this.gui = gui;
 	}
 
 

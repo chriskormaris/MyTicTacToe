@@ -92,13 +92,13 @@ public class SettingsWindow extends JFrame {
 		add(clientPortLabel);
 
 		guiStyleDropDown = new JComboBox<>();
-		guiStyleDropDown.addItem("System style");
 		guiStyleDropDown.addItem("Cross-Platform style");
+		guiStyleDropDown.addItem("System style");
 		guiStyleDropDown.addItem("Nimbus style");
 
-		if (selectedGuiStyle == GuiStyle.SYSTEM_STYLE) {
+		if (selectedGuiStyle == GuiStyle.CROSS_PLATFORM_STYLE) {
 			guiStyleDropDown.setSelectedIndex(0);
-		} else if (selectedGuiStyle == GuiStyle.CROSS_PLATFORM_STYLE) {
+		} else if (selectedGuiStyle == GuiStyle.SYSTEM_STYLE) {
 			guiStyleDropDown.setSelectedIndex(1);
 		} else if (selectedGuiStyle == GuiStyle.NIMBUS_STYLE) {
 			guiStyleDropDown.setSelectedIndex(2);
@@ -304,14 +304,14 @@ public class SettingsWindow extends JFrame {
 				dispose();
 			} else if (ev.getSource() == apply) {
 				try {
-					GuiStyle guiStyle = GuiStyle.valueOf(guiStyleDropDown.getSelectedItem().toString()
-							.toUpperCase().replace("-", "_").replace(" ", "_"));
-					GameMode gameMode = GameMode.valueOf(gameModeDropDown.getSelectedItem().toString()
-							.toUpperCase().replace("-", "_").replace(" ", "_"));
-					AiType ai1Type = AiType.valueOf(ai1TypeDropDown.getSelectedItem().toString()
-							.toUpperCase().replace("-", "_").replace(" ", "_"));
-					AiType ai2Type = AiType.valueOf(ai2TypeDropDown.getSelectedItem().toString()
-							.toUpperCase().replace("-", "_").replace(" ", "_"));
+					GuiStyle guiStyle = GuiStyle.valueOf(guiStyleDropDown.getSelectedItem().toString().toUpperCase()
+							.replace("-", "_").replace(" ", "_"));
+					GameMode gameMode = GameMode.valueOf(gameModeDropDown.getSelectedItem().toString().toUpperCase()
+							.replace("-", "_").replace(" ", "_"));
+					AiType ai1Type = AiType.valueOf(ai1TypeDropDown.getSelectedItem().toString().toUpperCase()
+							.replace("-", "_").replace(" ", "_"));
+					AiType ai2Type = AiType.valueOf(ai2TypeDropDown.getSelectedItem().toString().toUpperCase()
+							.replace("-", "_").replace(" ", "_"));
 					int ai1MaxDepth = ai1MaxDepthDropDown.getSelectedIndex() + 1;
 					int ai2MaxDepth = ai2MaxDepthDropDown.getSelectedIndex() + 1;
 					com.chriskormaris.mytictactoe.gui.enumeration.Color player1Color = Color.valueOf(

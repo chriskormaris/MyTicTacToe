@@ -61,43 +61,6 @@ public class GUI extends JFrame {
 	final Stack<Board> undoBoards;
 	final Stack<Board> redoBoards;
 
-	public GUI() {
-		this(GuiConstants.TITLE);
-	}
-
-	public GUI(String title) {
-		super(title);
-
-		gameParameters = new GameParameters();
-		newGameParameters = new GameParameters(gameParameters);
-
-		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-				Constants.X,
-				Color.BLUE
-		)));
-		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-				Constants.O,
-				Color.RED
-		)));
-
-		undoBoards = new Stack<>();
-		redoBoards = new Stack<>();
-
-		configureGuiStyle();
-
-		super.setSize(500, 500);
-		super.setResizable(false);
-		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		super.setTitle(title);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (int) (screenSize.getWidth() - super.getWidth()) / 2;
-		int y = (int) (screenSize.getHeight() - super.getHeight()) / 2;
-		super.setLocation(x, y);
-
-		super.addKeyListener(gameKeyListener);
-		super.addKeyListener(undoRedoKeyListener);
-	}
-
 	KeyListener gameKeyListener = new KeyListener() {
 		@Override
 		public void keyTyped(KeyEvent e) {
@@ -147,14 +110,51 @@ public class GUI extends JFrame {
 		}
 	};
 
+	public GUI() {
+		this(GuiConstants.TITLE);
+	}
+
+	public GUI(String title) {
+		super(title);
+
+		gameParameters = new GameParameters();
+		newGameParameters = new GameParameters(gameParameters);
+
+		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+				Constants.X,
+				Color.BLUE
+		)));
+		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+				Constants.O,
+				Color.RED
+		)));
+
+		undoBoards = new Stack<>();
+		redoBoards = new Stack<>();
+
+		configureGuiStyle();
+
+		super.setSize(500, 500);
+		super.setResizable(false);
+		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super.setTitle(title);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int x = (int) (screenSize.getWidth() - super.getWidth()) / 2;
+		int y = (int) (screenSize.getHeight() - super.getHeight()) / 2;
+		super.setLocation(x, y);
+
+		super.addKeyListener(gameKeyListener);
+		super.addKeyListener(undoRedoKeyListener);
+	}
+
 	private void configureGuiStyle() {
 		try {
-			if (gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
+			if (gameParameters.getGuiStyle() == GuiStyle.CROSS_PLATFORM_STYLE) {
 				// Option 1
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} else if (gameParameters.getGuiStyle() == GuiStyle.CROSS_PLATFORM_STYLE) {
-				// Option 2
 				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} else if (gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
+				// Option 2
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			} else if (gameParameters.getGuiStyle() == GuiStyle.NIMBUS_STYLE) {
 				// Option 3
 				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -172,7 +172,6 @@ public class GUI extends JFrame {
 			}
 		}
 	}
-
 
 	private void addMenus() {
 		// Adding the menu bar
@@ -263,7 +262,6 @@ public class GUI extends JFrame {
 		super.setJMenuBar(menuBar);
 	}
 
-
 	public void undo() {
 		if (!undoBoards.isEmpty()) {
 			System.out.println("Undo is pressed!");
@@ -349,7 +347,6 @@ public class GUI extends JFrame {
 			}
 		}
 	}
-
 
 	public void redo() {
 		if (!redoBoards.isEmpty()) {
@@ -456,7 +453,6 @@ public class GUI extends JFrame {
 		}
 	}
 
-
 	/* This method returns a pair of 2 integers from 0-2, given an id from 0-8.
 	 * We need something like a function, namely f, that contains the following points:
 	 * f(0, 0) = 0 = 0 * 3 + 0
@@ -550,7 +546,6 @@ public class GUI extends JFrame {
 		}
 	}
 
-
 	public void createHumanVsHumanNewGame() {
 		gameParameters = new GameParameters(newGameParameters);
 
@@ -588,7 +583,6 @@ public class GUI extends JFrame {
 
 		super.setVisible(true);
 	}
-
 
 	public void createAiVsAiNewGame() {
 		gameParameters = new GameParameters(newGameParameters);
@@ -645,7 +639,6 @@ public class GUI extends JFrame {
 
 		playAiVsAi(ai1, ai2);
 	}
-
 
 	public void createClientServerNewGame() {
 		gameParameters = new GameParameters(newGameParameters);
@@ -708,7 +701,6 @@ public class GUI extends JFrame {
 		}
 	}
 
-
 	private void playAiVsAi(AI ai1, AI ai2) {
 		while (!board.isTerminal()) {
 
@@ -740,7 +732,6 @@ public class GUI extends JFrame {
 
 		gameOver();
 	}
-
 
 	public void gameOver() {
 		String message;

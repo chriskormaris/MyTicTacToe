@@ -12,7 +12,6 @@ import java.util.List;
 public class ClientServerButton extends XOButton implements Serializable {
 
 	// Empty: 0, X: 1, O: 0
-	public int id;
 	public boolean programmaticallyPressed = false;
 
 	String serverIP;
@@ -20,19 +19,12 @@ public class ClientServerButton extends XOButton implements Serializable {
 	Client client;
 	int playerSymbol;
 
-	GUI gui;
-
-
 	public ClientServerButton(int id, String serverIP, int serverPort, int playerSymbol, GUI gui) {
-		setFocusable(false);
-		this.id = id;
-		this.addActionListener(this);
-		setIcon(null);
+		super(id, gui);
 		this.serverIP = serverIP;
 		this.serverPort = serverPort;
 		this.client = new Client(serverIP, serverPort, playerSymbol, gui.board);
 		this.playerSymbol = playerSymbol;
-		this.gui = gui;
 	}
 
 

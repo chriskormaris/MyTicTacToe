@@ -29,7 +29,7 @@ public class GameParameters {
 
 	// Default constructor
 	public GameParameters() {
-		this.guiStyle = GuiStyle.SYSTEM_STYLE;
+		this.guiStyle = GuiStyle.CROSS_PLATFORM_STYLE;
 		this.gameMode = GameMode.HUMAN_VS_AI;
 		this.ai1Type = AiType.BEST_RESPONSE_AI;
 		this.ai2Type = AiType.BEST_RESPONSE_AI;

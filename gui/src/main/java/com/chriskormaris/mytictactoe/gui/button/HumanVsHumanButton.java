@@ -10,16 +10,8 @@ import java.util.List;
 public class HumanVsHumanButton extends XOButton {
 
 	// Empty: 0, X: 1, O: 0
-	public int id;
-	GUI gui;
-
-
 	public HumanVsHumanButton(int id, GUI gui) {
-		setFocusable(false);
-		this.id = id;
-		this.addActionListener(this);
-		setIcon(null);
-		this.gui = gui;
+		super(id, gui);
 	}
 
 

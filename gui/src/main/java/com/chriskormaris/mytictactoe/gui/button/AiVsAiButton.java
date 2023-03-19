@@ -9,19 +9,12 @@ import java.awt.event.ActionEvent;
 public class AiVsAiButton extends XOButton {
 
 	// Empty: 0, X: 1, O: 0
-	public int id;
 	public int aiPlayer;
-
-	GUI gui;
 
 
 	public AiVsAiButton(int id, GUI gui) {
-		setFocusable(false);
-		this.id = id;
-		this.addActionListener(this);
-		setIcon(null);
+		super(id, gui);
 		this.aiPlayer = Constants.EMPTY;
-		this.gui = gui;
 	}
 
 
