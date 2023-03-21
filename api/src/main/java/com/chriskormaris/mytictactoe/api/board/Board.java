@@ -262,11 +262,9 @@ public class Board {
 		}
 	}
 
-	// Prints the board, using "X", "O" and 1-9 for ids
-	@Override
-	public String toString() {
+	private String getGameBoardAsString() {
 		StringBuilder output = new StringBuilder();
-		output.append("*********\n");
+		output.append("*********").append("\n");
 		int counter = 1;
 		for (int row = 0; row < 3; row++) {
 			output.append("* ");
@@ -286,10 +284,16 @@ public class Board {
 				}
 				counter++;
 			}
-			output.append("*\n");
+			output.append("*").append("\n");
 		}
-		output.append("*********\n");
+		output.append("*********").append("\n");
 		return output.toString();
+	}
+
+	// Prints the board, using "X", "O" and 1-9 for ids
+	@Override
+	public String toString() {
+		return getGameBoardAsString();
 	}
 
 }
