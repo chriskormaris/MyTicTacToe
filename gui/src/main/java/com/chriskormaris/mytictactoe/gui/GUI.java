@@ -136,7 +136,7 @@ public class GUI extends JFrame {
 
 		super.setSize(500, 500);
 		super.setResizable(false);
-		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		super.setTitle(title);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) (screenSize.getWidth() - super.getWidth()) / 2;
