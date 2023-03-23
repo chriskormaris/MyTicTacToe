@@ -13,6 +13,7 @@ import com.chriskormaris.mytictactoe.gui.button.AiVsAiButton;
 import com.chriskormaris.mytictactoe.gui.button.ClientServerButton;
 import com.chriskormaris.mytictactoe.gui.button.HumanVsAiButton;
 import com.chriskormaris.mytictactoe.gui.button.HumanVsHumanButton;
+import com.chriskormaris.mytictactoe.gui.button.XOButton;
 import com.chriskormaris.mytictactoe.gui.client_server.Server;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
@@ -145,6 +146,8 @@ public class GUI extends JFrame {
 
 		super.addKeyListener(gameKeyListener);
 		super.addKeyListener(undoRedoKeyListener);
+
+		addMenus();
 	}
 
 	private void configureGuiStyle() {
@@ -196,34 +199,7 @@ public class GUI extends JFrame {
 		menuBar.add(fileMenu);
 		menuBar.add(helpMenu);
 
-		newGameItem.addActionListener(e -> {
-			XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-					Constants.X,
-					gameParameters.getPlayer1Color()
-			)));
-			OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-					Constants.O,
-					gameParameters.getPlayer2Color()
-			)));
-
-			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-				createHumanVsAiNewGame();
-			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-				createHumanVsHumanNewGame();
-			} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-				createAiVsAiNewGame();
-			} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-				createClientServerNewGame();
-			}
-
-			undoBoards.clear();
-			redoBoards.clear();
-
-			undoItem.setEnabled(false);
-			redoItem.setEnabled(false);
-
-			System.out.println(board);
-		});
+		newGameItem.addActionListener(e -> startNewGame());
 
 		undoItem.addActionListener(e -> undo());
 
@@ -262,88 +238,87 @@ public class GUI extends JFrame {
 		super.setJMenuBar(menuBar);
 	}
 
+	private void startNewGame() {
+		gameParameters = new GameParameters(newGameParameters);
+
+		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+				Constants.X,
+				gameParameters.getPlayer1Color()
+		)));
+		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+				Constants.O,
+				gameParameters.getPlayer2Color()
+		)));
+
+		undoBoards.clear();
+		redoBoards.clear();
+
+		undoItem.setEnabled(false);
+		redoItem.setEnabled(false);
+
+		System.out.println(board);
+
+		if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+			createHumanVsAiNewGame();
+		} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+			createHumanVsHumanNewGame();
+		} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
+			createAiVsAiNewGame();
+		} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
+			createClientServerNewGame();
+		}
+	}
+
 	public void undo() {
 		if (!undoBoards.isEmpty()) {
 			System.out.println("Undo is pressed!");
 
-			// This is the "undo" implementation for Human VS Human mode.
-			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-				try {
-					redoBoards.push(new Board(board));
-					board = undoBoards.pop();
-
-					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						List<Integer> cell = getBoardCellById(button.id);
-						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.X,
-									gameParameters.getPlayer1Color()
-							))));
-							button.doClick();
-						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.O,
-									gameParameters.getPlayer2Color()
-							))));
-							button.doClick();
-						} else {
-							button.setIcon(null);
-							if (button.getActionListeners().length == 0)
-								button.addActionListener(button);
-						}
-					}
-
-					if (undoBoards.isEmpty()) {
-						undoItem.setEnabled(false);
-					}
-
-					redoItem.setEnabled(true);
-
-					System.out.println(board);
-				} catch (ArrayIndexOutOfBoundsException ex) {
-					System.err.println("No move has been made yet!");
-					System.err.flush();
-				}
+			XOButton[] buttons;
+			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+				buttons = humanVsAiButtons;
+			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+				buttons = humanVsHumanButtons;
+			} else {
+				buttons = aiVsAiButtons;
 			}
 
-			// This is the "undo" implementation for Human VS AI mode.
-			else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-				try {
-					redoBoards.push(new Board(board));
-					board = undoBoards.pop();
+			try {
+				redoBoards.push(new Board(board));
+				board = undoBoards.pop();
 
-					for (HumanVsAiButton button : humanVsAiButtons) {
-						List<Integer> cell = getBoardCellById(button.id);
-						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.X,
-									gameParameters.getPlayer1Color()
-							))));
-							button.doClick();
-						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.O,
-									gameParameters.getPlayer2Color()
-							))));
-							button.doClick();
-						} else {
-							button.setIcon(null);
-							if (button.getActionListeners().length == 0)
-								button.addActionListener(button);
+				for (XOButton button : buttons) {
+					List<Integer> cell = getBoardCellById(button.id);
+					if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
+						button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+								Constants.X,
+								gameParameters.getPlayer1Color()
+						))));
+						button.doClick();
+					} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
+						button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+								Constants.O,
+								gameParameters.getPlayer2Color()
+						))));
+						button.doClick();
+					} else {
+						button.setIcon(null);
+						if (button.getActionListeners().length == 0
+								&& gameParameters.getGameMode() != GameMode.AI_VS_AI) {
+							button.addActionListener(button);
 						}
 					}
-
-					if (undoBoards.isEmpty()) {
-						undoItem.setEnabled(false);
-					}
-
-					redoItem.setEnabled(true);
-
-					System.out.println(board);
-				} catch (ArrayIndexOutOfBoundsException ex) {
-					System.err.println("No move has been made yet!");
-					System.err.flush();
 				}
+
+				if (undoBoards.isEmpty()) {
+					undoItem.setEnabled(false);
+				}
+
+				redoItem.setEnabled(true);
+
+				System.out.println(board);
+			} catch (ArrayIndexOutOfBoundsException ex) {
+				System.err.println("No move has been made yet!");
+				System.err.flush();
 			}
 		}
 	}
@@ -352,103 +327,61 @@ public class GUI extends JFrame {
 		if (!redoBoards.isEmpty()) {
 			System.out.println("Redo is pressed!");
 
-			// This is the "redo" implementation for Human VS Human mode.
-			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-				try {
+			XOButton[] buttons;
+			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
+				buttons = humanVsAiButtons;
+			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
+				buttons = humanVsHumanButtons;
+			} else {
+				buttons = aiVsAiButtons;
+			}
 
-					undoBoards.push(new Board(board));
-					board = new Board(redoBoards.pop());
+			try {
+				undoBoards.push(new Board(board));
+				board = new Board(redoBoards.pop());
 
-					for (HumanVsHumanButton button : humanVsHumanButtons) {
-						List<Integer> cell = getBoardCellById(button.id);
-						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.X,
-									gameParameters.getPlayer1Color()
-							))));
-							for (ActionListener actionListener : button.getActionListeners()) {
-								button.removeActionListener(actionListener);
-							}
-						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.O,
-									gameParameters.getPlayer2Color()
-							))));
-							for (ActionListener actionListener : button.getActionListeners()) {
-								button.removeActionListener(actionListener);
-							}
-						} else {
-							button.setIcon(null);
-							if (button.getActionListeners().length == 0)
-								button.addActionListener(button);
+				for (XOButton button : buttons) {
+					List<Integer> cell = getBoardCellById(button.id);
+					if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
+						button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+								Constants.X,
+								gameParameters.getPlayer1Color()
+						))));
+						for (ActionListener actionListener : button.getActionListeners()) {
+							button.removeActionListener(actionListener);
+						}
+					} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
+						button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
+								Constants.O,
+								gameParameters.getPlayer2Color()
+						))));
+						for (ActionListener actionListener : button.getActionListeners()) {
+							button.removeActionListener(actionListener);
+						}
+					} else {
+						button.setIcon(null);
+						if (button.getActionListeners().length == 0
+								&& gameParameters.getGameMode() != GameMode.AI_VS_AI) {
+							button.addActionListener(button);
 						}
 					}
-
-					if (redoBoards.isEmpty()) {
-						redoItem.setEnabled(false);
-					}
-
-					undoItem.setEnabled(true);
-
-					System.out.println(board);
-
-					boolean isGameOver = board.isTerminal();
-					if (isGameOver) {
-						gameOver();
-					}
-
-				} catch (ArrayIndexOutOfBoundsException ex) {
-					System.err.println("No move has been made yet!");
-					System.err.flush();
 				}
-			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
 
-				try {
-					undoBoards.push(new Board(board));
-					board = new Board(redoBoards.pop());
-
-					for (HumanVsAiButton button : humanVsAiButtons) {
-						List<Integer> cell = getBoardCellById(button.id);
-						if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.X,
-									gameParameters.getPlayer1Color()
-							))));
-							for (ActionListener actionListener : button.getActionListeners()) {
-								button.removeActionListener(actionListener);
-							}
-						} else if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.O) {
-							button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-									Constants.O,
-									gameParameters.getPlayer2Color()
-							))));
-							for (ActionListener actionListener : button.getActionListeners()) {
-								button.removeActionListener(actionListener);
-							}
-						} else {
-							button.setIcon(null);
-							if (button.getActionListeners().length == 0)
-								button.addActionListener(button);
-						}
-					}
-
-					if (redoBoards.isEmpty()) {
-						redoItem.setEnabled(false);
-					}
-
-					undoItem.setEnabled(true);
-
-					System.out.println(board);
-
-					boolean isGameOver = board.isTerminal();
-					if (isGameOver) {
-						gameOver();
-					}
-
-				} catch (ArrayIndexOutOfBoundsException ex) {
-					System.err.println("No move has been made yet!");
-					System.err.flush();
+				if (redoBoards.isEmpty()) {
+					redoItem.setEnabled(false);
 				}
+
+				undoItem.setEnabled(true);
+
+				System.out.println(board);
+
+				boolean isGameOver = board.isTerminal();
+				if (isGameOver) {
+					gameOver();
+				}
+			} catch (ArrayIndexOutOfBoundsException ex) {
+				System.err.println("No move has been made yet!");
+				System.err.flush();
 			}
 		}
 	}
@@ -484,13 +417,7 @@ public class GUI extends JFrame {
 	}
 
 	public void createHumanVsAiNewGame() {
-		gameParameters = new GameParameters(newGameParameters);
-
 		configureGuiStyle();
-
-		if (menuBar == null) {
-			addMenus();
-		}
 
 		int aiPlayerSymbol = (gameParameters.getPlayerSymbol() == Constants.X) ? Constants.O : Constants.X;
 
@@ -547,13 +474,7 @@ public class GUI extends JFrame {
 	}
 
 	public void createHumanVsHumanNewGame() {
-		gameParameters = new GameParameters(newGameParameters);
-
 		configureGuiStyle();
-
-		if (menuBar == null) {
-			addMenus();
-		}
 
 		if (panel != null) {
 			super.remove(panel);
@@ -585,13 +506,7 @@ public class GUI extends JFrame {
 	}
 
 	public void createAiVsAiNewGame() {
-		gameParameters = new GameParameters(newGameParameters);
-
 		configureGuiStyle();
-
-		if (menuBar == null) {
-			addMenus();
-		}
 
 		AI ai1;
 		if (gameParameters.getAi1Type() == AiType.BEST_RESPONSE_AI) {
@@ -641,13 +556,7 @@ public class GUI extends JFrame {
 	}
 
 	public void createClientServerNewGame() {
-		gameParameters = new GameParameters(newGameParameters);
-
 		configureGuiStyle();
-
-		if (menuBar == null) {
-			addMenus();
-		}
 
 		Server server = new Server(gameParameters.getServerPort(), this);
 		server.start();
@@ -703,7 +612,6 @@ public class GUI extends JFrame {
 
 	private void playAiVsAi(AI ai1, AI ai2) {
 		while (!board.isTerminal()) {
-
 			// AI 1 Move
 			aiVsAiMove(ai1);
 
@@ -720,14 +628,15 @@ public class GUI extends JFrame {
 				aiVsAiMove(ai2);
 			}
 
-			// Sleep ms
-			try {
-				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
-				super.paint(super.getGraphics());
-			} catch (Exception ex) {
-				ex.printStackTrace();
+			if (!board.isTerminal()) {
+				// Sleep ms
+				try {
+					Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
+					super.paint(super.getGraphics());
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 			}
-
 		}
 
 		gameOver();
@@ -741,7 +650,7 @@ public class GUI extends JFrame {
 		} else if (board.getWinner() == Constants.O) {
 			System.out.println("Player 2 \"O\" wins!");
 			message = "Player 2 \"O\" wins!\nPlay again?";
-		} else if (Board.isGameBoardFull(board.getGameBoard()) && board.getWinner() == Constants.EMPTY) {
+		} else if (board.isGameBoardFull() && board.getWinner() == Constants.EMPTY) {
 			System.out.println("It is a draw!");
 			message = "It is a draw!\nPlay again?";
 		} else {
@@ -749,18 +658,9 @@ public class GUI extends JFrame {
 		}
 		int input = JOptionPane.showConfirmDialog(this, message, "Game Over", JOptionPane.YES_NO_OPTION);
 		if (input == JOptionPane.OK_OPTION) {
-			undoBoards.clear();
-			redoBoards.clear();
-			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-				createHumanVsAiNewGame();
-			} else if (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-				createHumanVsHumanNewGame();
-			} else if (gameParameters.getGameMode() == GameMode.AI_VS_AI) {
-				createAiVsAiNewGame();
-			} else if (gameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-				createClientServerNewGame();
-			}
+			startNewGame();
 		} else if (input == JOptionPane.NO_OPTION || input == JOptionPane.CLOSED_OPTION) {
+			undoItem.setEnabled(true);
 			if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
 				for (HumanVsAiButton button : humanVsAiButtons) {
 					button.removeActionListener(button);
@@ -779,8 +679,7 @@ public class GUI extends JFrame {
 
 	// Make a move; it places a symbol on the board
 	public void makeMove(int row, int col, int player) {
-		if ((player == Constants.X && gameParameters.getGameMode() == GameMode.HUMAN_VS_AI)
-				|| (gameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN)) {
+		if (player == Constants.X || gameParameters.getGameMode() != GameMode.HUMAN_VS_AI) {
 			undoBoards.push(new Board(board));
 		}
 
@@ -801,7 +700,6 @@ public class GUI extends JFrame {
 		gui.newGameParameters = new GameParameters();
 		gui.newGameParameters.setGuiStyle(GuiStyle.SYSTEM_STYLE);
 		gui.newGameParameters.setGameMode(GameMode.HUMAN_VS_AI);
-		gui.newGameParameters.setGameMode(GameMode.AI_VS_AI);
 		gui.newGameParameters.setAi1Type(AiType.BEST_RESPONSE_AI);
 		gui.newGameParameters.setAi1MaxDepth(4);
 		gui.newGameParameters.setAi2MaxDepth(4);
@@ -813,15 +711,7 @@ public class GUI extends JFrame {
 		gui.newGameParameters.setClientPort(4001);
 		*/
 
-		if (gui.newGameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
-			gui.createHumanVsAiNewGame();
-		} else if (gui.newGameParameters.getGameMode() == GameMode.HUMAN_VS_HUMAN) {
-			gui.createHumanVsHumanNewGame();
-		} else if (gui.newGameParameters.getGameMode() == GameMode.AI_VS_AI) {
-			gui.createAiVsAiNewGame();
-		} else if (gui.newGameParameters.getGameMode() == GameMode.CLIENT_SERVER) {
-			gui.createClientServerNewGame();
-		}
+		gui.startNewGame();
 	}
 
 }

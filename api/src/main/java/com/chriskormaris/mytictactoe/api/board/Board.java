@@ -47,9 +47,9 @@ public class Board {
 
 	// Checking if the board is empty.
 	public static boolean isGameBoardEmpty(int[][] gameBoard) {
-		for (int row = 0; row < 3; row++) {
-			for (int column = 0; column < 3; column++) {
-				if (gameBoard[row][column] != Constants.EMPTY) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (gameBoard[i][j] != Constants.EMPTY) {
 					return false;
 				}
 			}
@@ -59,10 +59,10 @@ public class Board {
 
 	// Checking if the board is full,
 	// by checking if there is at least one empty tile.
-	public static boolean isGameBoardFull(int[][] gameBoard) {
-		for (int row = 0; row < 3; row++) {
-			for (int column = 0; column < 3; column++) {
-				if (gameBoard[row][column] == Constants.EMPTY) {
+	public boolean isGameBoardFull() {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (gameBoard[i][j] == Constants.EMPTY) {
 					return false;
 				}
 			}
@@ -72,9 +72,9 @@ public class Board {
 
 	public static int getNumberOfEmptyCells(int[][] gameBoard) {
 		int number_of_empty_cells = 0;
-		for (int row = 0; row < 3; row++) {
-			for (int column = 0; column < 3; column++) {
-				if (gameBoard[row][column] == Constants.EMPTY) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (gameBoard[i][j] == Constants.EMPTY) {
 					number_of_empty_cells++;
 				}
 			}
@@ -101,11 +101,11 @@ public class Board {
 	 * Any square in the board that is empty results to a child. */
 	public List<Board> getChildren(int symbol) {
 		List<Board> children = new ArrayList<>();
-		for (int row = 0; row < 3; row++) {
-			for (int column = 0; column < 3; column++) {
-				if (isValidMove(row, column)) {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (isValidMove(i, j)) {
 					Board child = new Board(this);
-					child.makeMove(row, column, symbol);
+					child.makeMove(i, j, symbol);
 					children.add(child);
 				}
 			}
@@ -115,10 +115,10 @@ public class Board {
 
 	public List<Move> getValidMoves(int symbol) {
 		List<Move> moves = new ArrayList<>();
-		for (int row = 0; row < 3; row++) {
-			for (int column = 0; column < 3; column++) {
-				if (isValidMove(row, column)) {
-					moves.add(new Move(row, column, symbol));
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				if (isValidMove(i, j)) {
+					moves.add(new Move(i, j, symbol));
 				}
 			}
 		}
@@ -135,15 +135,15 @@ public class Board {
 		int sum;
 
 		// Checking rows
-		for (int row = 0; row < 3; row++) {
-			sum = gameBoard[row][0] + gameBoard[row][1] + gameBoard[row][2];
+		for (int i = 0; i < 3; i++) {
+			sum = gameBoard[i][0] + gameBoard[i][1] + gameBoard[i][2];
 			if (sum == 3) {
 				Xlines = Xlines + 100;
 				// If the sum is 2, then there is definitely 1 empty cell.
 			} else if (sum == 2) {
 				Xlines = Xlines + 10;
 				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			} else if (sum == 1 && (gameBoard[row][0] == 0 || gameBoard[row][1] == 0 || gameBoard[row][2] == 0)) {
+			} else if (sum == 1 && (gameBoard[i][0] == 0 || gameBoard[i][1] == 0 || gameBoard[i][2] == 0)) {
 				Xlines = Xlines + 1;
 			} else if (sum == -3) {
 				Olines = Olines + 100;
@@ -151,21 +151,21 @@ public class Board {
 			} else if (sum == -2) {
 				Olines = Olines + 10;
 				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			} else if (sum == -1 && (gameBoard[row][0] == 0 || gameBoard[row][1] == 0 || gameBoard[row][2] == 0)) {
+			} else if (sum == -1 && (gameBoard[i][0] == 0 || gameBoard[i][1] == 0 || gameBoard[i][2] == 0)) {
 				Olines = Olines + 1;
 			}
 		}
 
 		// Checking columns
-		for (int column = 0; column < 3; column++) {
-			sum = gameBoard[0][column] + gameBoard[1][column] + gameBoard[2][column];
+		for (int j = 0; j < 3; j++) {
+			sum = gameBoard[0][j] + gameBoard[1][j] + gameBoard[2][j];
 			if (sum == 3) {
 				Xlines = Xlines + 100;
 				// If the sum is 2, then there is definitely 1 empty cell.
 			} else if (sum == 2) {
 				Xlines = Xlines + 10;
 				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			} else if (sum == 1 && (gameBoard[0][column] == 0 || gameBoard[1][column] == 0 || gameBoard[2][column] == 0)) {
+			} else if (sum == 1 && (gameBoard[0][j] == 0 || gameBoard[1][j] == 0 || gameBoard[2][j] == 0)) {
 				Xlines = Xlines + 1;
 			} else if (sum == -3) {
 				Olines = Olines + 100;
@@ -173,7 +173,7 @@ public class Board {
 			} else if (sum == -2) {
 				Olines = Olines + 10;
 				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			} else if (sum == -1 && (gameBoard[0][column] == 0 || gameBoard[1][column] == 0 || gameBoard[2][column] == 0)) {
+			} else if (sum == -1 && (gameBoard[0][j] == 0 || gameBoard[1][j] == 0 || gameBoard[2][j] == 0)) {
 				Olines = Olines + 1;
 			}
 		}
@@ -225,33 +225,41 @@ public class Board {
 	 */
 	public boolean isTerminal() {
 		// Checking if there is a horizontal TicTacToe
-		for (int row = 0; row < 3; row++) {
-			if ((gameBoard[row][0] == gameBoard[row][1]) && (gameBoard[row][1] == gameBoard[row][2]) && (gameBoard[row][0] != Constants.EMPTY)) {
-				setWinner(gameBoard[row][0]);
+		for (int i = 0; i < 3; i++) {
+			if (gameBoard[i][0] == gameBoard[i][1]
+					&& gameBoard[i][1] == gameBoard[i][2]
+					&& gameBoard[i][0] != Constants.EMPTY) {
+				setWinner(gameBoard[i][0]);
 				return true;
 			}
 		}
 
 		// Checking if there is a vertical TicTacToe
-		for (int column = 0; column < 3; column++) {
-			if ((gameBoard[0][column] == gameBoard[1][column]) && (gameBoard[1][column] == gameBoard[2][column]) && (gameBoard[0][column] != Constants.EMPTY)) {
-				setWinner(gameBoard[0][column]);
+		for (int j = 0; j < 3; j++) {
+			if (gameBoard[0][j] == gameBoard[1][j]
+					&& gameBoard[1][j] == gameBoard[2][j]
+					&& gameBoard[0][j] != Constants.EMPTY) {
+				setWinner(gameBoard[0][j]);
 				return true;
 			}
 		}
 
 		// Checking if there is a diagonal TicTacToe
-		if ((gameBoard[0][0] == gameBoard[1][1]) && (gameBoard[1][1] == gameBoard[2][2]) && (gameBoard[1][1] != Constants.EMPTY)) {
+		if (gameBoard[0][0] == gameBoard[1][1]
+				&& gameBoard[1][1] == gameBoard[2][2]
+				&& gameBoard[1][1] != Constants.EMPTY) {
 			setWinner(gameBoard[0][0]);
 			return true;
 		}
-		if ((gameBoard[0][2] == gameBoard[1][1]) && (gameBoard[1][1] == gameBoard[2][0]) && (gameBoard[1][1] != Constants.EMPTY)) {
+		if (gameBoard[0][2] == gameBoard[1][1]
+				&& gameBoard[1][1] == gameBoard[2][0]
+				&& gameBoard[1][1] != Constants.EMPTY) {
 			setWinner(gameBoard[0][2]);
 			return true;
 		}
 
 		// Checking if there is at least one empty tile
-		return (Board.isGameBoardFull(gameBoard));
+		return (isGameBoardFull());
 	}
 
 	public void changeLastSymbolPlayed() {
@@ -266,10 +274,10 @@ public class Board {
 		StringBuilder output = new StringBuilder();
 		output.append("*********").append("\n");
 		int counter = 1;
-		for (int row = 0; row < 3; row++) {
+		for (int i = 0; i < 3; i++) {
 			output.append("* ");
-			for (int column = 0; column < 3; column++) {
-				switch (gameBoard[row][column]) {
+			for (int j = 0; j < 3; j++) {
+				switch (gameBoard[i][j]) {
 					case Constants.X:
 						output.append("X ");
 						break;

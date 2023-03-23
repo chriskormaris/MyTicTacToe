@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 public class GuiConstants {
 
 	public static final String TITLE = "My TicTacToe";
-	public static final String VERSION = "2.2.0";
+	public static final String VERSION = "2.2.1";
 
 	public static final String IMG_PATH = "img/";
 	public static final String X_IMG_PATH = IMG_PATH + "X/";
