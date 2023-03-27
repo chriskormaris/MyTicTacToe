@@ -17,9 +17,11 @@ public abstract class XOButton extends JButton implements ActionListener {
 	public XOButton(int id, GUI gui) {
 		this.id = id;
 		this.gui = gui;
+
 		setFocusable(false);
-		setBackground(Color.LIGHT_GRAY);
 		addActionListener(this);
+
+		setBackground(Color.WHITE);
 		setBorder(BorderFactory.createLoweredSoftBevelBorder());
 
 		if (gui.gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
