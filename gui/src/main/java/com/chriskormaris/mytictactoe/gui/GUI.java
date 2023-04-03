@@ -206,7 +206,7 @@ public class GUI extends JFrame {
 		redoItem.addActionListener(e -> redo());
 
 		settingsItem.addActionListener(e -> {
-			SettingsWindow settings = new SettingsWindow(this, gameParameters, newGameParameters);
+			SettingsWindow settings = new SettingsWindow(this, newGameParameters);
 			settings.setVisible(true);
 		});
 
