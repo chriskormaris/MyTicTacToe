@@ -1,4 +1,12 @@
-# MyTicTacToe
+# My TicTacToe #
+
+© Created by: Christos Kormaris, Athens 2019
+
+Programming Language: `Java`
+
+Video for this project:
+- https://www.youtube.com/watch?v=yc8WF4b1LR0
+
 The classic TicTacToe game with a nice GUI, made with Java Swing.
 
 Game modes:
@@ -7,16 +15,12 @@ Game modes:
 3) AI vs AI
 4) Client-Server (like Human vs Human for different PCs, using static IPs)
 
-Video for this project:
-- https://www.youtube.com/watch?v=yc8WF4b1LR0
-
-
 ### Screenshots
 
 #### System style
 ![screenshot](/screenshots/1_system_style.png)
 
-#### Cross platform style
+#### Cross-platform style
 ![screenshot](/screenshots/2_cross_platform_style.png)
 
 #### Nimbus style
