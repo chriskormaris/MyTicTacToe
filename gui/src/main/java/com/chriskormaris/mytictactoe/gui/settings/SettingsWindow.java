@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class SettingsWindow extends JFrame {
@@ -31,7 +33,6 @@ public class SettingsWindow extends JFrame {
 	private final JButton apply;
 	private final JButton cancel;
 
-
 	private final Component parentComponent;
 	private final GameParameters newGameParameters;
 
@@ -44,13 +45,11 @@ public class SettingsWindow extends JFrame {
 		int width = 460;
 		int height = 550;
 
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLayout(null);
-		setSize(width, height);
-		setLocationRelativeTo(parentComponent);
-		setResizable(false);
-
-		EventHandler handler = new EventHandler();
+		super.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		super.setLayout(null);
+		super.setSize(width, height);
+		super.setLocationRelativeTo(parentComponent);
+		super.setResizable(false);
 
 		GuiStyle selectedGuiStyle = newGameParameters.getGuiStyle();
 		GameMode selectedMode = newGameParameters.getGameMode();
@@ -65,6 +64,9 @@ public class SettingsWindow extends JFrame {
 		String clientIP = newGameParameters.getClientIP();
 		int clientPort = newGameParameters.getClientPort();
 
+		List<JLabel> labels = new ArrayList<>();
+		List<JComponent> components = new ArrayList<>();
+
 		JLabel guiStyleLabel = new JLabel("GUI style");
 		JLabel gameModeLabel = new JLabel("Game mode");
 		JLabel ai1TypeLabel = new JLabel("AI 1 type");
@@ -78,18 +80,18 @@ public class SettingsWindow extends JFrame {
 		JLabel clientIpLabel = new JLabel("Client IP");
 		JLabel clientPortLabel = new JLabel("Client port");
 
-		add(guiStyleLabel);
-		add(gameModeLabel);
-		add(ai1TypeLabel);
-		add(ai2TypeLabel);
-		add(ai1MaxDepthLabel);
-		add(ai2MaxDepthLabel);
-		add(player1ColorLabel);
-		add(player2ColorLabel);
-		add(playerSymbolLabel);
-		add(serverPortLabel);
-		add(clientIpLabel);
-		add(clientPortLabel);
+		labels.add(guiStyleLabel);
+		labels.add(gameModeLabel);
+		labels.add(ai1TypeLabel);
+		labels.add(ai2TypeLabel);
+		labels.add(ai1MaxDepthLabel);
+		labels.add(ai2MaxDepthLabel);
+		labels.add(player1ColorLabel);
+		labels.add(player2ColorLabel);
+		labels.add(playerSymbolLabel);
+		labels.add(serverPortLabel);
+		labels.add(clientIpLabel);
+		labels.add(clientPortLabel);
 
 		guiStyleDropDown = new JComboBox<>();
 		guiStyleDropDown.addItem("Cross-Platform style");
@@ -225,84 +227,72 @@ public class SettingsWindow extends JFrame {
 		}
 
 		serverPortTextField = new JTextField();
-		serverPortTextField.setText(serverPort + "");
+		serverPortTextField.setText(String.valueOf(serverPort));
 
 		clientIpTextField = new JTextField(clientIP);
 		clientIpTextField.setText(clientIP);
 
 		clientPortTextField = new JTextField(clientPort);
-		clientPortTextField.setText(clientPort + "");
+		clientPortTextField.setText(String.valueOf(clientPort));
 
-		add(guiStyleDropDown);
-		add(gameModeDropDown);
-		add(ai1TypeDropDown);
-		add(ai2TypeDropDown);
-		add(ai1MaxDepthDropDown);
-		add(ai2MaxDepthDropDown);
-		add(player1ColorDropDown);
-		add(player2ColorDropDown);
-		add(playerSymbolDropDown);
-		add(serverPortTextField);
-		add(clientIpTextField);
-		add(clientPortTextField);
+		components.add(guiStyleDropDown);
+		components.add(gameModeDropDown);
+		components.add(ai1TypeDropDown);
+		components.add(ai2TypeDropDown);
+		components.add(ai1MaxDepthDropDown);
+		components.add(ai2MaxDepthDropDown);
+		components.add(player1ColorDropDown);
+		components.add(player2ColorDropDown);
+		components.add(playerSymbolDropDown);
+		components.add(serverPortTextField);
+		components.add(clientIpTextField);
+		components.add(clientPortTextField);
 
 		int x = 20;
 		int y = 25;
 		int distance = 35;
 		int w = 250;
 		int h = 25;
-		guiStyleLabel.setBounds(x, y, w, h);
-		gameModeLabel.setBounds(x, y = y + distance, w, h);
-		ai1TypeLabel.setBounds(x, y = y + distance, w, h);
-		ai2TypeLabel.setBounds(x, y = y + distance, w, h);
-		ai1MaxDepthLabel.setBounds(x, y = y + distance, w, h);
-		ai2MaxDepthLabel.setBounds(x, y = y + distance, w, h);
-		player1ColorLabel.setBounds(x, y = y + distance, w, h);
-		player2ColorLabel.setBounds(x, y = y + distance, w, h);
-		playerSymbolLabel.setBounds(x, y = y + distance, w, h);
-		serverPortLabel.setBounds(x, y = y + distance, w, h);
-		clientIpLabel.setBounds(x, y = y + distance, w, h);
-		clientPortLabel.setBounds(x, y + distance, w, h);
+		for (JLabel label : labels) {
+			label.setBounds(x, y, w, h);
+			y = y + distance;
+			super.add(label);
+		}
 
 		x = 260;
 		y = 25;
 		w = 160;
-		guiStyleDropDown.setBounds(x, y, w, h);
-		gameModeDropDown.setBounds(x, y = y + distance, w, h);
-		ai1TypeDropDown.setBounds(x, y = y + distance, w, h);
-		ai2TypeDropDown.setBounds(x, y = y + distance, w, h);
-		ai1MaxDepthDropDown.setBounds(x, y = y + distance, w, h);
-		ai2MaxDepthDropDown.setBounds(x, y = y + distance, w, h);
-		player1ColorDropDown.setBounds(x, y = y + distance, w, h);
-		player2ColorDropDown.setBounds(x, y = y + distance, w, h);
-		playerSymbolDropDown.setBounds(x, y = y + distance, w, h);
-		serverPortTextField.setBounds(x, y = y + distance, w, h);
-		clientIpTextField.setBounds(x, y = y + distance, w, h);
-		clientPortTextField.setBounds(x, y + distance, w, h);
+		for (JComponent component : components) {
+			component.setBounds(x, y, w, h);
+			y = y + distance;
+			super.add(component);
+		}
 
 		apply = new JButton("Apply");
 		cancel = new JButton("Cancel");
-		add(apply);
-		add(cancel);
 
 		distance = 10;
 		y = 450;
 		w = 100;
 		h = 30;
+		EventHandler handler = new EventHandler();
 		apply.setBounds((width / 2) - 110 - (distance / 2), y, w, h);
 		apply.addActionListener(handler);
 		cancel.setBounds((width / 2) - 10 + (distance / 2), y, w, h);
 		cancel.addActionListener(handler);
+
+		super.add(apply);
+		super.add(cancel);
 	}
 
 
 	private class EventHandler implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent ev) {
-			if (ev.getSource() == cancel) {
+		public void actionPerformed(ActionEvent event) {
+			if (event.getSource() == cancel) {
 				dispose();
-			} else if (ev.getSource() == apply) {
+			} else if (event.getSource() == apply) {
 				try {
 					GuiStyle guiStyle = GuiStyle.valueOf(guiStyleDropDown.getSelectedItem().toString().toUpperCase()
 							.replace("-", "_").replace(" ", "_"));
