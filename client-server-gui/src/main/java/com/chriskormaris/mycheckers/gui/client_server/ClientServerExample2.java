@@ -10,14 +10,14 @@ public class ClientServerExample2 {
 	public static void main(String[] args) {
 		GUI gui = new GUI("My TicTacToe ClientServer 2");
 
-		GameParameters newGameParameters = new GameParameters();
-		newGameParameters.setGameMode(GameMode.CLIENT_SERVER);
-		newGameParameters.setPlayerSymbol(Constants.O);
-		newGameParameters.setServerPort(4001);
-		newGameParameters.setClientIP("127.0.0.1");
-		newGameParameters.setClientPort(4000);
+		gui.newGameParameters.setGameMode(GameMode.CLIENT_SERVER);
+		gui.newGameParameters.setPlayerSymbol(Constants.O);
+		gui.newGameParameters.setServerPort(4001);
+		gui.newGameParameters.setClientIP("127.0.0.1");
+		gui.newGameParameters.setClientPort(4000);
 
-		gui.gameParameters = new GameParameters(newGameParameters);
+		gui.gameParameters = new GameParameters(gui.newGameParameters);
+		gui.newGameParameters = new GameParameters(gui.newGameParameters);
 
 		gui.createClientServerNewGame();
 	}

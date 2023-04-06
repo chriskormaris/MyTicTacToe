@@ -23,13 +23,12 @@ public class ClientServerButton extends XOButton implements Serializable {
 		super(id, gui);
 		this.serverIP = serverIP;
 		this.serverPort = serverPort;
-		this.client = new Client(serverIP, serverPort, playerSymbol, gui.board);
+		this.client = new Client(serverIP, serverPort, gui.board);
 		this.playerSymbol = playerSymbol;
 	}
 
-
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		int turn = Constants.EMPTY;
 		if (gui.board.getLastPlayer() == Constants.X) {
 			turn = Constants.O;
@@ -62,7 +61,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 		System.out.println(gui.board);
 
 		if (!programmaticallyPressed) {
-			this.client = new Client(serverIP, serverPort, playerSymbol, gui.board);
+			this.client = new Client(serverIP, serverPort, gui.board);
 			this.client.start();
 
 			// check if the game is over
@@ -74,7 +73,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 			this.removeActionListener(this);
 		} catch (NullPointerException ignored) {
 		}
-		gui.clientServerButtons[id] = this;
+		gui.buttons[id] = this;
 	}
 
 }

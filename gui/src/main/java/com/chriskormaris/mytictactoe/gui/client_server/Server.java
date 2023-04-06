@@ -1,7 +1,9 @@
 package com.chriskormaris.mytictactoe.gui.client_server;
 
+import com.chriskormaris.mytictactoe.api.util.Constants;
 import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.gui.button.ClientServerButton;
+import com.chriskormaris.mytictactoe.gui.button.XOButton;
 import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
 
 import java.io.IOException;
@@ -13,14 +15,17 @@ public class Server extends Thread {
 
 	int serverPort;
 	GUI gui;
+	int playerSymbol;
 
-	public Server(int port, GUI gui) {
+	public Server(int port, GUI gui, int playerSymbol) {
 		this.serverPort = port;
 		this.gui = gui;
+		this.playerSymbol = playerSymbol;
 	}
 
 	@Override
 	public void run() {
+		int opposingPlayerSymbol = this.playerSymbol == Constants.X ? Constants.O : Constants.X;
 
 		ServerSocket serverSocket = null;
 		Socket connection = null;
@@ -31,33 +36,29 @@ public class Server extends Thread {
 			);
 			serverSocket = new ServerSocket(serverPort);
 
-			while (true) {
+			do {
 				connection = serverSocket.accept();
 				System.out.println("Server accepted connection!");
 				in = new ObjectInputStream(connection.getInputStream());
 
 				int lastMoveRow = in.readInt();
 				int lastMoveColumn = in.readInt();
-				int opposingPlayerSymbol = in.readInt();
 
 				int id = GuiUtils.getIdByBoardCell(lastMoveRow, lastMoveColumn);
 
 				gui.board.setLastPlayer(opposingPlayerSymbol);
 
-				for (ClientServerButton button : gui.clientServerButtons) {
+				for (XOButton button : gui.buttons) {
+					ClientServerButton clientServerButton = (ClientServerButton) button;
 					if (button.id == id) {
-						// Programmatically press the com.chriskormaris.gui.button.
-						button.programmaticallyPressed = true;
-						button.doClick();
-						button.programmaticallyPressed = false;
+						clientServerButton.programmaticallyPressed = true;
+						clientServerButton.doClick();
+						clientServerButton.programmaticallyPressed = false;
 					}
 				}
-				// GUI.board.printBoard();
+				// gui.board.printBoard();
 
-				if (gui.board.isTerminal()) {
-					break;
-				}
-			}
+			} while (!gui.board.isTerminal());
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -76,7 +77,9 @@ public class Server extends Thread {
 				ex.printStackTrace();
 			}
 		}
-		gui.gameOver();
+		if (gui.board.getLastPlayer() != playerSymbol) {
+			gui.gameOver();
+		}
 	}
 
 }

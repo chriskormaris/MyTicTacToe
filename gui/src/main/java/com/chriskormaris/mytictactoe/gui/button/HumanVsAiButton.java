@@ -23,9 +23,8 @@ public class HumanVsAiButton extends XOButton {
 		this.ai = ai;
 	}
 
-
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		gui.undoItem.setEnabled(true);
 
 		if (gui.gameParameters.getPlayerSymbol() == Constants.X) {
@@ -58,7 +57,7 @@ public class HumanVsAiButton extends XOButton {
 
 		int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 
-		for (HumanVsAiButton button : gui.humanVsAiButtons) {
+		for (XOButton button : gui.buttons) {
 			if (button.id == aiMoveButtonId) {
 				if (gui.gameParameters.getPlayerSymbol() == Constants.X) {
 					button.setIcon(gui.OIcon);

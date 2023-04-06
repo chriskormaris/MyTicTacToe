@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -28,9 +29,7 @@ public class Board {
 		this.lastPlayer = Constants.O;
 		this.gameBoard = new int[3][3];
 		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				this.gameBoard[i][j] = Constants.EMPTY;
-			}
+			Arrays.fill(this.gameBoard[i], Constants.EMPTY);
 		}
 		this.winner = Constants.EMPTY;
 	}

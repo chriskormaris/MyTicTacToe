@@ -14,9 +14,8 @@ public class HumanVsHumanButton extends XOButton {
 		super(id, gui);
 	}
 
-
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		gui.undoItem.setEnabled(true);
 
 		int turn = Constants.EMPTY;

@@ -12,13 +12,11 @@ public class Client extends Thread {
 
 	String serverIP;
 	int serverPort;
-	int playerSymbol;
 	Board board;
 
-	public Client(String IP, int port, int playerSymbol, Board board) {
+	public Client(String IP, int port, Board board) {
 		this.serverIP = IP;
 		this.serverPort = port;
-		this.playerSymbol = playerSymbol;
 		this.board = board;
 	}
 
@@ -37,9 +35,6 @@ public class Client extends Thread {
 			out.flush();
 
 			out.writeInt(lastMove.getColumn());
-			out.flush();
-
-			out.writeInt(playerSymbol);
 			out.flush();
 		} catch (IOException ex) {
 			ex.printStackTrace();

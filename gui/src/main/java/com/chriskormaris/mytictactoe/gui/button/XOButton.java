@@ -30,8 +30,7 @@ public abstract class XOButton extends JButton implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-
+	public void actionPerformed(ActionEvent event) {
 	}
 
 }

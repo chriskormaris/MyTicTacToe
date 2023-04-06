@@ -11,15 +11,13 @@ public class AiVsAiButton extends XOButton {
 	// Empty: 0, X: 1, O: 0
 	public int aiPlayer;
 
-
 	public AiVsAiButton(int id, GUI gui) {
 		super(id, gui);
 		this.aiPlayer = Constants.EMPTY;
 	}
 
-
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		if (aiPlayer == Constants.X) {
 			setIcon(gui.XIcon);
 		} else if (aiPlayer == Constants.O) {
