@@ -1,4 +1,4 @@
-# My TicTacToe #
+# My Tic-Tac-Toe #
 
 © Created by: Christos Kormaris, Athens 2019
 
@@ -7,7 +7,7 @@ Programming Language: `Java`
 Video for this project:
 - https://www.youtube.com/watch?v=yc8WF4b1LR0
 
-The classic TicTacToe game with a nice GUI, made with Java Swing.
+The classic Tic-Tac-Toe game with a nice GUI, made with Java Swing.
 
 Game modes:
 1) Human vs Minimax AI

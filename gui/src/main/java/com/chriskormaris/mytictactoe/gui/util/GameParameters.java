@@ -29,12 +29,12 @@ public class GameParameters {
 
 	// Default constructor
 	public GameParameters() {
-		this.guiStyle = GuiStyle.CROSS_PLATFORM_STYLE;
+		this.guiStyle = GuiStyle.CROSS_PLATFORM;
 		this.gameMode = GameMode.HUMAN_VS_AI;
 		this.ai1Type = AiType.BEST_RESPONSE_AI;
 		this.ai2Type = AiType.BEST_RESPONSE_AI;
-		this.ai1MaxDepth = 3;
-		this.ai2MaxDepth = 3;
+		this.ai1MaxDepth = Constants.DEFAULT_MAX_DEPTH;
+		this.ai2MaxDepth = Constants.DEFAULT_MAX_DEPTH;
 		this.player1Color = Color.BLUE;
 		this.player2Color = Color.RED;
 		this.playerSymbol = Constants.X;

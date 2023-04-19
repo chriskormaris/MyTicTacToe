@@ -15,7 +15,7 @@ public class MinimaxAI extends AI {
 
 	public MinimaxAI() {
 		super(Constants.O);
-		maxDepth = 3;
+		maxDepth = Constants.DEFAULT_MAX_DEPTH;
 	}
 
 	public MinimaxAI(int maxDepth, int playerSymbol) {
@@ -64,14 +64,9 @@ public class MinimaxAI extends AI {
 			Move move = min(child, depth + 1);
 			// The child-move with the greatest value is selected and returned by max
 			if (move.getValue() >= maxMove.getValue()) {
-				if ((move.getValue() == maxMove.getValue())) {
-					// If the heuristic has the same value then we randomly choose one of the two moves
-					if (r.nextInt(2) == 0 || move.getValue() == Integer.MIN_VALUE) {
-						maxMove.setRow(child.getLastMove().getRow());
-						maxMove.setColumn(child.getLastMove().getColumn());
-						maxMove.setValue(move.getValue());
-					}
-				} else {
+				if (move.getValue() > maxMove.getValue()
+                        // If the heuristic has the same value then we randomly choose one of the two moves
+                        || r.nextInt(2) == 0 || move.getValue() == Integer.MIN_VALUE) {
 					maxMove.setRow(child.getLastMove().getRow());
 					maxMove.setColumn(child.getLastMove().getColumn());
 					maxMove.setValue(move.getValue());
@@ -95,13 +90,8 @@ public class MinimaxAI extends AI {
 		for (Board child : children) {
 			Move move = max(child, depth + 1);
 			if (move.getValue() <= minMove.getValue()) {
-				if ((move.getValue() == minMove.getValue())) {
-					if (r.nextInt(2) == 0 || move.getValue() == Integer.MAX_VALUE) {
-						minMove.setRow(child.getLastMove().getRow());
-						minMove.setColumn(child.getLastMove().getColumn());
-						minMove.setValue(move.getValue());
-					}
-				} else {
+				if (move.getValue() < minMove.getValue()
+						|| r.nextInt(2) == 0 || move.getValue() == Integer.MAX_VALUE) {
 					minMove.setRow(child.getLastMove().getRow());
 					minMove.setColumn(child.getLastMove().getColumn());
 					minMove.setValue(move.getValue());

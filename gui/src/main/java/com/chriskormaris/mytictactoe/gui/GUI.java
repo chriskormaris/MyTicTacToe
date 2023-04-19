@@ -143,13 +143,13 @@ public class GUI extends JFrame {
 
 	private void configureGuiStyle() {
 		try {
-			if (gameParameters.getGuiStyle() == GuiStyle.CROSS_PLATFORM_STYLE) {
+			if (gameParameters.getGuiStyle() == GuiStyle.CROSS_PLATFORM) {
 				// Option 1
 				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-			} else if (gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
+			} else if (gameParameters.getGuiStyle() == GuiStyle.SYSTEM) {
 				// Option 2
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} else if (gameParameters.getGuiStyle() == GuiStyle.NIMBUS_STYLE) {
+			} else if (gameParameters.getGuiStyle() == GuiStyle.NIMBUS) {
 				// Option 3
 				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 					if ("Nimbus".equals(info.getName())) {
@@ -214,7 +214,7 @@ public class GUI extends JFrame {
 
 		aboutItem.addActionListener(e -> {
 			JLabel label = new JLabel(
-					"<html>© Created by: Christos Kormaris<br>"
+					"<html>&copy; Created by: Christos Kormaris, Athens 2019<br>"
 							+ "Version " + GuiConstants.VERSION + "</html>"
 			);
 			JOptionPane.showMessageDialog(this, label, "About", JOptionPane.INFORMATION_MESSAGE);

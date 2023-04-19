@@ -24,7 +24,7 @@ public abstract class XOButton extends JButton implements ActionListener {
 		setBackground(Color.WHITE);
 		setBorder(BorderFactory.createLoweredSoftBevelBorder());
 
-		if (gui.gameParameters.getGuiStyle() == GuiStyle.SYSTEM_STYLE) {
+		if (gui.gameParameters.getGuiStyle() == GuiStyle.SYSTEM) {
 			setUI(new MetalButtonUI());
 		}
 	}
