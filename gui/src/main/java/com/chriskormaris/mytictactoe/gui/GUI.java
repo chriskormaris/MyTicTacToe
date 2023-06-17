@@ -112,14 +112,8 @@ public class GUI extends JFrame {
 		gameParameters = new GameParameters();
 		newGameParameters = new GameParameters(gameParameters);
 
-		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-				Constants.X,
-				Color.BLUE
-		)));
-		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-				Constants.O,
-				Color.RED
-		)));
+		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, Color.BLUE)));
+		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, Color.RED)));
 
 		undoBoards = new Stack<>();
 		redoBoards = new Stack<>();
@@ -232,14 +226,8 @@ public class GUI extends JFrame {
 	private void startNewGame() {
 		gameParameters = new GameParameters(newGameParameters);
 
-		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-				Constants.X,
-				gameParameters.getPlayer1Color()
-		)));
-		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
-				Constants.O,
-				gameParameters.getPlayer2Color()
-		)));
+		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, gameParameters.getPlayer1Color())));
+		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, gameParameters.getPlayer2Color())));
 
 		undoBoards.clear();
 		redoBoards.clear();
