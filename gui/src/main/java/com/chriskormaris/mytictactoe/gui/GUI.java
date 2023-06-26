@@ -235,6 +235,7 @@ public class GUI extends JFrame {
 		undoItem.setEnabled(false);
 		redoItem.setEnabled(false);
 
+		board = new Board();
 		System.out.println(board);
 
 		if (gameParameters.getGameMode() == GameMode.HUMAN_VS_AI) {
@@ -411,8 +412,6 @@ public class GUI extends JFrame {
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
 
-		board = new Board();
-
 		buttons = new HumanVsAiButton[9];
 
 		panel.removeAll();
@@ -456,8 +455,6 @@ public class GUI extends JFrame {
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
-
-		board = new Board();
 
 		buttons = new HumanVsHumanButton[9];
 
@@ -507,8 +504,6 @@ public class GUI extends JFrame {
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
 
-		board = new Board();
-
 		buttons = new AiVsAiButton[9];
 
 		panel.removeAll();
@@ -541,8 +536,6 @@ public class GUI extends JFrame {
 
 		layout = new GridLayout(3, 3);
 		panel.setLayout(layout);
-
-		board = new Board();
 
 		buttons = new ClientServerButton[9];
 
@@ -612,12 +605,15 @@ public class GUI extends JFrame {
 		String message;
 		if (board.getWinner() == Constants.X) {
 			System.out.println("Player 1 \"X\" wins!");
+			System.out.println();
 			message = "Player 1 \"X\" wins!\nPlay again?";
 		} else if (board.getWinner() == Constants.O) {
 			System.out.println("Player 2 \"O\" wins!");
+			System.out.println();
 			message = "Player 2 \"O\" wins!\nPlay again?";
 		} else if (board.isGameBoardFull() && board.getWinner() == Constants.EMPTY) {
 			System.out.println("It is a draw!");
+			System.out.println();
 			message = "It is a draw!\nPlay again?";
 		} else {
 			return;
