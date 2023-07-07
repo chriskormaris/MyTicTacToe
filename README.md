@@ -7,6 +7,9 @@ Programming Language: `Java`
 Video for this project:
 - https://www.youtube.com/watch?v=yc8WF4b1LR0
 
+Download `.jar` executable:
+- https://drive.google.com/file/d/1RZ654HDlvPodKq1-YliyYgJly-lgxMDX
+
 The classic Tic-Tac-Toe game with a nice GUI, made with Java Swing.
 
 Game modes:
