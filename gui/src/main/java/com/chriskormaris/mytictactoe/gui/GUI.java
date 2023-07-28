@@ -17,7 +17,7 @@ import com.chriskormaris.mytictactoe.gui.button.XOButton;
 import com.chriskormaris.mytictactoe.gui.client_server.Server;
 import com.chriskormaris.mytictactoe.gui.enumeration.Color;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
-import com.chriskormaris.mytictactoe.gui.settings.SettingsWindow;
+import com.chriskormaris.mytictactoe.gui.frame.SettingsFrame;
 import com.chriskormaris.mytictactoe.gui.util.GameParameters;
 import com.chriskormaris.mytictactoe.gui.util.GuiConstants;
 import com.chriskormaris.mytictactoe.gui.util.GuiUtils;
@@ -191,7 +191,7 @@ public class GUI extends JFrame {
 		redoItem.addActionListener(e -> redo());
 
 		settingsItem.addActionListener(e -> {
-			SettingsWindow settings = new SettingsWindow(this, newGameParameters);
+			SettingsFrame settings = new SettingsFrame(this, newGameParameters);
 			settings.setVisible(true);
 		});
 
