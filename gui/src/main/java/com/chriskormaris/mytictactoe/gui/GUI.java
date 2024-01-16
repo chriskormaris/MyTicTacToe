@@ -156,7 +156,7 @@ public class GUI extends JFrame {
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			} catch (Exception ex2) {
-				ex2.printStackTrace();
+				throw new RuntimeException(ex2);
 			}
 		}
 	}
@@ -581,7 +581,7 @@ public class GUI extends JFrame {
 				Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
 				super.paint(super.getGraphics());
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				throw new RuntimeException(ex);
 			}
 
 			if (!board.isTerminal()) {
@@ -593,7 +593,7 @@ public class GUI extends JFrame {
 					Thread.sleep(Constants.AI_MOVE_MILLISECONDS);
 					super.paint(super.getGraphics());
 				} catch (Exception ex) {
-					ex.printStackTrace();
+					throw new RuntimeException(ex);
 				}
 			}
 		}

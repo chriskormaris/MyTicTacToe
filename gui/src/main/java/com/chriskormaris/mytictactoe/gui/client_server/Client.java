@@ -37,7 +37,7 @@ public class Client extends Thread {
 			out.writeInt(lastMove.getColumn());
 			out.flush();
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			throw new RuntimeException(ex);
 		} finally {
 			try {
 				if (out != null) {
@@ -47,7 +47,7 @@ public class Client extends Thread {
 					requestSocket.close();
 				}
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				throw new RuntimeException(ex);
 			}
 		}
 	}

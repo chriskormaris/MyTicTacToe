@@ -61,7 +61,7 @@ public class Server extends Thread {
 			} while (!gui.board.isTerminal());
 
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			throw new RuntimeException(ex);
 		} finally {
 			try {
 				if (in != null) {
@@ -74,7 +74,7 @@ public class Server extends Thread {
 					serverSocket.close();
 				}
 			} catch (IOException ex) {
-				ex.printStackTrace();
+				throw new RuntimeException(ex);
 			}
 		}
 		if (gui.board.getLastPlayer() != playerSymbol) {
