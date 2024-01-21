@@ -49,9 +49,6 @@ public class GUI extends JFrame {
 
 	public Board board;
 
-	// Menu bars and items
-	JMenuBar menuBar;
-
 	public JMenuItem undoItem;
 	public JMenuItem redoItem;
 
@@ -162,8 +159,8 @@ public class GUI extends JFrame {
 	}
 
 	private void addMenus() {
-		// Adding the menu bar
-		menuBar = new JMenuBar();
+		// Adding the menu bars and items
+		JMenuBar menuBar = new JMenuBar();
 
 		JMenu fileMenu = new JMenu("File");
 		JMenuItem newGameItem = new JMenuItem("New Game");

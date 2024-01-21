@@ -27,19 +27,16 @@ public class Server extends Thread {
 	public void run() {
 		int opposingPlayerSymbol = this.playerSymbol == Constants.X ? Constants.O : Constants.X;
 
-		ServerSocket serverSocket = null;
-		Socket connection = null;
-		ObjectInputStream in = null;
-		try {
+		try (ServerSocket serverSocket = new ServerSocket(serverPort);
+		     Socket connection = serverSocket.accept();
+		     ObjectInputStream in = new ObjectInputStream(connection.getInputStream())) {
+
 			System.out.println(
 					"Server thread with id " + this.getId() + ": Server listening at port: " + serverPort + "..."
 			);
-			serverSocket = new ServerSocket(serverPort);
 
 			do {
-				connection = serverSocket.accept();
 				System.out.println("Server accepted connection!");
-				in = new ObjectInputStream(connection.getInputStream());
 
 				int lastMoveRow = in.readInt();
 				int lastMoveColumn = in.readInt();
@@ -62,21 +59,8 @@ public class Server extends Thread {
 
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
-		} finally {
-			try {
-				if (in != null) {
-					in.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-				if (serverSocket != null) {
-					serverSocket.close();
-				}
-			} catch (IOException ex) {
-				throw new RuntimeException(ex);
-			}
 		}
+
 		if (gui.board.getLastPlayer() != playerSymbol) {
 			gui.gameOver();
 		}

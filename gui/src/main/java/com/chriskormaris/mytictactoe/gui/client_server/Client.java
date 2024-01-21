@@ -22,13 +22,10 @@ public class Client extends Thread {
 
 	@Override
 	public void run() {
-		Socket requestSocket = null;
-		ObjectOutputStream out = null;
+		try (Socket requestSocket = new Socket(InetAddress.getByName(serverIP), serverPort);
+		     ObjectOutputStream out = new ObjectOutputStream(requestSocket.getOutputStream())) {
 
-		try {
-			requestSocket = new Socket(InetAddress.getByName(serverIP), serverPort);
 			System.out.println("Client has started! Established connection with server at port: " + serverPort + "...");
-			out = new ObjectOutputStream(requestSocket.getOutputStream());
 
 			Move lastMove = board.getLastMove();
 			out.writeInt(lastMove.getRow());
@@ -38,17 +35,6 @@ public class Client extends Thread {
 			out.flush();
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
-		} finally {
-			try {
-				if (out != null) {
-					out.close();
-				}
-				if (requestSocket != null) {
-					requestSocket.close();
-				}
-			} catch (IOException ex) {
-				throw new RuntimeException(ex);
-			}
 		}
 	}
 
