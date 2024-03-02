@@ -38,9 +38,9 @@ public class GameParameters {
 		this.player1Color = Color.BLUE;
 		this.player2Color = Color.RED;
 		this.playerSymbol = Constants.X;
-		this.serverPort = Constants.SERVER_PORT;
-		this.clientIP = Constants.LOCALHOST;
-		this.clientPort = Constants.CLIENT_PORT;
+		this.serverPort = GuiConstants.SERVER_PORT;
+		this.clientIP = GuiConstants.LOCALHOST;
+		this.clientPort = GuiConstants.CLIENT_PORT;
 	}
 
 	public GameParameters(GameParameters otherGameParameters) {
