@@ -54,7 +54,6 @@ public class BestResponseAI extends AI {
 			return new Move(1, 1, Constants.X);
 		}
 
-
 		/* Number of Empty Cells: 8 */
 
 		// Cases: 2-9
@@ -103,11 +102,8 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 2) {
 				return new Move(2, 0, Constants.O);
 			}
-			if (randomNumber == 3) {
-				return new Move(2, 2, Constants.O);
-			}
+			return new Move(2, 2, Constants.O);
 		}
-
 
 		/* Number of Empty Cells: 7 */
 
@@ -136,9 +132,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 2) {
 				return new Move(2, 0, Constants.X);
 			}
-			if (randomNumber == 3) {
-				return new Move(2, 2, Constants.X);
-			}
+			return new Move(2, 2, Constants.X);
 		}
 
 		// Case: 15
@@ -161,9 +155,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 1) {
 				return new Move(2, 0, Constants.X);
 			}
-			if (randomNumber == 2) {
-				return new Move(2, 2, Constants.X);
-			}
+			return new Move(2, 2, Constants.X);
 		}
 
 		// Case: 16
@@ -185,9 +177,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 1) {
 				return new Move(2, 0, Constants.X);
 			}
-			if (randomNumber == 2) {
-				return new Move(2, 2, Constants.X);
-			}
+			return new Move(2, 2, Constants.X);
 		}
 
 		// Case: 17
@@ -209,9 +199,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.X);
 			}
-			if (randomNumber == 2) {
-				return new Move(2, 2, Constants.X);
-			}
+			return new Move(2, 2, Constants.X);
 		}
 
 		// Case: 18
@@ -233,11 +221,8 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 1) {
 				return new Move(0, 2, Constants.X);
 			}
-			if (randomNumber == 2) {
-				return new Move(2, 0, Constants.X);
-			}
+			return new Move(2, 0, Constants.X);
 		}
-
 
 		/* Number of Empty Cells: 6 */
 
@@ -263,9 +248,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 2, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 0, Constants.O);
-			}
+			return new Move(2, 0, Constants.O);
 		}
 		
 		/* Given board:
@@ -284,9 +267,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(2, 0, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 2, Constants.O);
-			}
+			return new Move(2, 2, Constants.O);
 		}
 		
 		/* Given board:
@@ -305,19 +286,16 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 2, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 2, Constants.O);
-			}
+			return new Move(2, 2, Constants.O);
 		}
-		
 
 		/* Given board:
 		/* |- - -|
 		 * |O X X|
 		 * |- - -| */
 		if (getAiPlayer() == Constants.O
-				&& (gameBoard[1][0] == Constants.X && gameBoard[1][1] == Constants.X
-				&& gameBoard[1][2] == Constants.O)
+				&& (gameBoard[1][0] == Constants.O && gameBoard[1][1] == Constants.X
+				&& gameBoard[1][2] == Constants.X)
 				&& numberOfEmptyCells == 6) {
 			/* |O - -| |- - -|
 			 * |O X X| |O X X|
@@ -327,9 +305,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 0, Constants.O);
-			}
+			return new Move(2, 0, Constants.O);
 		}
 		
 		/* Given boards:
@@ -351,9 +327,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 2, Constants.O);
-			}
+			return new Move(2, 2, Constants.O);
 		}
 		
 		/* Given board:
@@ -361,9 +335,9 @@ public class BestResponseAI extends AI {
 		 * |- X -|
 		 * |- X -| */
 		if (getAiPlayer() == Constants.O
-				&& (gameBoard[0][1] == Constants.X
+				&& (gameBoard[0][1] == Constants.O
 				&& gameBoard[1][1] == Constants.X
-				&& gameBoard[2][0] == Constants.O)
+				&& gameBoard[2][0] == Constants.X)
 				&& numberOfEmptyCells == 6) {
 			/* |O O -| |- O O|
 			 * |- X -| |- X -|
@@ -373,11 +347,8 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(0, 2, Constants.O);
-			}
+			return new Move(0, 2, Constants.O);
 		}
-
 
 		/* Number of Empty Cells: 5 */
 
@@ -444,8 +415,8 @@ public class BestResponseAI extends AI {
 			return new Move(2, 2, Constants.X);
 		}
 
-
 		/* Number of Empty Cells: 4 */
+
 		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 4);
 		if (bestResponseMove != null) return bestResponseMove;
 
@@ -525,9 +496,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 2, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 2, Constants.O);
-			}
+			return new Move(2, 2, Constants.O);
 		}
 
 		/* Non-winning and near-losing case, that suggests the move [0][0] or [2][0] (for 4 empty cells). */
@@ -546,9 +515,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 0, Constants.O);
-			}
+			return new Move(2, 0, Constants.O);
 		}
 
 		/* Non-winning and near-losing case, that suggests the move [0][0] or [0][2] (for 4 empty cells). */
@@ -567,9 +534,7 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(0, 0, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(0, 2, Constants.O);
-			}
+			return new Move(0, 2, Constants.O);
 		}
 
 		/* Non-winning and near-losing case, that suggests the move [2][0] or [2][2] (for 4 empty cells). */
@@ -588,26 +553,20 @@ public class BestResponseAI extends AI {
 			if (randomNumber == 0) {
 				return new Move(2, 0, Constants.O);
 			}
-			if (randomNumber == 1) {
-				return new Move(2, 2, Constants.O);
-			}
+			return new Move(2, 2, Constants.O);
 		}
-
 
 		/* Number of Empty Cells: 3 */
 		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 3);
 		if (bestResponseMove != null) return bestResponseMove;
 
-
 		/* Number of Empty Cells: 2 */
 		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 2);
 		if (bestResponseMove != null) return bestResponseMove;
 
-
 		/* Number of Empty Cells: 1 */
 		bestResponseMove = casesThatSuggestWinOrNoLose(gameBoard, numberOfEmptyCells, 1);
 		if (bestResponseMove != null) return bestResponseMove;
-
 
 		/* For the rest of the cases, we simply make a random move, among the empty cells. */
 		List<List<Integer>> emptyCells = new ArrayList<>();
@@ -623,8 +582,7 @@ public class BestResponseAI extends AI {
 			}
 		}
 
-
-		if (emptyCells.size() > 0) {
+		if (!emptyCells.isEmpty()) {
 			int randomNumber = r.nextInt(emptyCells.size()) + 1;
 			if (getAiPlayer() == Constants.X
 					&& numberOfEmptyCells % 2 == 1) {
@@ -800,7 +758,6 @@ public class BestResponseAI extends AI {
 			// System.out.println("INSIDE CASE A9");
 			return new Move(2, 2, currentPlayer);
 		}
-
 
 		/* Cases that suggest a no-lose condition! */
 

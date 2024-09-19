@@ -124,98 +124,101 @@ public class Board {
 		return moves;
 	}
 
-	/* +100 for EACH 3-in-a-line for X.
+	/* Infinity if 3-in-a-line for X.
 	 * +10 for EACH 2-in-a-line (with 1 empty cell) for X.
 	 * +1 for EACH 1-in-a-line (with 2 empty cells) for X.
 	 * Negative scores for O, i.e., -100, -10, -1 for EACH O's 3-in-a-line, 2-in-a-line and 1-in-a-line. */
 	public int evaluate() {
-		int Xlines = 0;
-		int Olines = 0;
-		int sum;
+		int XLines = 0;
+		int OLines = 0;
 
 		// Checking rows
 		for (int i = 0; i < 3; i++) {
-			sum = gameBoard[i][0] + gameBoard[i][1] + gameBoard[i][2];
+			int sum = gameBoard[i][0] + gameBoard[i][1] + gameBoard[i][2];
 			if (sum == 3) {
-				Xlines = Xlines + 100;
-				// If the sum is 2, then there is definitely 1 empty cell.
+				return Integer.MAX_VALUE;
 			} else if (sum == 2) {
-				Xlines = Xlines + 10;
-				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				// If the sum is 2, then there is definitely 1 empty cell.
+				XLines = XLines + 10;
 			} else if (sum == 1 && (gameBoard[i][0] == 0 || gameBoard[i][1] == 0 || gameBoard[i][2] == 0)) {
-				Xlines = Xlines + 1;
+				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				XLines = XLines + 1;
 			} else if (sum == -3) {
-				Olines = Olines + 100;
-				// If the sum is -2, then there is definitely 1 empty cell.
+				return Integer.MIN_VALUE;
 			} else if (sum == -2) {
-				Olines = Olines + 10;
-				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				// If the sum is -2, then there is definitely 1 empty cell.
+				OLines = OLines + 10;
 			} else if (sum == -1 && (gameBoard[i][0] == 0 || gameBoard[i][1] == 0 || gameBoard[i][2] == 0)) {
-				Olines = Olines + 1;
+				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				OLines = OLines + 1;
 			}
 		}
 
 		// Checking columns
 		for (int j = 0; j < 3; j++) {
-			sum = gameBoard[0][j] + gameBoard[1][j] + gameBoard[2][j];
+			int sum = gameBoard[0][j] + gameBoard[1][j] + gameBoard[2][j];
 			if (sum == 3) {
-				Xlines = Xlines + 100;
-				// If the sum is 2, then there is definitely 1 empty cell.
+				return Integer.MAX_VALUE;
 			} else if (sum == 2) {
-				Xlines = Xlines + 10;
-				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				// If the sum is 2, then there is definitely 1 empty cell.
+				XLines = XLines + 10;
 			} else if (sum == 1 && (gameBoard[0][j] == 0 || gameBoard[1][j] == 0 || gameBoard[2][j] == 0)) {
-				Xlines = Xlines + 1;
+				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				XLines = XLines + 1;
 			} else if (sum == -3) {
-				Olines = Olines + 100;
-				// If the sum is -2, then there is definitely 1 empty cell.
+				return Integer.MIN_VALUE;
 			} else if (sum == -2) {
-				Olines = Olines + 10;
-				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				// If the sum is -2, then there is definitely 1 empty cell.
+				OLines = OLines + 10;
 			} else if (sum == -1 && (gameBoard[0][j] == 0 || gameBoard[1][j] == 0 || gameBoard[2][j] == 0)) {
-				Olines = Olines + 1;
+				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+				OLines = OLines + 1;
 			}
 		}
 
 		// Checking diagonals
-		sum = gameBoard[0][0] + gameBoard[1][1] + gameBoard[2][2];
+
+		// downward diagonal
+		int sum = gameBoard[0][0] + gameBoard[1][1] + gameBoard[2][2];
 		if (sum == 3) {
-			Xlines = Xlines + 100;
-			// If the sum is 2, then there is definitely 1 empty cell.
+			return Integer.MAX_VALUE;
 		} else if (sum == 2) {
-			Xlines = Xlines + 10;
-			// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+			// If the sum is 2, then there is definitely 1 empty cell.
+			XLines = XLines + 10;
 		} else if (sum == 1 && (gameBoard[0][0] == 0 || gameBoard[1][1] == 0 || gameBoard[2][2] == 0)) {
-			Xlines = Xlines + 1;
-		} else if (sum == -3) {
-			Olines = Olines + 100;
-			// If the sum is -2, then there is definitely 1 empty cell.
-		} else if (sum == -2) {
-			Olines = Olines + 10;
-			// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-		} else if (sum == -1 && (gameBoard[0][0] == 0 || gameBoard[1][1] == 0 || gameBoard[2][2] == 0)) {
-			Olines = Olines + 1;
-		}
-		sum = gameBoard[0][2] + gameBoard[1][1] + gameBoard[2][0];
-		if (sum == 3) {
-			Xlines = Xlines + 100;
-			// If the sum is 2, then there is definitely 1 empty cell.
-		} else if (sum == 2) {
-			Xlines = Xlines + 10;
 			// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-		} else if (sum == 1 && (gameBoard[0][2] == 0 || gameBoard[1][1] == 0 || gameBoard[2][0] == 0)) {
-			Xlines = Xlines + 1;
+			XLines = XLines + 1;
 		} else if (sum == -3) {
-			Olines = Olines + 100;
-			// If the sum is -2, then there is definitely 1 empty cell.
+			return Integer.MIN_VALUE;
 		} else if (sum == -2) {
-			Olines = Olines + 10;
+			// If the sum is -2, then there is definitely 1 empty cell.
+			OLines = OLines + 10;
+		} else if (sum == -1 && (gameBoard[0][0] == 0 || gameBoard[1][1] == 0 || gameBoard[2][2] == 0)) {
 			// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-		} else if (sum == -1 && (gameBoard[0][2] == 0 || gameBoard[1][1] == 0 || gameBoard[2][0] == 0)) {
-			Olines = Olines + 1;
+			OLines = OLines + 1;
 		}
 
-		return Xlines - Olines;
+		// upward diagonal
+		sum = gameBoard[0][2] + gameBoard[1][1] + gameBoard[2][0];
+		if (sum == 3) {
+			return Integer.MAX_VALUE;
+		} else if (sum == 2) {
+			// If the sum is 2, then there is definitely 1 empty cell.
+			XLines = XLines + 10;
+		} else if (sum == 1 && (gameBoard[0][2] == 0 || gameBoard[1][1] == 0 || gameBoard[2][0] == 0)) {
+			// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+			XLines = XLines + 1;
+		} else if (sum == -3) {
+			return Integer.MIN_VALUE;
+		} else if (sum == -2) {
+			// If the sum is -2, then there is definitely 1 empty cell.
+			OLines = OLines + 10;
+		} else if (sum == -1 && (gameBoard[0][2] == 0 || gameBoard[1][1] == 0 || gameBoard[2][0] == 0)) {
+			// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
+			OLines = OLines + 1;
+		}
+
+		return XLines - OLines;
 	}
 
 	/*
