@@ -1,12 +1,11 @@
 package com.chriskormaris.mytictactoe.api.board;
 
 import com.chriskormaris.mytictactoe.api.util.Constants;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -45,7 +44,7 @@ public class Board {
 	}
 
 	// Checking if the board is empty.
-	public static boolean isGameBoardEmpty(int[][] gameBoard) {
+	public boolean isEmpty() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (gameBoard[i][j] != Constants.EMPTY) {
@@ -69,16 +68,16 @@ public class Board {
 		return true;
 	}
 
-	public static int getNumberOfEmptyCells(int[][] gameBoard) {
-		int number_of_empty_cells = 0;
+	public int getNumberOfEmptyCells() {
+		int numberOfEmptyCells = 0;
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (gameBoard[i][j] == Constants.EMPTY) {
-					number_of_empty_cells++;
+					numberOfEmptyCells++;
 				}
 			}
 		}
-		return number_of_empty_cells;
+		return numberOfEmptyCells;
 	}
 
 	// Make a move; it places a symbol on the board
@@ -127,10 +126,10 @@ public class Board {
 	/* Infinity if 3-in-a-line for X.
 	 * +10 for EACH 2-in-a-line (with 1 empty cell) for X.
 	 * +1 for EACH 1-in-a-line (with 2 empty cells) for X.
-	 * Negative scores for O, i.e., -100, -10, -1 for EACH O's 3-in-a-line, 2-in-a-line and 1-in-a-line. */
+	 * Negative scores for O, i.e., -Infinity, -10, -1 for EACH O's 3-in-a-line, 2-in-a-line and 1-in-a-line. */
 	public int evaluate() {
-		int XLines = 0;
-		int OLines = 0;
+		int XScore = 0;
+		int OScore = 0;
 
 		// Checking rows
 		for (int i = 0; i < 3; i++) {
@@ -139,18 +138,18 @@ public class Board {
 				return Integer.MAX_VALUE;
 			} else if (sum == 2) {
 				// If the sum is 2, then there is definitely 1 empty cell.
-				XLines = XLines + 10;
+				XScore = XScore + 10;
 			} else if (sum == 1 && (gameBoard[i][0] == 0 || gameBoard[i][1] == 0 || gameBoard[i][2] == 0)) {
 				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-				XLines = XLines + 1;
+				XScore = XScore + 1;
 			} else if (sum == -3) {
 				return Integer.MIN_VALUE;
 			} else if (sum == -2) {
 				// If the sum is -2, then there is definitely 1 empty cell.
-				OLines = OLines + 10;
+				OScore = OScore + 10;
 			} else if (sum == -1 && (gameBoard[i][0] == 0 || gameBoard[i][1] == 0 || gameBoard[i][2] == 0)) {
 				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-				OLines = OLines + 1;
+				OScore = OScore + 1;
 			}
 		}
 
@@ -161,18 +160,18 @@ public class Board {
 				return Integer.MAX_VALUE;
 			} else if (sum == 2) {
 				// If the sum is 2, then there is definitely 1 empty cell.
-				XLines = XLines + 10;
+				XScore = XScore + 10;
 			} else if (sum == 1 && (gameBoard[0][j] == 0 || gameBoard[1][j] == 0 || gameBoard[2][j] == 0)) {
 				// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-				XLines = XLines + 1;
+				XScore = XScore + 1;
 			} else if (sum == -3) {
 				return Integer.MIN_VALUE;
 			} else if (sum == -2) {
 				// If the sum is -2, then there is definitely 1 empty cell.
-				OLines = OLines + 10;
+				OScore = OScore + 10;
 			} else if (sum == -1 && (gameBoard[0][j] == 0 || gameBoard[1][j] == 0 || gameBoard[2][j] == 0)) {
 				// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-				OLines = OLines + 1;
+				OScore = OScore + 1;
 			}
 		}
 
@@ -184,18 +183,18 @@ public class Board {
 			return Integer.MAX_VALUE;
 		} else if (sum == 2) {
 			// If the sum is 2, then there is definitely 1 empty cell.
-			XLines = XLines + 10;
+			XScore = XScore + 10;
 		} else if (sum == 1 && (gameBoard[0][0] == 0 || gameBoard[1][1] == 0 || gameBoard[2][2] == 0)) {
 			// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			XLines = XLines + 1;
+			XScore = XScore + 1;
 		} else if (sum == -3) {
 			return Integer.MIN_VALUE;
 		} else if (sum == -2) {
 			// If the sum is -2, then there is definitely 1 empty cell.
-			OLines = OLines + 10;
+			OScore = OScore + 10;
 		} else if (sum == -1 && (gameBoard[0][0] == 0 || gameBoard[1][1] == 0 || gameBoard[2][2] == 0)) {
 			// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			OLines = OLines + 1;
+			OScore = OScore + 1;
 		}
 
 		// upward diagonal
@@ -204,21 +203,21 @@ public class Board {
 			return Integer.MAX_VALUE;
 		} else if (sum == 2) {
 			// If the sum is 2, then there is definitely 1 empty cell.
-			XLines = XLines + 10;
+			XScore = XScore + 10;
 		} else if (sum == 1 && (gameBoard[0][2] == 0 || gameBoard[1][1] == 0 || gameBoard[2][0] == 0)) {
 			// If the sum is 1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			XLines = XLines + 1;
+			XScore = XScore + 1;
 		} else if (sum == -3) {
 			return Integer.MIN_VALUE;
 		} else if (sum == -2) {
 			// If the sum is -2, then there is definitely 1 empty cell.
-			OLines = OLines + 10;
+			OScore = OScore + 10;
 		} else if (sum == -1 && (gameBoard[0][2] == 0 || gameBoard[1][1] == 0 || gameBoard[2][0] == 0)) {
 			// If the sum is -1 and there is at least 1 empty cell, then the other cell left is definitely empty too.
-			OLines = OLines + 1;
+			OScore = OScore + 1;
 		}
 
-		return XLines - OLines;
+		return XScore - OScore;
 	}
 
 	/*
