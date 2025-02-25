@@ -354,9 +354,9 @@ public class BestResponseAI extends AI {
 				&& (gameBoard[0][1] == Constants.X
 				&& gameBoard[1][0] == Constants.X
 				&& gameBoard[1][1] == Constants.O)) {
-				/* |O X -| |- X Ο| |- X -|
+				/* |O X -| |- X O| |- X -|
 				 * |X O -| |X O -| |X O -|
-				 * |- - -| |- - -| |Ο - -| */
+				 * |- - -| |- - -| |O - -| */
 				// System.out.println("INSIDE CASE C9");
 				int randomNumber = random.nextInt(3);
 				if (randomNumber == 0) {
@@ -490,6 +490,110 @@ public class BestResponseAI extends AI {
 				 * |- X X| */
 				// System.out.println("INSIDE CASE D4");
 				return new Move(2, 2, Constants.X);
+			}
+
+			/* |O - -|
+			 * |- X -|
+			 * |- O X| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][0] == Constants.O && gameBoard[1][1] == Constants.X
+					&& gameBoard[2][1] == Constants.O && gameBoard[2][2] == Constants.X)) {
+				/* |O - X|
+				 * |- X -|
+				 * |- O X| */
+				// System.out.println("INSIDE CASE D5");
+				return new Move(0, 2, Constants.X);
+			}
+
+			/* |- - O|
+			 * |- X -|
+			 * |X O -| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][2] == Constants.O && gameBoard[1][1] == Constants.X
+					&& gameBoard[2][0] == Constants.X && gameBoard[2][1] == Constants.O)) {
+				/* |X - O|
+				 * |- X -|
+				 * |X O -| */
+				// System.out.println("INSIDE CASE D6");
+				return new Move(0, 0, Constants.X);
+			}
+
+			/* |- O X|
+			 * |- X -|
+			 * |O - -| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][1] == Constants.O && gameBoard[0][2] == Constants.X
+					&& gameBoard[1][1] == Constants.X && gameBoard[2][0] == Constants.O)) {
+				/* |- O X|
+				 * |- X -|
+				 * |O - X| */
+				// System.out.println("INSIDE CASE D7");
+				return new Move(2, 2, Constants.X);
+			}
+
+			/* |X O -|
+			 * |- X -|
+			 * |- - O| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][0] == Constants.X && gameBoard[0][1] == Constants.O
+					&& gameBoard[1][1] == Constants.X && gameBoard[2][2] == Constants.O)) {
+				/* |X O -|
+				 * |- X -|
+				 * |X - O| */
+				// System.out.println("INSIDE CASE D8");
+				return new Move(2, 0, Constants.X);
+			}
+
+			/* |O - -|
+			 * |- X O|
+			 * |- - X| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][0] == Constants.O && gameBoard[1][1] == Constants.X
+					&& gameBoard[1][2] == Constants.O && gameBoard[2][2] == Constants.X)) {
+				/* |O - -|
+				 * |- X O|
+				 * |X - X| */
+				// System.out.println("INSIDE CASE D9");
+				return new Move(2, 0, Constants.X);
+			}
+
+			/* |- - O|
+			 * |O X -|
+			 * |X - -| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][2] == Constants.O && gameBoard[1][0] == Constants.O
+					&& gameBoard[1][1] == Constants.X && gameBoard[2][0] == Constants.X)) {
+				/* |- - O|
+				 * |O X -|
+				 * |X - X| */
+				// System.out.println("INSIDE CASE D10");
+				return new Move(2, 2, Constants.X);
+			}
+
+			/* |- - X|
+			 * |- X O|
+			 * |O - -| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][2] == Constants.X && gameBoard[1][1] == Constants.X
+					&& gameBoard[1][2] == Constants.O && gameBoard[2][0] == Constants.O)) {
+				/* |X - X|
+				 * |- X O|
+				 * |O - -| */
+				// System.out.println("INSIDE CASE D11");
+				return new Move(0, 0, Constants.X);
+			}
+
+			/* |X - -|
+			 * |O X -|
+			 * |- - O| */
+			if (getAiPlayer() == Constants.X
+					&& (gameBoard[0][0] == Constants.X && gameBoard[1][0] == Constants.O
+					&& gameBoard[1][1] == Constants.X && gameBoard[2][2] == Constants.O)) {
+				/* |X - X|
+				 * |O X -|
+				 * |- - O| */
+				// System.out.println("INSIDE CASE D12");
+				return new Move(0, 2, Constants.X);
 			}
 
 		}
