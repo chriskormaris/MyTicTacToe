@@ -57,7 +57,7 @@ public class Board {
 
 	// Checking if the board is full,
 	// by checking if there is at least one empty tile.
-	public boolean isGameBoardFull() {
+	public boolean isFull() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (gameBoard[i][j] == Constants.EMPTY) {
@@ -224,7 +224,7 @@ public class Board {
 	 * A state is terminal if there is a TicTacToe
 	 * or no empty tiles are available
 	 */
-	public boolean isTerminal() {
+	public boolean checkForWin() {
 		// Checking if there is a horizontal TicTacToe
 		for (int i = 0; i < 3; i++) {
 			if (gameBoard[i][0] == gameBoard[i][1]
@@ -245,13 +245,15 @@ public class Board {
 			}
 		}
 
-		// Checking if there is a diagonal TicTacToe
+		// Checking if there is an upward diagonal TicTacToe
 		if (gameBoard[0][0] == gameBoard[1][1]
 				&& gameBoard[1][1] == gameBoard[2][2]
 				&& gameBoard[1][1] != Constants.EMPTY) {
 			setWinner(gameBoard[0][0]);
 			return true;
 		}
+
+		// Checking if there is a downward diagonal TicTacToe
 		if (gameBoard[0][2] == gameBoard[1][1]
 				&& gameBoard[1][1] == gameBoard[2][0]
 				&& gameBoard[1][1] != Constants.EMPTY) {
@@ -259,11 +261,26 @@ public class Board {
 			return true;
 		}
 
-		// Checking if there is at least one empty tile
-		return (isGameBoardFull());
+		return false;
 	}
 
-	public void changeLastSymbolPlayed() {
+	/*
+	 * A state is win if there is a TicTacToe.
+	 */
+	public boolean isTerminal() {
+		if (checkForWin()) {
+			return true;
+		}
+
+		// Checking if there is a draw
+		return isDraw();
+	}
+
+	public boolean isDraw() {
+		return isFull() && this.winner == Constants.EMPTY;
+	}
+
+	public void changeLastPlayer() {
 		if (this.lastPlayer == Constants.X) {
 			this.lastPlayer = Constants.O;
 		} else if (this.lastPlayer == Constants.O) {
@@ -297,6 +314,10 @@ public class Board {
 		}
 		output.append("*********").append("\n");
 		return output.toString();
+	}
+
+	public int getNextPlayer() {
+		return this.lastPlayer == Constants.O ? Constants.X : Constants.O;
 	}
 
 	// Prints the board, using "X", "O" and 1-9 for ids

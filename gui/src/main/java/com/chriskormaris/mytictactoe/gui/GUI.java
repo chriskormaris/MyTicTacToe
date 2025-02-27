@@ -608,7 +608,7 @@ public class GUI extends JFrame {
 			System.out.println("Player 2 \"O\" wins!");
 			System.out.println();
 			message = "Player 2 \"O\" wins!\nPlay again?";
-		} else if (board.isGameBoardFull() && board.getWinner() == Constants.EMPTY) {
+		} else if (board.isDraw()) {
 			System.out.println("It is a draw!");
 			System.out.println();
 			message = "It is a draw!\nPlay again?";

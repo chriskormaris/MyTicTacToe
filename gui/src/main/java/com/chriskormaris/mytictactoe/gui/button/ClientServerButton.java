@@ -42,7 +42,7 @@ public class ClientServerButton extends XOButton implements Serializable {
 
 		if (programmaticallyPressed) {
 			turn = gui.board.getLastPlayer();
-			gui.board.changeLastSymbolPlayed();
+			gui.board.changeLastPlayer();
 		}
 
 		// add X or O on the board GUI
