@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class RandomChoiceAI extends AI {
 
+	private static final Random RANDOM = new Random();
+
 	public RandomChoiceAI(int aiPlayer) {
 		super(aiPlayer);
 	}
@@ -15,10 +17,8 @@ public class RandomChoiceAI extends AI {
 	// Initiates the random move.
 	@Override
 	public Move getNextMove(Board board) {
-		Random r = new Random();
-
 		List<Move> validMoves = board.getValidMoves(getAiPlayer());
-		int randomMoveIndex = r.nextInt(validMoves.size());
+		int randomMoveIndex = RANDOM.nextInt(validMoves.size());
 
 		return validMoves.get(randomMoveIndex);
 	}
