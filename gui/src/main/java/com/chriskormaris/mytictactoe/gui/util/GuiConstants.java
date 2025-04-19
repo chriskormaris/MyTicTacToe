@@ -9,7 +9,7 @@ public class GuiConstants {
 	public static final String TITLE = "My Tic-Tac-Toe";
 	public static final String VERSION = "2.4.2";
 
-	public static final long AI_MOVE_MILLISECONDS = 100L;
+	public static final long AI_MOVE_DELAY_MILLISECONDS = 100L;
 
 	public static final String LOCALHOST = "127.0.0.1";
 	public static final int SERVER_PORT = 4000;

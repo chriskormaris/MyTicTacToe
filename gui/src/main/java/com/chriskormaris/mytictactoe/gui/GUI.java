@@ -575,7 +575,7 @@ public class GUI extends JFrame {
 			aiVsAiMove(ai1);
 
 			try {
-				Thread.sleep(GuiConstants.AI_MOVE_MILLISECONDS);
+				Thread.sleep(GuiConstants.AI_MOVE_DELAY_MILLISECONDS);
 				super.paint(super.getGraphics());
 			} catch (Exception ex) {
 				throw new RuntimeException(ex);
@@ -587,7 +587,7 @@ public class GUI extends JFrame {
 
 			if (!board.isTerminal()) {
 				try {
-					Thread.sleep(GuiConstants.AI_MOVE_MILLISECONDS);
+					Thread.sleep(GuiConstants.AI_MOVE_DELAY_MILLISECONDS);
 					super.paint(super.getGraphics());
 				} catch (Exception ex) {
 					throw new RuntimeException(ex);
