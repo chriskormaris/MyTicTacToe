@@ -407,6 +407,9 @@ public class GUI extends JFrame {
 		super.add(panel);
 
 		layout = new GridLayout(3, 3);
+		layout.setHgap(10);
+		layout.setVgap(10);
+		panel.setBackground(java.awt.Color.BLACK);
 		panel.setLayout(layout);
 
 		buttons = new HumanVsAiButton[9];
@@ -450,8 +453,11 @@ public class GUI extends JFrame {
 		panel = new JPanel();
 		super.add(panel);
 
-		layout = new GridLayout(3, 3);
-		panel.setLayout(layout);
+        layout = new GridLayout(3, 3);
+        layout.setHgap(10);
+        layout.setVgap(10);
+        panel.setBackground(java.awt.Color.BLACK);
+        panel.setLayout(layout);
 
 		buttons = new HumanVsHumanButton[9];
 
@@ -498,8 +504,11 @@ public class GUI extends JFrame {
 		panel = new JPanel();
 		super.add(panel);
 
-		layout = new GridLayout(3, 3);
-		panel.setLayout(layout);
+        layout = new GridLayout(3, 3);
+        layout.setHgap(10);
+        layout.setVgap(10);
+        panel.setBackground(java.awt.Color.BLACK);
+        panel.setLayout(layout);
 
 		buttons = new AiVsAiButton[9];
 
@@ -531,8 +540,11 @@ public class GUI extends JFrame {
 		panel = new JPanel();
 		super.add(panel);
 
-		layout = new GridLayout(3, 3);
-		panel.setLayout(layout);
+        layout = new GridLayout(3, 3);
+        layout.setHgap(10);
+        layout.setVgap(10);
+        panel.setBackground(java.awt.Color.BLACK);
+        panel.setLayout(layout);
 
 		buttons = new ClientServerButton[9];
 
