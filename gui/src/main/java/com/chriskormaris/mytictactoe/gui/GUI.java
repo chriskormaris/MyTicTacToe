@@ -407,6 +407,9 @@ public class GUI extends JFrame {
 		super.add(panel);
 
 		layout = new GridLayout(3, 3);
+		layout.setHgap(10);
+		layout.setVgap(10);
+		panel.setBackground(java.awt.Color.BLACK);
 		panel.setLayout(layout);
 
 		buttons = new HumanVsAiButton[9];
