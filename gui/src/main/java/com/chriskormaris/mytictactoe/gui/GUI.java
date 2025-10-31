@@ -259,7 +259,7 @@ public class GUI extends JFrame {
 				board = undoBoards.pop();
 
 				for (XOButton button : buttons) {
-					List<Integer> cell = getBoardCellById(button.id);
+					List<Integer> cell = getBoardCellById(button.getId());
 					if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 						button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 								Constants.X,
@@ -308,7 +308,7 @@ public class GUI extends JFrame {
 				board = new Board(redoBoards.pop());
 
 				for (XOButton button : buttons) {
-					List<Integer> cell = getBoardCellById(button.id);
+					List<Integer> cell = getBoardCellById(button.getId());
 					if (board.getGameBoard()[cell.get(0)][cell.get(1)] == Constants.X) {
 						button.setIcon(new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(
 								Constants.X,
@@ -433,7 +433,7 @@ public class GUI extends JFrame {
 			int aiMoveButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 
 			for (XOButton button : buttons) {
-				if (button.id == aiMoveButtonId) {
+				if (button.getId() == aiMoveButtonId) {
 					button.setIcon(XIcon);
 					button.removeActionListener(button);
 				}
@@ -575,7 +575,7 @@ public class GUI extends JFrame {
 		int aiButtonId = GuiUtils.getIdByBoardCell(aiMove.getRow(), aiMove.getColumn());
 		for (XOButton button : buttons) {
 			AiVsAiButton aiVsAiButton = (AiVsAiButton) button;
-			if (button.id == aiButtonId) {
+			if (button.getId() == aiButtonId) {
 				aiVsAiButton.aiPlayer = ai.getAiPlayer();
 				aiVsAiButton.doClick();
 			}

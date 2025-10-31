@@ -2,6 +2,7 @@ package com.chriskormaris.mytictactoe.gui.button;
 
 import com.chriskormaris.mytictactoe.gui.GUI;
 import com.chriskormaris.mytictactoe.gui.enumeration.GuiStyle;
+import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.plaf.metal.MetalButtonUI;
@@ -9,9 +10,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@Getter
 public abstract class XOButton extends JButton implements ActionListener {
 
-	public int id;
+	int id;
 	GUI gui;
 
 	public XOButton(int id, GUI gui) {

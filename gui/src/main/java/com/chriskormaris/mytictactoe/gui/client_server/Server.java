@@ -47,7 +47,7 @@ public class Server extends Thread {
 
 				for (XOButton button : gui.buttons) {
 					ClientServerButton clientServerButton = (ClientServerButton) button;
-					if (button.id == id) {
+					if (button.getId() == id) {
 						clientServerButton.programmaticallyPressed = true;
 						clientServerButton.doClick();
 						clientServerButton.programmaticallyPressed = false;
