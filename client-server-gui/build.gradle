@@ -13,9 +13,10 @@ dependencies {
     implementation project(path: ':api')
     implementation project(path: ':gui')
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitVersion}"
+    testImplementation platform("org.junit:junit-bom:$junitVersion")
+
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
 }
 
 test {
