@@ -29,9 +29,10 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 
 public class GUI extends JFrame {
@@ -52,9 +53,9 @@ public class GUI extends JFrame {
 	public JMenuItem undoItem;
 	public JMenuItem redoItem;
 
-	// These Stack objects are used for the "undo" and "redo" functionalities.
-	final Stack<Board> undoBoards;
-	final Stack<Board> redoBoards;
+	// These Deque objects are used for the "undo" and "redo" functionalities.
+	final Deque<Board> undoBoards;
+	final Deque<Board> redoBoards;
 
 	KeyListener gameKeyListener = new KeyListener() {
 		@Override
@@ -112,8 +113,8 @@ public class GUI extends JFrame {
 		XIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.X, Color.BLUE)));
 		OIcon = new ImageIcon(ResourceLoader.load(GuiUtils.getIconPath(Constants.O, Color.RED)));
 
-		undoBoards = new Stack<>();
-		redoBoards = new Stack<>();
+		undoBoards = new ArrayDeque<>();
+		redoBoards = new ArrayDeque<>();
 
 		configureGuiStyle();
 
