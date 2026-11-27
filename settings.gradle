@@ -1,6 +1,5 @@
-rootProject.name = 'MyTicTacToe'
+rootProject.name = 'my-tic-tac-toe'
 
 include 'api'
 include 'gui'
 include 'client-server-gui'
-
